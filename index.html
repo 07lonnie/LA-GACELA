@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Gacela - Periódico Digital</title>
+  
+  <!-- Tipografías de Google Fonts: Playfair Display (Titulares) e Inter (Lectura) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ENCABEZADO -->
+  <header class="encabezado">
+    <div class="top-bar">
+      <span>Edición Digital | 2026</span>
+      <button id="btn-modo">🌙 Modo Oscuro</button>
+    </div>
+    <h1 class="logo">LA GACELA</h1>
+    <p class="slogan">Información con agilidad, rigor y elegancia</p>
+  </header>
+
+  <!-- NAVEGACIÓN Y MENÚ -->
+  <nav class="menu-categorias">
+    <button class="btn-nav active" data-categoria="todos">Inicio</button>
+    <button class="btn-nav" data-categoria="politica">Política</button>
+    <button class="btn-nav" data-categoria="internacionales">Internacionales</button>
+    <button class="btn-nav" data-categoria="espectaculos">Espectáculos</button>
+    <button class="btn-nav" data-categoria="deportes">Deportes</button>
+    <button class="btn-nav btn-especial" id="btn-quienes-somos">¿Quiénes Somos?</button>
+  </nav>
+
+  <!-- VISTA DE NOTICIAS -->
+  <main id="seccion-noticias" class="contenedor-periodico">
+
+    <!-- POLITICA (3 NOTICIAS) -->
+    <article class="noticia principal" data-categoria="politica">
+      <span class="etiqueta">Política</span>
+      <h2>Congreso debate reformas clave para el desarrollo regional</h2>
+      <img src="https://picsum.photos/800/400?random=1" alt="Noticia Politica 1">
+      <p class="bajada">Las bancadas buscan consensos en la nueva ley presupuestaria tras tres jornadas de intenso debate.</p>
+      <p class="texto-noticia">Analistas aseguran que esta medida impactará directamente en la inversión pública de los próximos cinco años...</p>
+    </article>
+
+    <article class="noticia" data-categoria="politica">
+      <span class="etiqueta">Política</span>
+      <h3>Nuevas iniciativas de transparencia en la gestión pública</h3>
+      <img src="https://picsum.photos/400/250?random=2" alt="Noticia Politica 2">
+      <p>Se implementarán portales abiertos para el seguimiento presupuestal en tiempo real.</p>
+    </article>
+
+    <article class="noticia" data-categoria="politica">
+      <span class="etiqueta">Política</span>
+      <h3>Cumbre de gobernadores define prioridades medioambientales</h3>
+      <img src="https://picsum.photos/400/250?random=3" alt="Noticia Politica 3">
+      <p>Autoridades regionales acuerdan un plan estratégico común para mitigar los efectos del cambio climático.</p>
+    </article>
+
+    <!-- INTERNACIONALES (3 NOTICIAS) -->
+    <article class="noticia" data-categoria="internacionales">
+      <span class="etiqueta">Internacionales</span>
+      <h2>Acuerdo histórico en la cumbre económica global</h2>
+      <img src="https://picsum.photos/800/400?random=4" alt="Noticia Internacional 1">
+      <p class="bajada">Más de 40 países firman tratado para regular la transición energética multilateral.</p>
+    </article>
+
+    <article class="noticia" data-categoria="internacionales">
+      <span class="etiqueta">Internacionales</span>
+      <h3>Avances diplomáticos alivian tensiones en el Pacífico</h3>
+      <img src="https://picsum.photos/400/250?random=5" alt="Noticia Internacional 2">
+      <p>Las delegaciones acuerdan retomar canales grupales directos de diálogo comercial.</p>
+    </article>
+
+    <article class="noticia" data-categoria="internacionales">
+      <span class="etiqueta">Internacionales</span>
+      <h3>Crisis alimentaria: la ONU lanza plan de contingencia</h3>
+      <img src="https://picsum.photos/400/250?random=6" alt="Noticia Internacional 3">
+      <p>Se movilizarán fondos de emergencia para zonas vulnerables del hemisferio sur.</p>
+    </article>
+
+    <!-- ESPECTÁCULOS (3 NOTICIAS) -->
+    <article class="noticia" data-categoria="espectaculos">
+      <span class="etiqueta">Espectáculos</span>
+      <h2>El cine independiente triunfa en la gala internacional</h2>
+      <img src="https://picsum.photos/800/400?random=7" alt="Noticia Espectaculos 1">
+      <p class="bajada">Producción iberoamericana arrasa con las principales estatuillas de la noche.</p>
+    </article>
+
+    <article class="noticia" data-categoria="espectaculos">
+      <span class="etiqueta">Espectáculos</span>
+      <h3>Gira mundial rompe récords de asistencia en tiempo récord</h3>
+      <img src="https://picsum.photos/400/250?random=8" alt="Noticia Espectaculos 2">
+      <p>El icónico grupo musical agota todas las entradas en más de 20 ciudades en cuestión de minutos.</p>
+    </article>
+
+    <article class="noticia" data-categoria="espectaculos">
+      <span class="etiqueta">Espectáculos</span>
+      <h3>Nuevas tendencias digitales en la producción artística</h3>
+      <img src="https://picsum.photos/400/250?random=9" alt="Noticia Espectaculos 3">
+      <p>Cómo la inteligencia artificial está redefiniendo el arte visual contemporáneo.</p>
+    </article>
+
+    <!-- DEPORTES (3 NOTICIAS) -->
+    <article class="noticia" data-categoria="deportes">
+      <span class="etiqueta">Deportes</span>
+      <h2>Hazaña deportiva: Récord nacional superado en atletismo</h2>
+      <img src="https://picsum.photos/800/400?random=10" alt="Noticia Deportes 1">
+      <p class="bajada">Con solo 21 años, el atleta establece una marca histórica que perduraba desde hace dos décadas.</p>
+    </article>
+
+    <article class="noticia" data-categoria="deportes">
+      <span class="etiqueta">Deportes</span>
+      <h3>La final del torneo local se definirá en un clásico decisivo</h3>
+      <img src="https://picsum.photos/400/250?random=11" alt="Noticia Deportes 2">
+      <p>Ambos equipos llegan empatados a la última fecha con estadio lleno garantizado.</p>
+    </article>
+
+    <article class="noticia" data-categoria="deportes">
+      <span class="etiqueta">Deportes</span>
+      <h3>Nuevas promesas destacan en el campeonato juvenil</h3>
+      <img src="https://picsum.photos/400/250?random=12" alt="Noticia Deportes 3">
+      <p>Ojeadores de ligas europeas siguen de cerca el talento emergente de la región.</p>
+    </article>
+
+  </main>
+
+  <!-- VISTA DE ¿QUIÉNES SOMOS? (Oculta por defecto) -->
+  <section id="seccion-quienes-somos" class="contenedor-equipo oculta">
+    <h2 class="titulo-seccion">Nuestro Equipo Editorial</h2>
+    <p class="subtitulo-seccion">Conoce a los periodistas detrás de las investigaciones e historias de La Gacela.</p>
+
+    <div class="grid-periodistas">
+
+      <div class="tarjeta-periodista">
+        <img src="fotos/Bel.jpeg" alt="Periodista 1">
+        <h3>Belen Lucero Yaranga Rojas</h3>
+        <span class="cargo">Editor de Política</span>
+        <a href="mailto:politica@lagacela.com" class="correo">belen.yaranga.rojas.13@gmail.com</a>
+      </div>
+
+      <div class="tarjeta-periodista">
+        <img src="fotos/Adri.jpeg" alt="Periodista 2">
+        <h3>Adriana Judith Peña Cotos</h3>
+        <span class="cargo">Editor de Internacionales</span>
+        <a href="mailto:internacionales@lagacela.com" class="correo">p.adriana2106@gmail.com</a>
+      </div>
+
+      <div class="tarjeta-periodista">
+        <img src="fotos/yami.jpeg" alt="Periodista 3">
+        <h3>Lidia Yamilet Chapilliquen Charca</h3>
+        <span class="cargo">Editor de Espectáculos</span>
+        <a href="mailto:espectaculos@lagacela.com" class="correo">lidiayamiletchapilliquen@gmail.com</a>
+      </div>
+
+      <div class="tarjeta-periodista">
+        <img src="fotos/Jhordan.jpeg" alt="Periodista 4">
+        <h3>Jhordan David Valverde Soto</h3>
+        <span class="cargo">Editor de Deportes</span>
+        <a href="mailto:deportes@lagacela.com" class="correo">deportes@lagacela.com</a>
+      </div>
+
+      <div class="tarjeta-periodista">
+        <img src="fotos/yo.jpeg" alt="Periodista 5">
+        <h3>Gianella Alondra Orellana Perez</h3>
+        <span class="cargo">Editor de Diseño Web</span>
+        <a href="mailto:web@lagacela.com" class="correo">gianellaalondraorellanaperez@gmail.com</a>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
