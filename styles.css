@@ -174,17 +174,21 @@ body {
 
 .grid-periodistas {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 20px;
+  align-items: stretch; /* Asegura que todas las tarjetas tengan la misma altura */
 }
 
 .tarjeta-periodista {
   background: var(--blanco);
   border: 1px solid var(--gris-borde);
   border-radius: 8px;
-  padding: 20px;
+  padding: 20px 15px;
   text-align: center;
   transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tarjeta-periodista:hover {
@@ -195,7 +199,7 @@ body {
 .tarjeta-periodista img {
   width: 110px;
   height: 110px;
-  object-fit: cover;    /* EVITA QUE LA FOTO DEL PERIODISTA SE VEA AHATADA */
+  object-fit: cover;
   border-radius: 50%;
   border: 3px solid var(--dorado);
   margin-bottom: 12px;
@@ -203,8 +207,12 @@ body {
 
 .tarjeta-periodista h3 {
   font-family: 'Playfair Display', serif;
-  margin: 8px 0 4px 0;
-  font-size: 18px;
+  margin: 8px 0 6px 0;
+  font-size: 16px;
+  min-height: 48px; /* Iguala la altura del bloque del nombre */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cargo {
@@ -212,18 +220,20 @@ body {
   font-size: 13px;
   color: var(--verde-esmeralda);
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: auto; /* Empuja el correo siempre al fondo de la tarjeta */
+  padding-bottom: 10px;
 }
 
 .correo {
-  font-size: 11px;                /* Un tamaño de letra un poco más ajustado */
+  font-size: 10px;
   color: #666;
   text-decoration: none;
-  display: block;                 /* Le da su propia línea */
-  width: 100%;                    /* Se adapta al ancho de la tarjeta */
-  overflow-wrap: break-word;      /* OBLIGA AL CORREO A DAR SALTO DE LÍNEA SI ES LARGO */
-  word-break: break-all;          /* Evita que desborde en pantallas pequeñas */
-  margin-top: 5px;
+  display: block;
+  width: 100%;
+  white-space: nowrap; /* Evita que el correo se parta en dos líneas */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Si no cabe completo, agrega '...' elegante al final */
+  margin-top: auto;
 }
 
 .correo:hover {
