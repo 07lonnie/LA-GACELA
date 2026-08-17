@@ -84,50 +84,31 @@ botonesNav.forEach(boton => {
   });
 });
 
-// VARIABLE PARA EVITAR RE-PINTADOS INNECESARIOS
-let categoriaActualEnPantalla = '';
-
-// FUNCIÓN AUXILIAR OPTIMIZADA
-function marcarBotonActivo(categoria) {
-  if (categoriaActualEnPantalla === categoria) return; // Si ya está activo, no hace nada (evita el parpadeo)
-  categoriaActualEnPantalla = categoria;
-
-  botonesNav.forEach(b => {
-    const dataCat = b.getAttribute('data-categoria');
-    const esInicio = (categoria === 'todos' || categoria === 'todas') && (dataCat === 'todos' || dataCat === 'todas' || b.id === 'btn-inicio');
-
-    if (b.id === categoria || dataCat === categoria || esInicio) {
-      b.classList.add('active');
-    } else {
-      b.classList.remove('active');
-    }
-  });
-}
-
-// 4. DETECTAR EL SCROLL SUAVE Y SIN PARPADEO
+// 4. DETECTAR EL SCROLL AUTOMÁTICO (SCROLLSPY)
 window.addEventListener('scroll', () => {
+  // Solo se activa si estamos viendo todas las noticias (Inicio)
   if (categoriaSeleccionada !== 'todos' && categoriaSeleccionada !== 'todas') return;
-  if (seccionQuienesSomos && !seccionQuienesSomos.classList.contains('oculta')) return;
+  if (!seccionQuienesSomos.classList.contains('oculta')) return;
 
-  // Si estamos cerca de la cabecera
-  if (window.scrollY < 250) {
+  // Si estamos muy arriba (cabecera), marcar "Inicio"
+  if (window.scrollY < 200) {
     marcarBotonActivo('todos');
     return;
   }
 
-  // Detectar la noticia más cercana al tercio superior de la pantalla
-  let categoriaEncontrada = null;
-  const lineaReferencia = window.innerHeight * 0.35;
+  // Buscar cuál noticia está a la altura de la vista del usuario
+  let categoriaVisible = 'todos';
+  const margenDeteccion = window.innerHeight * 0.35; // Punto de corte en la pantalla
 
   noticias.forEach(noticia => {
     const rect = noticia.getBoundingClientRect();
-    if (rect.top <= lineaReferencia && rect.bottom >= lineaReferencia) {
-      categoriaEncontrada = noticia.getAttribute('data-categoria');
+    if (rect.top <= margenDeteccion && rect.bottom >= margenDeteccion) {
+      categoriaVisible = noticia.getAttribute('data-categoria');
     }
   });
 
-  if (categoriaEncontrada) {
-    marcarBotonActivo(categoriaEncontrada);
+  if (categoriaVisible) {
+    marcarBotonActivo(categoriaVisible);
   }
 });
 
