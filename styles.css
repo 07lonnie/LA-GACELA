@@ -426,3 +426,48 @@ body {
   margin: 25px auto 30px auto !important;
   width: 100% !important;
 }
+
+/* ==========================================
+   MODO OSCURO FORZADO Y COMPLETO
+   ========================================== */
+body.modo-oscuro {
+  background-color: #121417 !important;
+  color: #e0e0e0 !important;
+}
+
+body.modo-oscuro header.encabezado {
+  background-color: #081a14 !important;
+  border-bottom-color: #D4AF37 !important;
+}
+
+body.modo-oscuro nav,
+body.modo-oscuro .barra-navegacion {
+  background-color: #0b221a !important;
+}
+
+body.modo-oscuro .tarjeta-periodista,
+body.modo-oscuro .noticia,
+body.modo-oscuro .card-noticia {
+  background-color: #1a1e24 !important;
+  border-color: #2e3842 !important;
+  color: #e0e0e0 !important;
+}
+
+body.modo-oscuro h1,
+body.modo-oscuro h2,
+body.modo-oscuro h3,
+body.modo-oscuro .titulo-seccion {
+  color: #D4AF37 !important; /* Dorado elegante */
+}
+
+body.modo-oscuro p,
+body.modo-oscuro .subtitulo-seccion,
+body.modo-oscuro .correo,
+body.modo-oscuro span {
+  color: #b0b8c1 !important;
+}
+
+body.modo-oscuro #btn-modo {
+  background-color: #D4AF37 !important;
+  color: #121417 !important;
+}
