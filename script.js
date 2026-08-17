@@ -2,103 +2,80 @@
 const btnModo = document.getElementById('btn-modo');
 const botonesNav = document.querySelectorAll('.btn-nav');
 const noticias = document.querySelectorAll('.noticia');
-
 const seccionNoticias = document.getElementById('seccion-noticias');
 const seccionQuienesSomos = document.getElementById('seccion-quienes-somos');
-const btnQuienesSomos = document.getElementById('btn-quienes-somos');
 
-// 1. MODO OSCURO
-btnModo.addEventListener('click', () => {
-  document.body.classList.toggle('modo-oscuro');
-  
-  if (document.body.classList.contains('modo-oscuro')) {
-    btnModo.textContent = '☀️ Modo Claro';
-  } else {
-    btnModo.textContent = '🌙 Modo Oscuro';
-  }
-});
+// 1. MODO OSCURO (CON MEMORIA AL RECARGAR)
+if (localStorage.getItem('modoOscuro') === 'activo') {
+  document.body.classList.add('modo-oscuro');
+  if (btnModo) btnModo.textContent = '☀️ Modo Claro';
+}
 
-// 2. SISTEMA DE FILTRADO Y NAVEGACIÓN DENTRO DE LA PÁGINA
-botonesNav.forEach(boton => {
-  boton.addEventListener('click', () => {
-    // Cambiar estado activo en los botones
-    botonesNav.forEach(b => b.classList.remove('active'));
-    boton.classList.add('active');
-
-    const categoria = boton.getAttribute('data-categoria');
-
-    // SI PRESIONA "¿QUIÉNES SOMOS?"
-    if (boton.id === 'btn-quienes-somos') {
-      seccionNoticias.classList.add('oculta');
-      seccionQuienesSomos.classList.remove('oculta');
-    } 
-    // SI PRESIONA CUALQUIER OTRA SECCIÓN / NOTICIAS
-    else {
-      seccionQuienesSomos.classList.add('oculta');
-      seccionNoticias.classList.remove('oculta');
-
-      // Filtrar las noticias en pantalla
-      noticias.forEach(noticia => {
-        const catNoticia = noticia.getAttribute('data-categoria');
-
-        if (categoria === 'todos' || catNoticia === categoria) {
-          noticia.style.display = 'block';
-        } else {
-          noticia.style.display = 'none';
-        }
-      });
+if (btnModo) {
+  btnModo.addEventListener('click', () => {
+    document.body.classList.toggle('modo-oscuro');
+    
+    if (document.body.classList.contains('modo-oscuro')) {
+      btnModo.textContent = '☀️ Modo Claro';
+      localStorage.setItem('modoOscuro', 'activo');
+    } else {
+      btnModo.textContent = '🌙 Modo Oscuro';
+      localStorage.setItem('modoOscuro', 'inactivo');
     }
   });
-});
-// --- RECORDAR LA ÚLTIMA SECCIÓN AL RECARGAR ---
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. Obtener todos los botones del menú y las noticias/secciones
-  const botonesMenu = document.querySelectorAll("nav button, .menu-item");
-  const noticias = document.querySelectorAll(".noticia");
-  const seccionQuienesSomos = document.getElementById("quienes-somos");
+}
 
-  // 2. Función para mostrar la sección o categoría seleccionada
-  function activarSeccion(categoria) {
-    if (!categoria) return;
+// 2. FUNCIÓN DE FILTRADO Y NAVEGACIÓN
+function navegarA(categoriaOId) {
+  if (!categoriaOId) return;
 
-    // Guardar en la memoria del navegador
-    localStorage.setItem("categoriaActiva", categoria);
+  // Guardar en la memoria del navegador
+  localStorage.setItem('seccionActiva', categoriaOId);
 
-    // Actualizar clase activa en los botones
-    botonesMenu.forEach((btn) => {
-      if (btn.getAttribute("data-categoria") === categoria) {
-        btn.classList.add("activo");
+  // Actualizar estado activo en los botones
+  botonesNav.forEach(b => {
+    const dataCat = b.getAttribute('data-categoria');
+    if (b.id === categoriaOId || dataCat === categoriaOId) {
+      b.classList.add('active');
+    } else {
+      b.classList.remove('active');
+    }
+  });
+
+  // SI SE SELECCIONA "¿QUIÉNES SOMOS?"
+  if (categoriaOId === 'btn-quienes-somos' || categoriaOId === 'quienes-somos') {
+    if (seccionNoticias) seccionNoticias.classList.add('oculta');
+    if (seccionQuienesSomos) seccionQuienesSomos.classList.remove('oculta');
+  } 
+  // SI SE SELECCIONA CUALQUIER OTRA SECCIÓN DE NOTICIAS
+  else {
+    if (seccionQuienesSomos) seccionQuienesSomos.classList.add('oculta');
+    if (seccionNoticias) seccionNoticias.classList.remove('oculta');
+
+    // Filtrar noticias
+    noticias.forEach(noticia => {
+      const catNoticia = noticia.getAttribute('data-categoria');
+      if (categoriaOId === 'todos' || categoriaOId === 'todas' || catNoticia === categoriaOId) {
+        noticia.style.display = '';
       } else {
-        btn.classList.remove("activo");
+        noticia.style.display = 'none';
       }
     });
-
-    // Controlar visibilidad de Quiénes Somos y Noticias
-    if (categoria === "quienes-somos") {
-      if (seccionQuienesSomos) seccionQuienesSomos.style.display = "block";
-      noticias.forEach((noticia) => (noticia.style.display = "none"));
-    } else {
-      if (seccionQuienesSomos) seccionQuienesSomos.style.display = "none";
-      noticias.forEach((noticia) => {
-        const catNoticia = noticia.getAttribute("data-categoria");
-        if (categoria === "todas" || catNoticia === categoria) {
-          noticia.style.display = "";
-        } else {
-          noticia.style.display = "none";
-        }
-      });
-    }
   }
+}
 
-  // 3. Escuchar clics en cada botón del menú
-  botonesMenu.forEach((boton) => {
-    boton.addEventListener("click", () => {
-      const categoria = boton.getAttribute("data-categoria");
-      activarSeccion(categoria);
-    });
+// 3. ASIGNAR EVENTOS CLICK A LOS BOTONES
+botonesNav.forEach(boton => {
+  boton.addEventListener('click', () => {
+    const destino = boton.id === 'btn-quienes-somos' 
+      ? 'btn-quienes-somos' 
+      : boton.getAttribute('data-categoria');
+    navegarA(destino);
   });
+});
 
-  // 4. AL RECARGAR: Leer la última sección guardada (o 'todas' por defecto)
-  const categoriaGuardada = localStorage.getItem("categoriaActiva") || "todas";
-  activarSeccion(categoriaGuardada);
+// 4. RESTAURAR LA ÚLTIMA SECCIÓN AL RECARGAR (F5)
+document.addEventListener('DOMContentLoaded', () => {
+  const seccionPrevia = localStorage.getItem('seccionActiva') || 'todos';
+  navegarA(seccionPrevia);
 });
