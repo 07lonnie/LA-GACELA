@@ -314,10 +314,8 @@ body {
 }
 
 /* PRESENTACIÓN INSTITUCIONAL */
-.presentacion-institucional {
-  text-align: center;
-  max-width: 850px;
-  margin: 0 auto 30px auto;
+.presentacion-institucional .titulo-seccion {
+  margin-bottom: 20px !important;
 }
 
 .contenedor-foto-institucional {
