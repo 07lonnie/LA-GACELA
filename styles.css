@@ -276,28 +276,18 @@ body.modo-oscuro .bajada {
 }
 
 .manifiesto-texto {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;          /* Totalmente centrado */
   font-family: inherit;
   font-size: 15px;
-  line-height: 1.8;
+  line-height: 1.9;            /* Interlineado cómodo para lectura lineal */
   color: inherit;
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
 .manifiesto-texto p {
-  margin-bottom: 12px;
-}
-
-.manifiesto-texto .destacado {
-  font-size: 17px;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 500;
-  line-height: 1.6;
-  margin-bottom: 18px;
-}
-
-.manifiesto-texto .cierre {
-  font-weight: 600;
-  margin-top: 16px;
+  margin: 0;
 }
 
 .divisor-dorado {
