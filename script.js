@@ -50,3 +50,55 @@ botonesNav.forEach(boton => {
     }
   });
 });
+// --- RECORDAR LA ÚLTIMA SECCIÓN AL RECARGAR ---
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Obtener todos los botones del menú y las noticias/secciones
+  const botonesMenu = document.querySelectorAll("nav button, .menu-item");
+  const noticias = document.querySelectorAll(".noticia");
+  const seccionQuienesSomos = document.getElementById("quienes-somos");
+
+  // 2. Función para mostrar la sección o categoría seleccionada
+  function activarSeccion(categoria) {
+    if (!categoria) return;
+
+    // Guardar en la memoria del navegador
+    localStorage.setItem("categoriaActiva", categoria);
+
+    // Actualizar clase activa en los botones
+    botonesMenu.forEach((btn) => {
+      if (btn.getAttribute("data-categoria") === categoria) {
+        btn.classList.add("activo");
+      } else {
+        btn.classList.remove("activo");
+      }
+    });
+
+    // Controlar visibilidad de Quiénes Somos y Noticias
+    if (categoria === "quienes-somos") {
+      if (seccionQuienesSomos) seccionQuienesSomos.style.display = "block";
+      noticias.forEach((noticia) => (noticia.style.display = "none"));
+    } else {
+      if (seccionQuienesSomos) seccionQuienesSomos.style.display = "none";
+      noticias.forEach((noticia) => {
+        const catNoticia = noticia.getAttribute("data-categoria");
+        if (categoria === "todas" || catNoticia === categoria) {
+          noticia.style.display = "";
+        } else {
+          noticia.style.display = "none";
+        }
+      });
+    }
+  }
+
+  // 3. Escuchar clics en cada botón del menú
+  botonesMenu.forEach((boton) => {
+    boton.addEventListener("click", () => {
+      const categoria = boton.getAttribute("data-categoria");
+      activarSeccion(categoria);
+    });
+  });
+
+  // 4. AL RECARGAR: Leer la última sección guardada (o 'todas' por defecto)
+  const categoriaGuardada = localStorage.getItem("categoriaActiva") || "todas";
+  activarSeccion(categoriaGuardada);
+});
