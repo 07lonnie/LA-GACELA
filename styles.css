@@ -363,14 +363,14 @@ body {
    CORRECCIÓN FINAL: CENTRADO TOTAL Y ESPACIADO HOLGADO (ARRIBA Y ABAJO)
    ==================================================== */
 
-/* Contenedor principal centrado con amplio margen superior e inferior */
+/* Contenedor principal centrado con margen superior reducido */
 #seccion-quienes-somos,
 .seccion-quienes-somos,
 .contenedor-equipo {
   width: 100% !important;
   max-width: 950px !important;
-  margin: 100px auto 140px auto !important; /* 100px arriba para separarlo del menú y 140px abajo */
-  padding: 60px 20px 80px 20px !important;  /* Relleno interno superior e inferior */
+  margin: 20px auto 140px auto !important; /* Reducido de 100px a 20px */
+  padding: 10px 20px 80px 20px !important;  /* Reducido de 60px a 10px */
   box-sizing: border-box !important;
   display: block !important;
   text-align: center !important;
@@ -380,7 +380,7 @@ body {
 #seccion-quienes-somos h2,
 #seccion-quienes-somos .titulo-seccion {
   text-align: center !important;
-  margin: 30px auto 10px auto !important;
+  margin: 10px auto 10px auto !important;   /* Reducido de 30px a 10px */
   width: 100% !important;
   display: block !important;
   font-family: 'Playfair Display', Georgia, serif !important;
