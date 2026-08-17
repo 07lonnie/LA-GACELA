@@ -360,3 +360,67 @@ body {
   margin: 35px auto 40px auto;
   border-radius: 2px;
 }
+
+/* ====================================================
+   CORRECCIÓN FINAL: CENTRADO TOTAL Y ESPACIADO HOLGADO (ARRIBA Y ABAJO)
+   ==================================================== */
+
+/* Contenedor principal centrado con amplio margen superior e inferior */
+#seccion-quienes-somos,
+.seccion-quienes-somos,
+.contenedor-equipo {
+  width: 100% !important;
+  max-width: 950px !important;
+  margin: 100px auto 140px auto !important; /* 100px arriba para separarlo del menú y 140px abajo */
+  padding: 60px 20px 80px 20px !important;  /* Relleno interno superior e inferior */
+  box-sizing: border-box !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+/* Forzar centrado absoluto en Título y Subtítulo */
+#seccion-quienes-somos h2,
+#seccion-quienes-somos .titulo-seccion {
+  text-align: center !important;
+  margin: 30px auto 10px auto !important;
+  width: 100% !important;
+  display: block !important;
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 34px !important;
+  color: var(--verde-esmeralda, #0e3b2e) !important;
+}
+
+#seccion-quienes-somos p.subtitulo-seccion {
+  text-align: center !important;
+  margin: 0 auto 35px auto !important;
+  width: 100% !important;
+  max-width: 600px !important;
+  display: block !important;
+  font-size: 15px !important;
+  color: #666 !important;
+}
+
+/* Divisor dorado centrado */
+#seccion-quienes-somos .divisor-dorado {
+  margin: 45px auto !important;
+  display: block !important;
+}
+
+/* Carrusel y flechas perfectamente centrados */
+.carrusel-equipo-contenedor {
+  position: relative !important;
+  max-width: 440px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.carrusel-indicadores {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 25px auto 30px auto !important;
+  width: 100% !important;
+}
