@@ -176,50 +176,61 @@
       </div>
     </div>
 
-    <!-- LÍNEA DIVISORIA DORADA -->
+  <!-- LÍNEA DIVISORIA DORADA -->
     <div class="divisor-dorado"></div>
     <h2 class="titulo-seccion">Nuestro Equipo Editorial</h2>
     <p class="subtitulo-seccion">Conoce a los periodistas detrás de las investigaciones e historias de La Gacela.</p>
 
-    <div class="grid-periodistas">
+    <!-- CARRUSEL INTERACTIVO -->
+    <div class="carrusel-equipo-contenedor">
+      <button class="btn-carrusel prev" id="btn-prev-equipo" aria-label="Anterior">&#10094;</button>
 
-      <div class="tarjeta-periodista">
-        <img src="fotos/Belen.jpg" alt="Periodista 1">
-        <h3>Belen Lucero Yaranga Rojas</h3>
-        <span class="cargo">Editor de Política</span>
-        <a href="mailto:politica@lagacela.com" class="correo">belen.yaranga.rojas.13@gmail.com</a>
+      <div class="carrusel-ventana">
+        <div class="grid-periodistas carrusel-track" id="track-periodistas">
+
+          <div class="tarjeta-periodista">
+            <img src="fotos/Belen.jpg" alt="Belen Yaranga">
+            <h3>Belen Lucero Yaranga Rojas</h3>
+            <span class="cargo">Editor de Política</span>
+            <a href="mailto:belen.yaranga.rojas.13@gmail.com" class="correo">belen.yaranga.rojas.13@gmail.com</a>
+          </div>
+
+          <div class="tarjeta-periodista">
+            <img src="fotos/Adriana.jpg" alt="Adriana Peña">
+            <h3>Adriana Judith Peña Cotos</h3>
+            <span class="cargo">Editor de Internacionales</span>
+            <a href="mailto:p.adriana2106@gmail.com" class="correo">p.adriana2106@gmail.com</a>
+          </div>
+
+          <div class="tarjeta-periodista">
+            <img src="fotos/Yamilet.jpg" alt="Yamilet Chapilliquen">
+            <h3>Lidia Yamilet Chapilliquen Charca</h3>
+            <span class="cargo">Editor de Espectáculos</span>
+            <a href="mailto:lidiayamiletchapilliquen@gmail.com" class="correo">lidiayamiletchapilliquen@gmail.com</a>
+          </div>
+
+          <div class="tarjeta-periodista">
+            <img src="fotos/Jhordan.jpg" alt="Jhordan Valverde">
+            <h3>Jhordan David Valverde Soto</h3>
+            <span class="cargo">Editor de Deportes</span>
+            <a href="mailto:jhordanv1806@gmail.com" class="correo">jhordanv1806@gmail.com</a>
+          </div>
+
+          <div class="tarjeta-periodista">
+            <img src="fotos/yo.jpg" alt="Gianella Orellana">
+            <h3>Gianella Alondra Orellana Perez</h3>
+            <span class="cargo">Editor de Diseño Web</span>
+            <a href="mailto:gianellaalondraorellanaperez@gmail.com" class="correo">gianellaalondraorellanaperez@gmail.com</a>
+          </div>
+
+        </div>
       </div>
 
-      <div class="tarjeta-periodista">
-        <img src="fotos/Adriana.jpg" alt="Periodista 2">
-        <h3>Adriana Judith Peña Cotos</h3>
-        <span class="cargo">Editor de Internacionales</span>
-        <a href="mailto:internacionales@lagacela.com" class="correo">p.adriana2106@gmail.com</a>
-      </div>
-
-      <div class="tarjeta-periodista">
-        <img src="fotos/Yamilet.jpg" alt="Periodista 3">
-        <h3>Lidia Yamilet Chapilliquen Charca</h3>
-        <span class="cargo">Editor de Espectáculos</span>
-        <a href="mailto:espectaculos@lagacela.com" class="correo">lidiayamiletchapilliquen@gmail.com</a>
-      </div>
-
-      <div class="tarjeta-periodista">
-        <img src="fotos/Jhordan.jpg" alt="Periodista 4">
-        <h3>Jhordan David Valverde Soto</h3>
-        <span class="cargo">Editor de Deportes</span>
-        <a href="mailto:deportes@lagacela.com" class="correo">jhordanv1806@gmail.com</a>
-      </div>
-
-      <div class="tarjeta-periodista">
-        <img src="fotos/yo.jpg" alt="Periodista 5">
-        <h3>Gianella Alondra Orellana Perez</h3>
-        <span class="cargo">Editor de Diseño Web</span>
-        <a href="mailto:web@lagacela.com" class="correo">gianellaalondraorellanaperez@gmail.com</a>
-      </div>
-
+      <button class="btn-carrusel next" id="btn-next-equipo" aria-label="Siguiente">&#10095;</button>
     </div>
-  </section>
+
+    <!-- PUNTOS INDICADORES -->
+    <div class="carrusel-indicadores" id="indicadores-equipo"></div>
 
   <script src="script.js"></script>
 </body>

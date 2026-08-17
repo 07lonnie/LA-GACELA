@@ -79,3 +79,55 @@ document.addEventListener('DOMContentLoaded', () => {
   const seccionPrevia = localStorage.getItem('seccionActiva') || 'todos';
   navegarA(seccionPrevia);
 });
+
+// --- FUNCIONALIDAD DEL CARRUSEL DE EQUIPO EDITORIAL ---
+const track = document.getElementById('track-periodistas');
+const btnPrev = document.getElementById('btn-prev-equipo');
+const btnNext = document.getElementById('btn-next-equipo');
+const contenedorIndicadores = document.getElementById('indicadores-equipo');
+
+if (track && btnPrev && btnNext) {
+  const tarjetas = track.querySelectorAll('.tarjeta-periodista');
+  const totalTarjetas = tarjetas.length;
+  let indiceActual = 0;
+
+  // Generar los puntos indicadores dinámicamente
+  if (contenedorIndicadores) {
+    contenedorIndicadores.innerHTML = '';
+    tarjetas.forEach((_, i) => {
+      const punto = document.createElement('button');
+      punto.classList.add('indicador');
+      if (i === 0) punto.classList.add('activo');
+      punto.setAttribute('aria-label', `Ir a periodista ${i + 1}`);
+      punto.addEventListener('click', () => {
+        indiceActual = i;
+        actualizarCarrusel();
+      });
+      contenedorIndicadores.appendChild(punto);
+    });
+  }
+
+  function actualizarCarrusel() {
+    track.style.transform = `translateX(-${indiceActual * 100}%)`;
+    
+    // Actualizar puntos activos
+    const puntos = document.querySelectorAll('.indicador');
+    puntos.forEach((p, idx) => {
+      if (idx === indiceActual) {
+        p.classList.add('activo');
+      } else {
+        p.classList.remove('activo');
+      }
+    });
+  }
+
+  btnNext.addEventListener('click', () => {
+    indiceActual = (indiceActual + 1) % totalTarjetas;
+    actualizarCarrusel();
+  });
+
+  btnPrev.addEventListener('click', () => {
+    indiceActual = (indiceActual - 1 + totalTarjetas) % totalTarjetas;
+    actualizarCarrusel();
+  });
+}
