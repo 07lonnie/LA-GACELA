@@ -6,7 +6,6 @@
   <title>Panel Editorial - La Gacela</title>
   
   <script>
-    // Inicialización manual para evitar errores 404 al buscar config.yml en servidores locales
     window.CMS_MANUAL_INIT = true;
   </script>
 </head>
@@ -15,8 +14,9 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
   <script>
-    // 1. CONFIGURACIÓN DEL CMS E INTEGRACIÓN DE CAMPOS Y WIDGETS
+    // Configuración limpia sin depender de parseos externos
     CMS.init({
+      load_config_file: false,
       config: {
         backend: {
           name: "git-gateway",
@@ -68,11 +68,10 @@
       }
     });
 
-    // 2. REGISTRO DE FUENTES Y ESTILOS
     CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap");
     CMS.registerPreviewStyle("../styles.css");
 
-    // 3. PLANTILLA DE VISTA PREVIA LIMPIA (Sin títulos de campo ni números)
+    // Plantilla de vista previa limpia (sin textos de números ni etiquetas)
     var NoticiasPreview = createClass({
       render: function() {
         var entry = this.props.entry;
@@ -128,7 +127,7 @@
               h('div', {}, date.toString())
             ),
 
-            // Foto Principal Completa (object-fit: contain)
+            // Foto Principal Completa
             thumbnail ? h('figure', { style: { margin: '0 0 35px 0', width: '100%' } },
               h('div', { style: { width: '100%', backgroundColor: '#f8f9fa', borderRadius: '6px', textAlign: 'center', overflow: 'hidden', padding: '5px' } },
                 h('img', { src: thumbnail.toString(), style: { width: '100%', maxHeight: '480px', objectFit: 'contain', display: 'block', margin: '0 auto' } })
