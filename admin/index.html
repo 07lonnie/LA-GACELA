@@ -6,7 +6,12 @@
   <title>Panel Editorial - La Gacela</title>
 </head>
 <body>
-  <!-- Carga de Decap CMS -->
+  <!-- Decap CMS Core -->
   <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <script>
+    // Inyectar fuentes y estilos de La Gacela en el panel de vista previa
+    CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap");
+    CMS.registerPreviewStyle("../styles.css");
+  </script>
 </body>
 </html>

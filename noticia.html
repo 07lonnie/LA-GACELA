@@ -6,12 +6,10 @@
   <title>Noticia - La Gacela</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Convertidor Markdown a HTML -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
-  <!-- ENCABEZADO EDITORIAL -->
   <header class="encabezado">
     <div class="top-bar">
       <span>Edición Digital | 2026</span>
@@ -21,58 +19,55 @@
     <p class="slogan">Información con agilidad, rigor y elegancia</p>
   </header>
 
-  <!-- SECCIÓN PRINCIPAL DE LA NOTICIA -->
   <article class="noticia-periodistica-container">
     
-    <!-- 1. VOLADA / CATEGORÍA -->
+    <!-- VOLADA -->
     <div class="noticia-volada" id="art-volada">POLÍTICA</div>
 
-    <!-- 2. TITULAR PRINCIPAL -->
+    <!-- TITULAR -->
     <h1 class="noticia-titular" id="art-titulo">Cargando titular de la noticia...</h1>
 
-    <!-- 3. BAJADA O RESUMEN -->
+    <!-- BAJADA -->
     <p class="noticia-bajada" id="art-bajada"></p>
 
-    <!-- 4. CRÉDITO Y FECHA DE PUBLICACIÓN -->
+    <!-- CRÉDITO Y FECHA -->
     <div class="noticia-creditos-fecha">
       <div class="autor-info">
         <span>Por <strong id="art-autor">Redacción La Gacela</strong></span>
       </div>
       <div class="fecha-info">
-        <span id="art-fecha">24 de Agosto, 2026</span>
+        <span id="art-fecha"></span>
       </div>
     </div>
 
-    <!-- 5. FOTOGRAFÍA PRINCIPAL Y LEYENDA -->
+    <!-- FOTOGRAFÍA PRINCIPAL COMPLETA -->
     <figure class="noticia-media-wrapper" id="contenedor-foto" style="display:none;">
       <div class="marco-imagen">
-        <img id="art-foto" src="" alt="Imagen periodística">
+        <img id="art-foto" src="" alt="Fotografía informativa">
       </div>
       <figcaption class="noticia-leyenda" id="art-pie-foto"></figcaption>
     </figure>
 
-    <!-- 6. CUERPO DE LA NOTICIA (LEAD + DESARROLLO) -->
+    <!-- LEAD / ENTRADILLA DESTACADA -->
+    <div class="noticia-lead-destacado" id="art-lead" style="display:none;"></div>
+
+    <!-- CUERPO DE LA NOTICIA -->
     <div class="noticia-cuerpo-redaccion" id="art-cuerpo"></div>
 
-    <!-- 7. RECURSO DE VIDEO (SI TIENE YOUTUBE) -->
+    <!-- VIDEO RECURSO -->
     <div class="noticia-recurso-video" id="contenedor-video" style="display:none;">
-      <h4 class="subtitulo-recurso">cobertura en video:</h4>
+      <h4 class="subtitulo-recurso">Cobertura en video:</h4>
       <div class="iframe-responsive">
         <iframe id="art-video" src="" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
 
-    <!-- 8. ETIQUETAS / SEPA MÁS (TAGS) -->
-    <div class="noticia-sepa-mas" id="contenedor-tags">
+    <!-- TAGS / SEPA MÁS -->
+    <div class="noticia-sepa-mas" id="contenedor-tags" style="display:none;">
       <h3>Sepa más:</h3>
-      <div class="tags-list">
-        <span class="tag-item">La Gacela</span>
-        <span class="tag-item">UNFV</span>
-        <span class="tag-item">Periodismo</span>
-      </div>
+      <div class="tags-list" id="tags-lista"></div>
     </div>
 
-    <!-- BOTÓN VOLVER -->
     <div class="volver-contenedor">
       <a href="index.html" class="btn-volver-portada">← Volver a la portada</a>
     </div>
@@ -106,7 +101,6 @@
           return match ? match[1].trim() : '';
         };
 
-        // Formateador ortográfico de categorías con tildes
         const normalizarCategoria = (cat) => {
           const mapa = {
             'politica': 'POLÍTICA',
@@ -118,22 +112,30 @@
         };
 
         const titulo = obtenerValor('title');
+        const volada = obtenerValor('volada');
         const categoria = obtenerValor('categoria');
         const autor = obtenerValor('autor');
         const fecha = obtenerValor('date');
         const bajada = obtenerValor('bajada');
+        const lead = obtenerValor('lead');
         const thumbnail = obtenerValor('thumbnail');
         const pieFoto = obtenerValor('pie_foto');
         const videoUrl = obtenerValor('video_url');
+        const tags = obtenerValor('tags');
 
         document.title = `${titulo} - La Gacela`;
         document.getElementById('art-titulo').textContent = titulo;
-        document.getElementById('art-volada').textContent = normalizarCategoria(categoria);
+        document.getElementById('art-volada').textContent = volada ? volada.toUpperCase() : normalizarCategoria(categoria);
         document.getElementById('art-autor').textContent = autor || 'Redacción La Gacela';
         document.getElementById('art-fecha').textContent = fecha;
         document.getElementById('art-bajada').textContent = bajada;
 
-        // Mostrar imagen garantizando que NO se recorte
+        if (lead) {
+          const elLead = document.getElementById('art-lead');
+          elLead.textContent = lead;
+          elLead.style.display = 'block';
+        }
+
         if (thumbnail) {
           const img = document.getElementById('art-foto');
           img.src = thumbnail;
@@ -144,7 +146,6 @@
           document.getElementById('art-pie-foto').textContent = pieFoto;
         }
 
-        // Mostrar video si existe
         if (videoUrl) {
           const videoFrame = document.getElementById('art-video');
           let embedUrl = videoUrl;
@@ -157,7 +158,12 @@
           document.getElementById('contenedor-video').style.display = 'block';
         }
 
-        // Cargar cuerpo enriquecido
+        if (tags) {
+          const listaTagsHTML = tags.split(',').map(t => `<span class="tag-item">${t.trim()}</span>`).join('');
+          document.getElementById('tags-lista').innerHTML = listaTagsHTML;
+          document.getElementById('contenedor-tags').style.display = 'block';
+        }
+
         document.getElementById('art-cuerpo').innerHTML = marked.parse(cuerpoMarkdown);
 
       } catch (e) {

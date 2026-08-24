@@ -1,3 +1,4 @@
+# Configuración del Panel Editorial de La Gacela
 backend:
   name: git-gateway
   repo: 07lonnie/LA-GACELA
@@ -21,12 +22,25 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Categoría", name: "categoria", widget: "select", options: ["politica", "internacionales", "espectaculos", "deportes"] }
-      - { label: "Autor", name: "autor", widget: "string" }
-      - { label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
-      - { label: "Bajada", name: "bajada", widget: "text" }
-      - { label: "Imagen de Portada", name: "thumbnail", widget: "image", required: false }
-      - { label: "Pie de Foto", name: "pie_foto", widget: "string", required: false }
-      - { label: "Video YouTube", name: "video_url", widget: "string", required: false }
-      - { label: "Cuerpo de la Noticia", name: "body", widget: "markdown" }
+      - { label: "1. Volada / Antetítulo (Opcional)", name: "volada", widget: "string", required: false, hint: "Ejemplo: GOBIERNO, CRISIS INSTITUCIONAL" }
+      - { label: "2. Titular Principal (Encabezado)", name: "title", widget: "string", hint: "Titular informativo de máximo 15 a 20 palabras" }
+      - { 
+          label: "3. Categoría", 
+          name: "categoria", 
+          widget: "select", 
+          options: [
+            { label: "Política", value: "politica" },
+            { label: "Internacionales", value: "internacionales" },
+            { label: "Espectáculos", value: "espectaculos" },
+            { label: "Deportes", value: "deportes" }
+          ]
+        }
+      - { label: "4. Bajada / Sumario", name: "bajada", widget: "text", hint: "Síntesis corta que va debajo del titular" }
+      - { label: "5. Autor (Crédito del Redactor)", name: "autor", widget: "string", hint: "Nombre completo del periodista" }
+      - { label: "6. Fecha de Publicación", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false }
+      - { label: "7. Lead / Entradilla (Opcional)", name: "lead", widget: "text", required: false, hint: "Primer párrafo que responde al Qué, Quién, Cuándo, Dónde y Por qué" }
+      - { label: "8. Fotografía Principal (Proporción 16:9)", name: "thumbnail", widget: "image", required: false }
+      - { label: "9. Leyenda / Pie de Foto y Fuente", name: "pie_foto", widget: "string", required: false, hint: "Ejemplo: Dina Boluarte en el Congreso. | Fuente: Presidencia" }
+      - { label: "10. Video de YouTube (Enlace completo u opcional)", name: "video_url", widget: "string", required: false }
+      - { label: "11. Etiquetas / Sepa más (separadas por comas)", name: "tags", widget: "string", required: false, hint: "Ejemplo: Dina Boluarte, Congreso, Elecciones" }
+      - { label: "12. Cuerpo de la Noticia", name: "body", widget: "markdown", hint: "Desarrollo completo de la nota con subtítulos, citas o testimonios" }
