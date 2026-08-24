@@ -1,6 +1,5 @@
-```css:styles.css
 /* ==========================================================
-   LA GACELA - ESTILOS VISUALES Y REPRODUCTORES INLINE
+   LA GACELA - HOJA DE ESTILOS UNIFICADA Y DEFINITIVA
    ========================================================== */
 
 :root {
@@ -23,14 +22,19 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background-color: var(--fondo-claro);
   color: var(--texto-principal);
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* ENCABEZADO */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* 1. ENCABEZADO Y LOGO */
 .encabezado {
   background-color: var(--verde-esmeralda);
   color: var(--blanco);
@@ -70,6 +74,7 @@ body {
 
 .enlace-logo {
   text-decoration: none;
+  display: inline-block;
 }
 
 .logo {
@@ -88,7 +93,7 @@ body {
   color: var(--dorado);
 }
 
-/* NAVEGACIÓN */
+/* 2. BARRA DE NAVEGACIÓN */
 .navegacion {
   background-color: var(--verde-oscuro);
   border-bottom: 2px solid var(--dorado);
@@ -122,7 +127,7 @@ body {
   padding: 8px 16px;
   cursor: pointer;
   border-radius: 4px;
-  text-decoration: none;
+  text-decoration: none !important;
   display: inline-block;
   transition: all 0.25s ease;
 }
@@ -146,7 +151,411 @@ body {
   padding: 8px 18px !important;
 }
 
-/* PÁGINA Y CONTENEDOR DE LA NOTICIA */
+.nav-btn-destacado:hover {
+  background-color: var(--dorado-hover) !important;
+  color: var(--blanco) !important;
+}
+
+/* 3. CONTROL DE SECCIONES (OCULTAR INACTIVAS) */
+.contenedor-principal {
+  max-width: 1200px;
+  margin: 40px auto 80px auto;
+  padding: 0 20px;
+}
+
+.seccion-vista {
+  display: none !important;
+}
+
+.seccion-vista.activo {
+  display: block !important;
+}
+
+.encabezado-seccion-actual {
+  margin-bottom: 30px;
+}
+
+.titulo-seccion-bloque {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  color: var(--verde-esmeralda);
+  border-bottom: 2px solid var(--dorado);
+  padding-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+.subtitulo-seccion-texto {
+  font-size: 15px;
+  color: var(--texto-secundario);
+}
+
+/* 4. NOTICIA DESTACADA (HERO EN PORTADA) */
+.tarjeta-destacada-hero {
+  background-color: var(--tarjeta-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  border: 1px solid var(--borde-suave);
+  margin-bottom: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-destacada-hero:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.14);
+}
+
+.enlace-destacada {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+}
+
+@media (max-width: 850px) {
+  .enlace-destacada {
+    grid-template-columns: 1fr;
+  }
+}
+
+.imagen-destacada-wrapper {
+  position: relative;
+  min-height: 360px;
+  background-color: #e2e8f0;
+}
+
+.imagen-destacada-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.badge-categoria-destacada {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: var(--verde-esmeralda);
+  color: var(--blanco);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  border: 1px solid var(--dorado);
+}
+
+.contenido-destacada {
+  padding: 35px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.etiqueta-destacada-alerta {
+  color: var(--dorado);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.titulo-destacada {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  line-height: 1.25;
+  color: var(--texto-principal) !important;
+  margin-bottom: 15px;
+  font-weight: 900;
+}
+
+.bajada-destacada {
+  font-size: 15px;
+  color: var(--texto-secundario);
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.meta-destacada {
+  font-size: 13px;
+  color: #777;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid var(--borde-suave);
+}
+
+.meta-destacada strong {
+  color: var(--verde-esmeralda);
+}
+
+/* 5. RETÍCULA DE TARJETAS SECUNDARIAS */
+.grid-noticias {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.tarjeta-noticia-portada {
+  background-color: var(--tarjeta-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  border: 1px solid var(--borde-suave);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tarjeta-noticia-portada:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.enlace-noticia {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.imagen-portada-wrapper {
+  position: relative;
+  width: 100%;
+  height: 210px;
+  background-color: #e2e8f0;
+  overflow: hidden;
+}
+
+.imagen-portada-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.badge-categoria-portada {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: var(--verde-esmeralda);
+  color: var(--blanco);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 4px 9px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  border: 1px solid var(--dorado);
+}
+
+.contenido-tarjeta-portada {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.titulo-tarjeta {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  line-height: 1.3;
+  color: var(--texto-principal) !important;
+  margin-bottom: 10px;
+}
+
+.bajada-tarjeta {
+  font-size: 14px;
+  color: var(--texto-secundario);
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.meta-tarjeta {
+  font-size: 12px;
+  color: #777777;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--borde-suave);
+}
+
+.meta-tarjeta strong {
+  color: var(--verde-esmeralda);
+}
+
+/* 6. ¿QUIÉNES SOMOS? Y ISOTIPO DEBAJO DEL TÍTULO */
+.presentacion-institucional {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.presentacion-institucional h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 36px;
+  color: var(--verde-esmeralda);
+  margin-bottom: 20px;
+}
+
+.contenedor-foto-institucional {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 25px auto;
+}
+
+.foto-institucional {
+  max-width: 110px;
+  height: auto;
+  display: block;
+}
+
+.manifiesto-texto p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--texto-principal);
+  text-align: justify;
+}
+
+.divisor-dorado {
+  width: 80px;
+  height: 3px;
+  background-color: var(--dorado);
+  margin: 30px auto;
+}
+
+/* 7. CARRUSEL EDITORIAL */
+.bloque-equipo-editorial {
+  margin-top: 40px;
+}
+
+.titulo-equipo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  color: var(--verde-esmeralda);
+  margin-bottom: 6px;
+}
+
+.subtitulo-equipo {
+  font-size: 15px;
+  color: var(--texto-secundario);
+  margin-bottom: 30px;
+}
+
+.carrusel-contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.tarjeta-equipo {
+  background-color: var(--tarjeta-bg);
+  border-radius: 12px;
+  padding: 40px 35px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  border: 1px solid var(--borde-suave);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.avatar-miembro-wrapper {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 20px auto;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--dorado);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+  background-color: #f1f5f9;
+}
+
+.avatar-miembro-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nombre-miembro {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 24px;
+  color: var(--verde-esmeralda);
+  margin-bottom: 6px;
+}
+
+.cargo-miembro {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dorado-hover);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.correo-miembro {
+  display: inline-block;
+  font-size: 13.5px;
+  color: var(--verde-esmeralda) !important;
+  font-weight: 500;
+  text-decoration: none !important;
+  margin-bottom: 18px;
+  transition: color 0.2s ease;
+}
+
+.correo-miembro:hover {
+  color: var(--dorado) !important;
+  text-decoration: underline !important;
+}
+
+.bio-miembro {
+  font-size: 15px;
+  color: var(--texto-secundario);
+  line-height: 1.6;
+}
+
+.carrusel-flecha {
+  background-color: var(--verde-esmeralda);
+  color: var(--blanco);
+  border: 1px solid var(--dorado);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.carrusel-flecha:hover {
+  background-color: var(--dorado);
+  color: var(--verde-esmeralda);
+  transform: scale(1.1);
+}
+
+.carrusel-indicadores {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.punto-indicador {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #cbd5e1;
+  transition: all 0.3s ease;
+}
+
+.punto-indicador.activo {
+  background-color: var(--dorado);
+  width: 24px;
+  border-radius: 10px;
+}
+
+/* 8. PÁGINA DE LECTURA DE NOTICIA (noticia.html) */
 .noticia-pagina-wrapper {
   background-color: var(--fondo-claro);
   padding: 40px 15px 80px 15px;
@@ -269,7 +678,7 @@ body {
   text-align: justify !important;
 }
 
-/* FOTOS INTERMEDIAS Y REPRODUCTORES EN EL CUERPO */
+/* MEDIOS E IMÁGENES INTERMEDIAS EN EL TEXTO */
 .noticia-figura-inline {
   margin: 30px 0 !important;
   width: 100% !important;
@@ -306,7 +715,6 @@ body {
   padding-left: 10px !important;
 }
 
-/* REPRODUCTOR DE VIDEO EMBEBIDO DENTRO DEL TEXTO */
 .iframe-responsive-inline {
   position: relative !important;
   padding-bottom: 56.25% !important;
@@ -362,7 +770,35 @@ body {
   color: #ffffff !important;
 }
 
-/* MODO OSCURO ARMONIOSO */
+/* 9. PIE DE PÁGINA */
+.bloque-vacio-seccion {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  background-color: var(--tarjeta-bg);
+  border-radius: 8px;
+  border: 1px dashed var(--borde-suave);
+  color: var(--texto-secundario);
+}
+
+.pie-pagina {
+  background-color: var(--verde-oscuro);
+  color: var(--blanco);
+  text-align: center;
+  padding: 30px 20px;
+  border-top: 3px solid var(--dorado);
+  font-size: 13px;
+}
+
+.logo-footer {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--dorado);
+  margin-bottom: 6px;
+  letter-spacing: 2px;
+}
+
+/* 10. MODO OSCURO ARMONIOSO */
 body.modo-oscuro {
   --fondo-claro: #0b1311;
   --tarjeta-bg: #13241e;
@@ -371,27 +807,44 @@ body.modo-oscuro {
   --borde-suave: #1e3d33;
 }
 
-body.modo-oscuro .noticia-periodistica-container {
-  background-color: #13241e !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+body.modo-oscuro .encabezado {
+  background-color: #061712;
 }
 
-body.modo-oscuro .noticia-titular,
-body.modo-oscuro .noticia-lead-destacado p {
+body.modo-oscuro .navegacion {
+  background-color: #04100c;
+}
+
+body.modo-oscuro .titulo-seccion-bloque,
+body.modo-oscuro .presentacion-institucional h2,
+body.modo-oscuro .titulo-equipo,
+body.modo-oscuro .nombre-miembro {
+  color: #e2f1ec;
+}
+
+body.modo-oscuro .titulo-destacada,
+body.modo-oscuro .titulo-tarjeta,
+body.modo-oscuro .noticia-titular {
   color: #ffffff !important;
 }
 
-body.modo-oscuro .noticia-bajada, 
-body.modo-oscuro .noticia-bajada p,
-body.modo-oscuro .noticia-cuerpo-redaccion {
-  color: #cbd5e1 !important;
+body.modo-oscuro .correo-miembro {
+  color: var(--dorado) !important;
+}
+
+body.modo-oscuro .meta-destacada strong,
+body.modo-oscuro .meta-tarjeta strong {
+  color: var(--dorado);
+}
+
+body.modo-oscuro .tarjeta-destacada-hero,
+body.modo-oscuro .tarjeta-noticia-portada,
+body.modo-oscuro .tarjeta-equipo,
+body.modo-oscuro .noticia-periodistica-container {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
 }
 
 body.modo-oscuro .marco-imagen,
 body.modo-oscuro .marco-imagen-inline {
   background-color: #081512 !important;
-}
-
-body.modo-oscuro .noticia-creditos-fecha strong {
-  color: var(--dorado) !important;
 }

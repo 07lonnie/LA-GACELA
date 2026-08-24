@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cargarNoticiasDesdeGitHub();
 });
 
-/* PARSER MULTILÍNEA ROBUSTO DE FRONTMATTER (EVITA CORTES EN BAJADA Y LEAD) */
+/* PARSER MULTILÍNEA DE FRONTMATTER */
 function parseFrontmatter(texto) {
   const partes = texto.split(/^---$/m);
   if (partes.length < 3) return { metadatos: {}, cuerpo: texto };
@@ -94,7 +94,7 @@ function limpiarValorYaml(val) {
   return str.trim();
 }
 
-/* NAVEGACIÓN */
+/* NAVEGACIÓN ENTRE PESTAÑAS */
 function inicializarNavegacion() {
   const botonesNav = document.querySelectorAll('.nav-btn');
 
@@ -150,7 +150,7 @@ function cambiarVistaSeccion(seccion) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* CARGAR NOTICIAS DESDE GITHUB USANDO EL NUEVO PARSER */
+/* CARGAR NOTICIAS DESDE GITHUB */
 async function cargarNoticiasDesdeGitHub() {
   const grid = document.getElementById('grid-noticias');
   if (!grid) return;
@@ -197,7 +197,7 @@ async function cargarNoticiasDesdeGitHub() {
   }
 }
 
-/* RENDERIZADO CON TEXTO COMPLETO Y CORTE LIMPIO EN TARJETAS */
+/* RENDERIZADO FILTRADO Y HERO NOTICIA */
 function renderizarNoticiasProcesadas() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');

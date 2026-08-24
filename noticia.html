@@ -1,4 +1,3 @@
-```html:noticia.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Noticia - La Gacela</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="[https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap)" rel="stylesheet">
-  <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css)">
-  <script src="[https://cdn.jsdelivr.net/npm/marked/marked.min.js](https://cdn.jsdelivr.net/npm/marked/marked.min.js)"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
@@ -66,7 +65,7 @@
       <!-- LEAD / ENTRADILLA DESTACADA -->
       <div class="noticia-lead-destacado" id="art-lead" style="display:none;"></div>
 
-      <!-- CUERPO DE LA NOTICIA (INCLUYE VIDEOS E IMÁGENES INTERMEDIAS DONDE DECIDAS) -->
+      <!-- CUERPO DE LA NOTICIA -->
       <div class="noticia-cuerpo-redaccion" id="art-cuerpo"></div>
 
       <!-- ETIQUETAS / SEPA MÁS -->
@@ -163,7 +162,6 @@
           document.getElementById('contenedor-tags').style.display = 'block';
         }
 
-        // Configurar Marked para renderizar fotos intermedias con pie de foto y convertir enlaces de YouTube en reproductor
         const renderer = new marked.Renderer();
         renderer.image = function(href, title, text) {
           const leyendaHTML = text ? `<figcaption class="noticia-leyenda-inline">${text}</figcaption>` : '';
@@ -172,7 +170,6 @@
 
         marked.setOptions({ renderer: renderer });
 
-        // Transformar enlaces sueltos de YouTube en reproductores incrustados automáticamente
         const cuerpoProcesado = transformarVideosYMedios(cuerpo);
         document.getElementById('art-cuerpo').innerHTML = marked.parse(cuerpoProcesado);
 
@@ -182,18 +179,14 @@
       }
     });
 
-    // Convierte automáticamente enlaces de YouTube sueltos en el texto en reproductores visuales
     function transformarVideosYMedios(textoMarkdown) {
       if (!textoMarkdown) return '';
-      
       const regexYoutube = /(?:^|\n)(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})(?:\S+)?(?:\n|$)/g;
-      
       return textoMarkdown.replace(regexYoutube, (match, videoId) => {
-        return `\n<div class="iframe-responsive-inline"><iframe src="[https://www.youtube-nocookie.com/embed/$](https://www.youtube-nocookie.com/embed/$){videoId}" frameborder="0" allowfullscreen></iframe></div>\n`;
+        return `\n<div class="iframe-responsive-inline"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></div>\n`;
       });
     }
 
-    // PARSER FRONTMATTER ROBUSTO
     function parseFrontmatter(texto) {
       const partes = texto.split(/^---$/m);
       if (partes.length < 3) return { metadatos: {}, cuerpo: texto };
