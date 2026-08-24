@@ -1,3 +1,4 @@
+```html:noticia.html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Noticia - La Gacela</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link href="[https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap)" rel="stylesheet">
+  <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css)">
+  <script src="[https://cdn.jsdelivr.net/npm/marked/marked.min.js](https://cdn.jsdelivr.net/npm/marked/marked.min.js)"></script>
 </head>
 <body>
 
-  <!-- ENCABEZADO DEL PERIÓDICO -->
+  <!-- ENCABEZADO DE LA PÁGINA -->
   <header class="encabezado">
     <div class="top-bar">
       <span>Edición Digital | Universidad Nacional Federico Villarreal</span>
@@ -35,19 +36,17 @@
     </ul>
   </nav>
 
-  <!-- WRAPPER CON FONDO GRIS Y MÁRGENES PERIÓDICO -->
+  <!-- PÁGINA DE NOTICIA -->
   <div class="noticia-pagina-wrapper">
-    
-    <!-- TARJETA EDITORIAL CENTRADA (MAX 820PX) -->
     <article class="noticia-periodistica-container">
       
-      <!-- VOLADA / CATEGORÍA -->
+      <!-- VOLADA -->
       <div class="noticia-volada" id="art-volada">POLÍTICA</div>
 
       <!-- TITULAR PRINCIPAL -->
       <h1 class="noticia-titular" id="art-titulo">Cargando noticia...</h1>
 
-      <!-- BAJADA / SUMARIO COMPLETO -->
+      <!-- BAJADA -->
       <div class="noticia-bajada" id="art-bajada"></div>
 
       <!-- CRÉDITO Y FECHA -->
@@ -56,7 +55,7 @@
         <div class="fecha-info" id="art-fecha"></div>
       </div>
 
-      <!-- FOTOGRAFÍA PRINCIPAL ENCUADRADA -->
+      <!-- FOTOGRAFÍA PRINCIPAL (PORTADA DE LA NOTA) -->
       <figure class="noticia-media-wrapper" id="contenedor-foto" style="display:none;">
         <div class="marco-imagen">
           <img id="art-foto" src="" alt="Fotografía informativa">
@@ -64,19 +63,11 @@
         <figcaption class="noticia-leyenda" id="art-pie-foto"></figcaption>
       </figure>
 
-      <!-- LEAD / ENTRADILLA DESTACADA COMPLETA -->
+      <!-- LEAD / ENTRADILLA DESTACADA -->
       <div class="noticia-lead-destacado" id="art-lead" style="display:none;"></div>
 
-      <!-- CUERPO COMPLETO DE LA NOTICIA -->
+      <!-- CUERPO DE LA NOTICIA (INCLUYE VIDEOS E IMÁGENES INTERMEDIAS DONDE DECIDAS) -->
       <div class="noticia-cuerpo-redaccion" id="art-cuerpo"></div>
-
-      <!-- VIDEO DE YOUTUBE -->
-      <div class="noticia-recurso-video" id="contenedor-video" style="display:none;">
-        <h4 class="subtitulo-recurso">Cobertura en video:</h4>
-        <div class="iframe-responsive">
-          <iframe id="art-video" src="" frameborder="0" allowfullscreen></iframe>
-        </div>
-      </div>
 
       <!-- ETIQUETAS / SEPA MÁS -->
       <div class="noticia-sepa-mas" id="contenedor-tags" style="display:none;">
@@ -130,13 +121,6 @@
           return mapa[(cat || '').toLowerCase()] || (cat || '').toUpperCase();
         };
 
-        const obtenerYoutubeEmbedUrl = (url) => {
-          if (!url) return '';
-          const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-          const match = url.match(regExp);
-          return (match && match[2].length === 11) ? `https://www.youtube-nocookie.com/embed/${match[2]}` : '';
-        };
-
         const titulo = metadatos.title || 'Sin título';
         const volada = metadatos.volada;
         const categoria = metadatos.categoria;
@@ -146,7 +130,6 @@
         const lead = metadatos.lead;
         const thumbnail = metadatos.thumbnail;
         const pieFoto = metadatos.pie_foto;
-        const videoUrl = metadatos.video_url;
         const tags = metadatos.tags;
 
         document.title = `${titulo} - La Gacela`;
@@ -175,18 +158,23 @@
           }
         }
 
-        const embedUrl = obtenerYoutubeEmbedUrl(videoUrl);
-        if (embedUrl) {
-          document.getElementById('art-video').src = embedUrl;
-          document.getElementById('contenedor-video').style.display = 'block';
-        }
-
         if (tags) {
           document.getElementById('tags-lista').innerHTML = tags.split(',').map(t => `<span class="tag-item">${t.trim()}</span>`).join('');
           document.getElementById('contenedor-tags').style.display = 'block';
         }
 
-        document.getElementById('art-cuerpo').innerHTML = marked.parse(cuerpo);
+        // Configurar Marked para renderizar fotos intermedias con pie de foto y convertir enlaces de YouTube en reproductor
+        const renderer = new marked.Renderer();
+        renderer.image = function(href, title, text) {
+          const leyendaHTML = text ? `<figcaption class="noticia-leyenda-inline">${text}</figcaption>` : '';
+          return `<figure class="noticia-figura-inline"><div class="marco-imagen-inline"><img src="${href}" alt="${text || ''}" loading="lazy"></div>${leyendaHTML}</figure>`;
+        };
+
+        marked.setOptions({ renderer: renderer });
+
+        // Transformar enlaces sueltos de YouTube en reproductores incrustados automáticamente
+        const cuerpoProcesado = transformarVideosYMedios(cuerpo);
+        document.getElementById('art-cuerpo').innerHTML = marked.parse(cuerpoProcesado);
 
       } catch (e) {
         console.error(e);
@@ -194,7 +182,18 @@
       }
     });
 
-    // PARSER MULTILÍNEA COMPLETO
+    // Convierte automáticamente enlaces de YouTube sueltos en el texto en reproductores visuales
+    function transformarVideosYMedios(textoMarkdown) {
+      if (!textoMarkdown) return '';
+      
+      const regexYoutube = /(?:^|\n)(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})(?:\S+)?(?:\n|$)/g;
+      
+      return textoMarkdown.replace(regexYoutube, (match, videoId) => {
+        return `\n<div class="iframe-responsive-inline"><iframe src="[https://www.youtube-nocookie.com/embed/$](https://www.youtube-nocookie.com/embed/$){videoId}" frameborder="0" allowfullscreen></iframe></div>\n`;
+      });
+    }
+
+    // PARSER FRONTMATTER ROBUSTO
     function parseFrontmatter(texto) {
       const partes = texto.split(/^---$/m);
       if (partes.length < 3) return { metadatos: {}, cuerpo: texto };
