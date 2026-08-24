@@ -49,8 +49,9 @@ collections:
         widget: "string"
       - label: "6. Fecha de Publicación"
         name: "date"
-        widget: "date"
+        widget: "datetime"
         format: "YYYY-MM-DD"
+        timeFormat: false
       - label: "7. Lead / Entradilla (Opcional)"
         name: "lead"
         widget: "markdown"

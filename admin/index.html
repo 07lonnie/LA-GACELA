@@ -15,10 +15,10 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
   <script>
-    // 1. CONFIGURACIÓN ÚNICA DEL CMS (SIN DUPLICAR COLECCIONES)
+    // 1. CONFIGURACIÓN ÚNICA DEL CMS (USANDO WIDGET DATETIME OFICIAL)
     CMS.init({
       config: {
-        load_config_file: false, // Evita la duplicación de 'noticias'
+        load_config_file: false,
         backend: {
           name: "git-gateway",
           repo: "07lonnie/LA-GACELA",
@@ -56,7 +56,7 @@
               },
               { label: "4. Bajada / Sumario", name: "bajada", widget: "markdown", buttons: ["bold", "italic", "link"], hint: "Síntesis corta (permite negrita, cursiva y párrafos)" },
               { label: "5. Autor (Crédito del Redactor)", name: "autor", widget: "string", hint: "Nombre completo del periodista" },
-              { label: "6. Fecha de Publicación", name: "date", widget: "date", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD" },
+              { label: "6. Fecha de Publicación", name: "date", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false },
               { label: "7. Lead / Entradilla (Opcional)", name: "lead", widget: "markdown", required: false, buttons: ["bold", "italic", "link"], hint: "Primer párrafo del hecho (permite negrita y cursiva)" },
               { label: "8. Fotografía Principal (Proporción 16:9)", name: "thumbnail", widget: "image", required: false },
               { label: "9. Leyenda / Pie de Foto y Fuente", name: "pie_foto", widget: "string", required: false, hint: "Ejemplo: Dina Boluarte en el Congreso. | Fuente: Presidencia" },
@@ -157,10 +157,3 @@
   </script>
 </body>
 </html>
-```
-
-### Pasos para publicar:
-1. Reemplaza el contenido de `admin/index.html` en VS Code.
-2. Guarda los cambios con **`Ctrl` + `S`**.
-3. En la pestaña **Control de código fuente** (las 3 ramitas), presiona **Commit** y **Sync Changes**.
-4. Recarga tu navegador con **`Ctrl` + `F5`**. El error desaparecerá inmediatamente y te dará acceso al panel.
