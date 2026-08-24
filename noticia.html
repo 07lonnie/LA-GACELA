@@ -8,6 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- SCRIPTS DE INCRUSTACIÓN OFICIALES (TWITTER Y TIKTOK) -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script async src="https://www.tiktok.com/embed.js"></script>
 </head>
 <body>
 
@@ -54,7 +58,7 @@
         <div class="fecha-info" id="art-fecha"></div>
       </div>
 
-      <!-- FOTOGRAFÍA PRINCIPAL (PORTADA DE LA NOTA) -->
+      <!-- FOTOGRAFÍA PRINCIPAL -->
       <figure class="noticia-media-wrapper" id="contenedor-foto" style="display:none;">
         <div class="marco-imagen">
           <img id="art-foto" src="" alt="Fotografía informativa">
@@ -65,7 +69,7 @@
       <!-- LEAD / ENTRADILLA DESTACADA -->
       <div class="noticia-lead-destacado" id="art-lead" style="display:none;"></div>
 
-      <!-- CUERPO DE LA NOTICIA -->
+      <!-- CUERPO DE LA NOTICIA CON REPRODUCTORES MULTIMEDIA -->
       <div class="noticia-cuerpo-redaccion" id="art-cuerpo"></div>
 
       <!-- ETIQUETAS / SEPA MÁS -->
@@ -170,8 +174,14 @@
 
         marked.setOptions({ renderer: renderer });
 
-        const cuerpoProcesado = transformarVideosYMedios(cuerpo);
+        // Procesamiento de enlaces interactivos (YouTube, X / Twitter y TikTok)
+        const cuerpoProcesado = transformarRedesSociales(cuerpo);
         document.getElementById('art-cuerpo').innerHTML = marked.parse(cuerpoProcesado);
+
+        // Renderizar Widgets dinámicos tras insertar el HTML
+        if (window.twttr && window.twttr.widgets) {
+          window.twttr.widgets.load();
+        }
 
       } catch (e) {
         console.error(e);
@@ -179,14 +189,34 @@
       }
     });
 
-    function transformarVideosYMedios(textoMarkdown) {
+    // AUTO-INCRUSTACIÓN DE YOUTUBE, TWEETS Y TIKTOK
+    function transformarRedesSociales(textoMarkdown) {
       if (!textoMarkdown) return '';
+
+      let resultado = textoMarkdown;
+
+      // 1. YouTube
       const regexYoutube = /(?:^|\n)(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})(?:\S+)?(?:\n|$)/g;
-      return textoMarkdown.replace(regexYoutube, (match, videoId) => {
+      resultado = resultado.replace(regexYoutube, (match, videoId) => {
         return `\n<div class="iframe-responsive-inline"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></div>\n`;
       });
+
+      // 2. Twitter / X
+      const regexTwitter = /(?:^|\n)(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/([\w]+)\/status\/([\d]+)(?:\S+)?(?:\n|$)/g;
+      resultado = resultado.replace(regexTwitter, (match, user, tweetId) => {
+        return `\n<div class="contenedor-red-social"><blockquote class="twitter-tweet" data-dnt="true" align="center"><a href="https://twitter.com/${user}/status/${tweetId}"></a></blockquote></div>\n`;
+      });
+
+      // 3. TikTok
+      const regexTikTok = /(?:^|\n)(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com)\/@([\w.-]+)\/video\/([\d]+)(?:\S+)?(?:\n|$)/g;
+      resultado = resultado.replace(regexTikTok, (match, user, videoId) => {
+        return `\n<div class="contenedor-red-social"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${user}/video/${videoId}" data-video-id="${videoId}" style="max-width: 605px;min-width: 325px;"><section></section></blockquote></div>\n`;
+      });
+
+      return resultado;
     }
 
+    // PARSER FRONTMATTER ROBUSTO
     function parseFrontmatter(texto) {
       const partes = texto.split(/^---$/m);
       if (partes.length < 3) return { metadatos: {}, cuerpo: texto };

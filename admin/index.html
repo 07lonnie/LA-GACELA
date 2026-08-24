@@ -54,12 +54,20 @@
               },
               { label: "4. Bajada / Sumario", name: "bajada", widget: "markdown", buttons: ["bold", "italic", "link"], hint: "Síntesis inicial que va debajo del titular" },
               { label: "5. Autor (Crédito del Redactor)", name: "autor", widget: "string", hint: "Nombre del periodista" },
-              { label: "6. Fecha de Publicación", name: "date", widget: "datetime", format: "YYYY-MM-DD", timeFormat: false },
+              { 
+                label: "6. Fecha de Publicación", 
+                name: "date", 
+                widget: "datetime", 
+                format: "YYYY-MM-DD", 
+                dateFormat: "YYYY-MM-DD", 
+                timeFormat: false,
+                pickerUtc: false
+              },
               { label: "7. Lead / Entradilla (Opcional)", name: "lead", widget: "markdown", required: false, buttons: ["bold", "italic", "link"], hint: "Primer párrafo destacado" },
               { label: "8. Fotografía Principal (Portada)", name: "thumbnail", widget: "image", required: false },
               { label: "9. Leyenda / Pie de Foto Principal", name: "pie_foto", widget: "string", required: false, hint: "Ejemplo: Dina Boluarte en el Congreso. | Fuente: Presidencia" },
               { label: "10. Etiquetas / Sepa más (separadas por comas)", name: "tags", widget: "string", required: false, hint: "Ejemplo: Congreso, Elecciones, Política" },
-              { label: "11. Cuerpo de la Noticia (Párrafos, imágenes intermedias, videos y capturas)", name: "body", widget: "markdown", hint: "Puedes insertar imágenes con su pie de foto o pegar enlaces de YouTube directamente en el texto." }
+              { label: "11. Cuerpo de la Noticia (Párrafos, fotos, videos y redes sociales)", name: "body", widget: "markdown", hint: "Pega en su propia línea enlaces de YouTube, tweets (X) o TikTok para que se incrusten automáticamente." }
             ]
           }
         ]
@@ -129,7 +137,7 @@
             // Lead
             h('div', { style: { fontSize: '19.5px', fontWeight: '500', color: '#1a1a1a', lineHeight: '1.7', marginBottom: '22px' } }, this.props.widgetFor('lead')),
             
-            // Cuerpo de la noticia (admite imágenes, leyendas y párrafos)
+            // Cuerpo de la noticia
             h('div', { style: { fontSize: '18px', lineHeight: '1.8', color: '#2b2b2b' } }, this.props.widgetFor('body')),
             
             // Tags

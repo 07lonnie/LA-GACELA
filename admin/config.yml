@@ -25,7 +25,7 @@ collections:
         name: "volada"
         widget: "string"
         required: false
-      - label: "2. Titular Principal"
+      - label: "2. Titular Principal (Encabezado)"
         name: "title"
         widget: "string"
       - label: "3. Categoría"
@@ -44,35 +44,40 @@ collections:
         name: "bajada"
         widget: "markdown"
         buttons: ["bold", "italic", "link"]
-      - label: "5. Autor"
+      - label: "5. Autor (Crédito del Redactor)"
         name: "autor"
         widget: "string"
       - label: "6. Fecha de Publicación"
         name: "date"
         widget: "datetime"
         format: "YYYY-MM-DD"
+        dateFormat: "YYYY-MM-DD"
         timeFormat: false
+        pickerUtc: false
       - label: "7. Lead / Entradilla (Opcional)"
         name: "lead"
         widget: "markdown"
         required: false
         buttons: ["bold", "italic", "link"]
-      - label: "8. Fotografía Principal"
+      - label: "8. Fotografía Principal (Portada)"
         name: "thumbnail"
         widget: "image"
         required: false
-      - label: "9. Leyenda de Foto"
+      - label: "9. Leyenda / Pie de Foto Principal"
         name: "pie_foto"
         widget: "string"
         required: false
-      - label: "10. Link YouTube (Opcional)"
-        name: "video_url"
-        widget: "string"
-        required: false
-      - label: "11. Etiquetas (Separadas por comas)"
+      - label: "10. Etiquetas / Sepa más (separadas por comas)"
         name: "tags"
         widget: "string"
         required: false
-      - label: "12. Cuerpo de la Noticia"
+      - label: "11. Cuerpo de la Noticia (Párrafos, fotos, videos y redes sociales)"
         name: "body"
         widget: "markdown"
+```eof
+
+### Pasos finales:
+1. Reemplaza el texto en `admin/config.yml` y guárdalo (**`Ctrl` + `S`**).
+2. Haz el **Commit** y **Sync Changes** en VS Code.
+
+¡Con esto todos los archivos de tu proyecto estarán totalmente alineados y funcionando! Si necesitas algún otro ajuste, me avisas.
