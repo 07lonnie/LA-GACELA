@@ -523,3 +523,85 @@ body.modo-oscuro #btn-modo {
   text-align: justify;
   text-justify: inter-word;
 }
+/* ==========================================================
+   FORZAR CENTRADO COMPLETO Y ESPACIADO HOLGADO EN QUIÉNES SOMOS
+   ========================================================== */
+
+#seccion-quienes-somos,
+.seccion-quienes-somos,
+.presentacion-institucional {
+  width: 100% !important;
+  max-width: 850px !important;
+  margin: 40px auto 140px auto !important; /* Espacio arriba (40px) y abajo (140px) */
+  padding: 20px 20px 60px 20px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+/* Forzar centrado absoluto en todos los títulos y subtítulos de esta sección */
+#seccion-quienes-somos h2,
+#seccion-quienes-somos .titulo-seccion,
+.presentacion-institucional h2,
+.presentacion-institucional .titulo-seccion {
+  width: 100% !important;
+  text-align: center !important;
+  margin: 20px auto 15px auto !important;
+  font-family: 'Playfair Display', Georgia, serif !important;
+  font-size: 32px !important;
+  color: var(--verde-esmeralda, #0e3b2e) !important;
+  display: block !important;
+}
+
+#seccion-quienes-somos p.subtitulo-seccion,
+.presentacion-institucional p.subtitulo-seccion {
+  width: 100% !important;
+  text-align: center !important;
+  margin: 0 auto 30px auto !important;
+  font-size: 15px !important;
+  color: #666 !important;
+  display: block !important;
+}
+
+/* Centrado y ancho del bloque de texto descriptivo */
+.manifiesto-texto {
+  width: 100% !important;
+  max-width: 720px !important;
+  margin: 0 auto 25px auto !important;
+}
+
+.manifiesto-texto p {
+  text-align: justify !important;
+  text-justify: inter-word !important;
+  font-size: 15.5px !important;
+  line-height: 1.7 !important;
+  color: #333 !important;
+  margin: 0 auto !important;
+}
+
+/* Divisor dorado centrado */
+.divisor-dorado {
+  width: 80px !important;
+  height: 2px !important;
+  background-color: var(--dorado, #D4AF37) !important;
+  margin: 35px auto !important;
+  display: block !important;
+}
+
+/* Contenedor de la foto/icono central */
+.contenedor-foto-institucional {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 15px auto 20px auto !important;
+}
+
+.foto-institucional {
+  max-width: 110px !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
