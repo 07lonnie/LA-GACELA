@@ -848,3 +848,50 @@ body.modo-oscuro .noticia-cuerpo-redaccion {
 body.modo-oscuro .marco-imagen {
   background-color: #121417 !important;
 }
+
+/* ==========================================================
+ESTILOS DE DISEÑO Y CONTRASTE DE IMÁGENES
+========================================================== */
+
+body:not(.modo-oscuro) {
+background-color: #f1f5f9 !important;
+}
+
+.noticia-periodistica-container {
+background-color: #ffffff !important;
+border-radius: 10px !important;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+margin-top: 40px !important;
+margin-bottom: 80px !important;
+}
+
+.marco-imagen {
+width: 100% !important;
+max-height: 500px !important;
+background-color: #f8f9fa !important;
+border-radius: 6px !important;
+padding: 5px !important;
+display: flex !important;
+justify-content: center !important;
+align-items: center !important;
+}
+
+.marco-imagen img {
+width: 100% !important;
+height: auto !important;
+max-height: 490px !important;
+object-fit: contain !important;
+}
+
+.noticia-bajada p, .noticia-lead-destacado p {
+margin: 0 0 15px 0 !important;
+}
+
+.noticia-lead-destacado {
+font-family: 'Georgia', serif;
+font-size: 20px;
+font-weight: bold;
+color: #1a1a1a;
+margin-bottom: 25px;
+line-height: 1.6;
+}

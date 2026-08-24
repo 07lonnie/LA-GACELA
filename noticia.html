@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body { background-color: #f1f5f9; }
+    .noticia-periodistica-container { background-color: #ffffff; }
+  </style>
 </head>
 <body>
 
@@ -20,27 +24,16 @@
   </header>
 
   <article class="noticia-periodistica-container">
+    <div class="noticia-volada" id="art-volada"></div>
+    <h1 class="noticia-titular" id="art-titulo">Cargando noticia...</h1>
     
-    <!-- VOLADA -->
-    <div class="noticia-volada" id="art-volada">POLÍTICA</div>
+    <div class="noticia-bajada" id="art-bajada"></div>
 
-    <!-- TITULAR -->
-    <h1 class="noticia-titular" id="art-titulo">Cargando titular de la noticia...</h1>
-
-    <!-- BAJADA -->
-    <p class="noticia-bajada" id="art-bajada"></p>
-
-    <!-- CRÉDITO Y FECHA -->
     <div class="noticia-creditos-fecha">
-      <div class="autor-info">
-        <span>Por <strong id="art-autor">Redacción La Gacela</strong></span>
-      </div>
-      <div class="fecha-info">
-        <span id="art-fecha"></span>
-      </div>
+      <div class="autor-info"><span>Por <strong id="art-autor"></strong></span></div>
+      <div class="fecha-info"><span id="art-fecha"></span></div>
     </div>
 
-    <!-- FOTOGRAFÍA PRINCIPAL COMPLETA -->
     <figure class="noticia-media-wrapper" id="contenedor-foto" style="display:none;">
       <div class="marco-imagen">
         <img id="art-foto" src="" alt="Fotografía informativa">
@@ -48,13 +41,10 @@
       <figcaption class="noticia-leyenda" id="art-pie-foto"></figcaption>
     </figure>
 
-    <!-- LEAD / ENTRADILLA DESTACADA -->
     <div class="noticia-lead-destacado" id="art-lead" style="display:none;"></div>
-
-    <!-- CUERPO DE LA NOTICIA -->
+    
     <div class="noticia-cuerpo-redaccion" id="art-cuerpo"></div>
 
-    <!-- VIDEO RECURSO -->
     <div class="noticia-recurso-video" id="contenedor-video" style="display:none;">
       <h4 class="subtitulo-recurso">Cobertura en video:</h4>
       <div class="iframe-responsive">
@@ -62,7 +52,6 @@
       </div>
     </div>
 
-    <!-- TAGS / SEPA MÁS -->
     <div class="noticia-sepa-mas" id="contenedor-tags" style="display:none;">
       <h3>Sepa más:</h3>
       <div class="tags-list" id="tags-lista"></div>
@@ -71,7 +60,6 @@
     <div class="volver-contenedor">
       <a href="index.html" class="btn-volver-portada">← Volver a la portada</a>
     </div>
-
   </article>
 
   <script>
@@ -79,95 +67,76 @@
       const params = new URLSearchParams(window.location.search);
       const archivoNoticia = params.get('id');
 
-      if (!archivoNoticia) {
-        document.getElementById('art-titulo').textContent = 'Noticia no especificada';
-        return;
-      }
+      if (!archivoNoticia) return;
 
       try {
         const respuesta = await fetch(`contenido/noticias/${archivoNoticia}`);
-        if (!respuesta.ok) throw new Error('No se pudo encontrar la nota');
-        
         const texto = await respuesta.text();
         const partes = texto.split('---');
-        if (partes.length < 3) return;
-
         const metadatosRaw = partes[1];
         const cuerpoMarkdown = partes.slice(2).join('---');
 
         const obtenerValor = (clave) => {
-          const regex = new RegExp(`^${clave}:\\s*["']?(.*?)["']?$`, 'm');
+          const regex = new RegExp(`^${clave}:\\s*([\\s\\S]*?)(?=\\n^[a-z_]+:|$)`, 'm');
           const match = metadatosRaw.match(regex);
-          return match ? match[1].trim() : '';
+          if (match) {
+            let valor = match[1].trim();
+            if (valor.startsWith("'") && valor.endsWith("'") || valor.startsWith('"') && valor.endsWith('"')) {
+              valor = valor.substring(1, valor.length - 1);
+            }
+            return valor;
+          }
+          return '';
         };
 
         const normalizarCategoria = (cat) => {
-          const mapa = {
-            'politica': 'POLÍTICA',
-            'internacionales': 'INTERNACIONALES',
-            'espectaculos': 'ESPECTÁCULOS',
-            'deportes': 'DEPORTES'
-          };
+          const mapa = { 'politica': 'POLÍTICA', 'internacionales': 'INTERNACIONALES', 'espectaculos': 'ESPECTÁCULOS', 'deportes': 'DEPORTES' };
           return mapa[cat.toLowerCase()] || cat.toUpperCase();
         };
 
         const titulo = obtenerValor('title');
         const volada = obtenerValor('volada');
         const categoria = obtenerValor('categoria');
-        const autor = obtenerValor('autor');
-        const fecha = obtenerValor('date');
         const bajada = obtenerValor('bajada');
         const lead = obtenerValor('lead');
-        const thumbnail = obtenerValor('thumbnail');
-        const pieFoto = obtenerValor('pie_foto');
-        const videoUrl = obtenerValor('video_url');
-        const tags = obtenerValor('tags');
-
+        
         document.title = `${titulo} - La Gacela`;
         document.getElementById('art-titulo').textContent = titulo;
         document.getElementById('art-volada').textContent = volada ? volada.toUpperCase() : normalizarCategoria(categoria);
-        document.getElementById('art-autor').textContent = autor || 'Redacción La Gacela';
-        document.getElementById('art-fecha').textContent = fecha;
-        document.getElementById('art-bajada').textContent = bajada;
-
+        document.getElementById('art-autor').textContent = obtenerValor('autor') || 'Redacción';
+        document.getElementById('art-fecha').textContent = obtenerValor('date');
+        
+        document.getElementById('art-bajada').innerHTML = marked.parse(bajada);
+        
         if (lead) {
-          const elLead = document.getElementById('art-lead');
-          elLead.textContent = lead;
-          elLead.style.display = 'block';
+          document.getElementById('art-lead').innerHTML = marked.parse(lead);
+          document.getElementById('art-lead').style.display = 'block';
         }
 
+        const thumbnail = obtenerValor('thumbnail');
         if (thumbnail) {
-          const img = document.getElementById('art-foto');
-          img.src = thumbnail;
+          document.getElementById('art-foto').src = thumbnail;
           document.getElementById('contenedor-foto').style.display = 'block';
+          document.getElementById('art-pie-foto').textContent = obtenerValor('pie_foto');
         }
 
-        if (pieFoto) {
-          document.getElementById('art-pie-foto').textContent = pieFoto;
-        }
-
+        const videoUrl = obtenerValor('video_url');
         if (videoUrl) {
-          const videoFrame = document.getElementById('art-video');
-          let embedUrl = videoUrl;
-          if (videoUrl.includes('watch?v=')) {
-            embedUrl = videoUrl.replace('watch?v=', 'embed/');
-          } else if (videoUrl.includes('youtu.be/')) {
-            embedUrl = videoUrl.replace('youtu.be/', 'www.youtube.com/embed/');
-          }
-          videoFrame.src = embedUrl;
+          let embedUrl = videoUrl.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/');
+          document.getElementById('art-video').src = embedUrl;
           document.getElementById('contenedor-video').style.display = 'block';
         }
 
+        const tags = obtenerValor('tags');
         if (tags) {
-          const listaTagsHTML = tags.split(',').map(t => `<span class="tag-item">${t.trim()}</span>`).join('');
-          document.getElementById('tags-lista').innerHTML = listaTagsHTML;
+          document.getElementById('tags-lista').innerHTML = tags.split(',').map(t => `<span class="tag-item">${t.trim()}</span>`).join('');
           document.getElementById('contenedor-tags').style.display = 'block';
         }
 
         document.getElementById('art-cuerpo').innerHTML = marked.parse(cuerpoMarkdown);
 
       } catch (e) {
-        document.getElementById('art-titulo').textContent = 'Error al cargar la noticia seleccionada';
+        console.error(e);
       }
     });
   </script>

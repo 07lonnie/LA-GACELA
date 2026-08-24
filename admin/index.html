@@ -4,14 +4,155 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel Editorial - La Gacela</title>
+  
+  <script>
+    // Inicialización manual para evitar errores 404 al buscar config.yml en servidores locales
+    window.CMS_MANUAL_INIT = true;
+  </script>
 </head>
 <body>
-  <!-- Decap CMS Core -->
-  <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
   <script>
-    // Inyectar fuentes y estilos de La Gacela en el panel de vista previa
+    // 1. CONFIGURACIÓN DEL CMS E INTEGRACIÓN DE CAMPOS Y WIDGETS
+    CMS.init({
+      config: {
+        backend: {
+          name: "git-gateway",
+          repo: "07lonnie/LA-GACELA",
+          branch: "main",
+          auth_type: "pkce",
+          base_url: "https://auth.decapbridge.com",
+          auth_endpoint: "/sites/6f935bce-10e7-4f4f-acee-854e0d188d8a/pkce",
+          auth_token_endpoint: "/sites/6f935bce-10e7-4f4f-acee-854e0d188d8a/token",
+          gateway_url: "https://gateway.decapbridge.com"
+        },
+        logo_url: "https://decapbridge.com/decapcms-with-bridge.svg",
+        site_url: "https://la-gacela.vercel.app",
+        media_folder: "fotos/subidas",
+        public_folder: "fotos/subidas",
+        collections: [
+          {
+            name: "noticias",
+            label: "Noticias",
+            folder: "contenido/noticias",
+            create: true,
+            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+            fields: [
+              { label: "1. Volada / Antetítulo (Opcional)", name: "volada", widget: "string", required: false, hint: "Ejemplo: GOBIERNO, CRISIS INSTITUCIONAL" },
+              { label: "2. Titular Principal (Encabezado)", name: "title", widget: "string", hint: "Titular informativo de máximo 15 a 20 palabras" },
+              { 
+                label: "3. Categoría", 
+                name: "categoria", 
+                widget: "select", 
+                options: [
+                  { label: "Política", value: "politica" },
+                  { label: "Internacionales", value: "internacionales" },
+                  { label: "Espectáculos", value: "espectaculos" },
+                  { label: "Deportes", value: "deportes" }
+                ]
+              },
+              { label: "4. Bajada / Sumario", name: "bajada", widget: "markdown", buttons: ["bold", "italic", "link"], hint: "Síntesis corta (permite negrita, cursiva y párrafos)" },
+              { label: "5. Autor (Crédito del Redactor)", name: "autor", widget: "string", hint: "Nombre completo del periodista" },
+              { label: "6. Fecha de Publicación", name: "date", widget: "date", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD" },
+              { label: "7. Lead / Entradilla (Opcional)", name: "lead", widget: "markdown", required: false, buttons: ["bold", "italic", "link"], hint: "Primer párrafo del hecho (permite negrita y cursiva)" },
+              { label: "8. Fotografía Principal (Proporción 16:9)", name: "thumbnail", widget: "image", required: false },
+              { label: "9. Leyenda / Pie de Foto y Fuente", name: "pie_foto", widget: "string", required: false, hint: "Ejemplo: Dina Boluarte en el Congreso. | Fuente: Presidencia" },
+              { label: "10. Video de YouTube (Opcional)", name: "video_url", widget: "string", required: false, hint: "Pegar enlace completo de YouTube" },
+              { label: "11. Etiquetas / Sepa más (separadas por comas)", name: "tags", widget: "string", required: false, hint: "Ejemplo: Dina Boluarte, Congreso, Elecciones" },
+              { label: "12. Cuerpo de la Noticia", name: "body", widget: "markdown", hint: "Desarrollo completo de la nota" }
+            ]
+          }
+        ]
+      }
+    });
+
+    // 2. REGISTRO DE FUENTES Y ESTILOS
     CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap");
     CMS.registerPreviewStyle("../styles.css");
+
+    // 3. PLANTILLA DE VISTA PREVIA LIMPIA (Sin títulos de campo ni números)
+    var NoticiasPreview = createClass({
+      render: function() {
+        var entry = this.props.entry;
+        
+        var title = entry.getIn(['data', 'title']) || 'Escribe un titular...';
+        var volada = entry.getIn(['data', 'volada']);
+        var categoria = entry.getIn(['data', 'categoria']);
+        
+        var mapaCategorias = { 'politica': 'POLÍTICA', 'internacionales': 'INTERNACIONALES', 'espectaculos': 'ESPECTÁCULOS', 'deportes': 'DEPORTES' };
+        var voladaFinal = volada ? volada.toUpperCase() : (categoria ? (mapaCategorias[categoria] || categoria.toUpperCase()) : 'CATEGORÍA');
+        
+        var autor = entry.getIn(['data', 'autor']) || 'Redacción La Gacela';
+        var date = entry.getIn(['data', 'date']) || 'Fecha de publicación';
+        var thumbnail = this.props.getAsset(entry.getIn(['data', 'thumbnail']));
+        var pie_foto = entry.getIn(['data', 'pie_foto']);
+        var tags = entry.getIn(['data', 'tags']);
+
+        var tagsElements = [];
+        if (tags) {
+           var tagArray = tags.split(',');
+           for(var i=0; i < tagArray.length; i++){
+               tagsElements.push(h('span', {
+                 key: i, 
+                 style: { 
+                   fontFamily: 'Inter', fontSize: '13px', backgroundColor: '#f2f4f3', 
+                   color: '#444', padding: '6px 14px', borderRadius: '20px', 
+                   border: '1px solid #e0e0e0', marginRight: '8px', marginBottom: '8px', display: 'inline-block' 
+                 }
+               }, tagArray[i].trim()));
+           }
+        }
+
+        return h('div', { style: { padding: '30px 15px', backgroundColor: '#f1f5f9', minHeight: '100vh', fontFamily: 'Georgia, serif' } },
+          h('article', { 
+              style: { 
+                backgroundColor: '#ffffff', padding: '40px 35px', borderRadius: '8px', 
+                maxWidth: '820px', margin: '0 auto', boxShadow: '0 4px 20px rgba(0,0,0,0.08)' 
+              } 
+            },
+            
+            // Volada
+            h('div', { style: { fontFamily: 'Inter', color: '#D4AF37', fontSize: '13px', fontWeight: 'bold', letterSpacing: '2px', marginBottom: '12px' } }, voladaFinal),
+            
+            // Titular
+            h('h1', { style: { fontFamily: 'Playfair Display', fontSize: '38px', color: '#1a1a1a', marginTop: 0, marginBottom: '18px', lineHeight: '1.2', fontWeight: 'bold' } }, title),
+            
+            // Bajada
+            h('div', { style: { fontFamily: 'Inter', fontSize: '19px', color: '#4a4a4a', marginBottom: '25px', lineHeight: '1.5' } }, this.props.widgetFor('bajada')),
+            
+            // Créditos y Fecha
+            h('div', { style: { display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #eaeaea', borderBottom: '1px solid #eaeaea', padding: '12px 0', marginBottom: '30px', fontFamily: 'Inter', fontSize: '13.5px', color: '#666' } },
+              h('div', {}, "Por ", h('strong', { style: { color: '#0e3b2e' } }, autor)),
+              h('div', {}, date.toString())
+            ),
+
+            // Foto Principal Completa (object-fit: contain)
+            thumbnail ? h('figure', { style: { margin: '0 0 35px 0', width: '100%' } },
+              h('div', { style: { width: '100%', backgroundColor: '#f8f9fa', borderRadius: '6px', textAlign: 'center', overflow: 'hidden', padding: '5px' } },
+                h('img', { src: thumbnail.toString(), style: { width: '100%', maxHeight: '480px', objectFit: 'contain', display: 'block', margin: '0 auto' } })
+              ),
+              pie_foto ? h('figcaption', { style: { fontFamily: 'Inter', fontSize: '13px', color: '#666', fontStyle: 'italic', marginTop: '10px', borderLeft: '3px solid #D4AF37', paddingLeft: '10px' } }, pie_foto) : null
+            ) : null,
+
+            // Lead
+            h('div', { style: { fontSize: '19.5px', fontWeight: '500', color: '#1a1a1a', lineHeight: '1.7', marginBottom: '22px' } }, this.props.widgetFor('lead')),
+            
+            // Cuerpo de la Noticia
+            h('div', { style: { fontSize: '18px', lineHeight: '1.8', color: '#2b2b2b' } }, this.props.widgetFor('body')),
+            
+            // Etiquetas / Tags
+            tags ? h('div', { style: { marginTop: '45px', paddingTop: '25px', borderTop: '2px solid #f0f0f0' } }, 
+              h('h3', { style: { fontFamily: 'Inter', fontSize: '15px', color: '#0e3b2e', marginBottom: '12px' } }, "Sepa más:"), 
+              h('div', { style: { display: 'flex', flexWrap: 'wrap' } }, tagsElements)
+            ) : null
+          )
+        );
+      }
+    });
+
+    CMS.registerPreviewTemplate("noticias", NoticiasPreview);
   </script>
 </body>
 </html>
