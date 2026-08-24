@@ -3,231 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Gacela - Periódico Digital</title>
-  
-  <!-- Tipografías de Google Fonts: Playfair Display (Titulares) e Inter (Lectura) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
-  
+  <title>La Gacela - Periodico Universitario</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-  <!-- ENCABEZADO -->
+  <!-- ENCABEZADO Y LOGO -->
   <header class="encabezado">
     <div class="top-bar">
-      <span>Edición Digital | 2026</span>
+      <span>Edición Digital | Universidad Nacional Federico Villarreal</span>
       <button id="btn-modo">🌙 Modo Oscuro</button>
     </div>
-    <h1 class="logo">LA GACELA</h1>
+    <a href="index.html" class="enlace-logo">
+      <h1 class="logo">LA GACELA</h1>
+    </a>
     <p class="slogan">Información con agilidad, rigor y elegancia</p>
   </header>
 
-  <!-- NAVEGACIÓN Y MENÚ -->
-  <nav class="menu-categorias">
-    <button class="btn-nav active" data-categoria="todos">Inicio</button>
-    <button class="btn-nav" data-categoria="politica">Política</button>
-    <button class="btn-nav" data-categoria="internacionales">Internacionales</button>
-    <button class="btn-nav" data-categoria="espectaculos">Espectáculos</button>
-    <button class="btn-nav" data-categoria="deportes">Deportes</button>
-    <button class="btn-nav btn-especial" id="btn-quienes-somos">¿Quiénes Somos?</button>
+  <!-- BARRA DE NAVEGACIÓN ESTILIZADA POR SECCIONES -->
+  <nav class="navegacion">
+    <ul class="nav-menu">
+      <li><button class="nav-btn activo" data-seccion="inicio">Inicio</button></li>
+      <li><button class="nav-btn" data-seccion="politica">Política</button></li>
+      <li><button class="nav-btn" data-seccion="internacionales">Internacionales</button></li>
+      <li><button class="nav-btn" data-seccion="espectaculos">Espectáculos</button></li>
+      <li><button class="nav-btn" data-seccion="deportes">Deportes</button></li>
+      <li><button class="nav-btn nav-btn-destacado" data-seccion="quienes-somos">¿Quiénes somos?</button></li>
+    </ul>
   </nav>
 
-  <!-- VISTA DE NOTICIAS -->
-  <main id="seccion-noticias" class="contenedor-periodico">
+  <!-- CONTENEDOR PRINCIPAL DE SECCIONES -->
+  <main class="contenedor-principal">
 
-    <!-- SECCIÓN POLÍTICA (3 NOTICIAS) -->
+    <!-- SECCIÓN DE NOTICIAS (FILTRABLE) -->
+    <section id="sec-noticias" class="seccion-vista activo">
+      <div class="encabezado-seccion-actual">
+        <h2 id="titulo-seccion-actual" class="titulo-seccion-bloque">Últimas Publicaciones</h2>
+        <p id="bajada-seccion-actual" class="subtitulo-seccion-texto">Las noticias más relevantes de la jornada universitaria y nacional.</p>
+      </div>
 
-    <!-- Noticia 1 (Principal de Política) -->
-    <article class="noticia principal" data-categoria="politica">
-      <span class="etiqueta">Política</span>
-      <h2>Cámara de Diputados ratifica el trabajo presencial obligatorio para sesiones plenarias y de comisiones</h2>
-      <!-- Recuerda guardar la foto en tu carpeta fotos como politica1.jpeg -->
-      <img src="fotos/diputados.jpg" alt="Cámara de Diputados y Congreso del Perú">
-      <p class="bajada">La Mesa Directiva dispuso el retorno total a la presencialidad parlamentaria para fortalecer el debate y la fiscalización.</p>
-      <p class="texto-noticia">
-        Con el objetivo de garantizar una mayor transparencia y asistencia efectiva en el Palacio Legislativo, se estableció que tanto las sesiones del Pleno como los grupos de trabajo ordinarios y comisiones investigadoras deberán desarrollarse de manera presencial, dejando atrás las modalidades virtuales excepcionales.
-      </p>
-    </article>
+      <div id="grid-noticias" class="grid-noticias">
+        <!-- Las noticias se cargan dinámicamente desde script.js -->
+      </div>
+    </section>
 
-    <!-- Noticia 2 -->
-    <article class="noticia" data-categoria="politica">
-      <span class="etiqueta">Política</span>
-      <h3>Polémica y retroceso en designación de Juan Falconí en el Consejo de la Procuraduría General</h3>
-      <img src="fotos/keiko.jpg" alt="Procuraduría General del Estado">
-      <p>Tras advertirse impedimentos normativos para funcionarios en ejercicio, el Ejecutivo dejó sin efecto el nombramiento del viceministro en el ente de defensa jurídica.</p>
-    </article>
+    <!-- SECCIÓN QUIÉNES SOMOS + CARRUSEL EDITORIAL -->
+    <section id="sec-quienes-somos" class="seccion-vista">
+      <div class="presentacion-institucional">
+        <h2>¿Quiénes somos?</h2>
+        <div class="divisor-dorado"></div>
 
-    <!-- Noticia 3 -->
-    <article class="noticia" data-categoria="politica">
-      <span class="etiqueta">Política</span>
-      <h3>Perú y México: el panorama jurídico tras la salida y eventual extradición de Betssy Chávez</h3>
-      <img src="fotos/betssy.jpg" alt="Relaciones diplomáticas y extradición Betssy Chávez">
-      <p>Especialistas en derecho internacional analizan los alcances del salvoconducto y los mecanismos legales que maneja la justicia peruana frente a las investigaciones en curso.</p>
-    </article>
+        <div class="contenedor-foto-institucional">
+          <img src="fotos/LAGACELAICONODORADO.jpg" alt="Isotipo La Gacela" class="foto-institucional" onerror="this.style.display='none'">
+        </div>
 
-    <!-- SECCIÓN INTERNACIONALES (3 NOTICIAS) -->
+        <div class="manifiesto-texto">
+          <p>
+            Somos <strong>La Gacela</strong>, el periódico universitario fundado por estudiantes de Ciencias de la Comunicación de la <strong>Universidad Nacional Federico Villarreal</strong>. Nuestro compromiso es ejercer un periodismo ético, riguroso y transparente que aporte contexto a los hechos de mayor relevancia. Buscamos ser un espacio de confianza donde el rigor informativo y el análisis crítico guíen cada una de nuestras coberturas.
+          </p>
+        </div>
 
-    <!-- Noticia 1 (Principal de Internacionales) -->
-    <article class="noticia principal" data-categoria="internacionales">
-      <span class="etiqueta">Internacionales</span>
-      <h2>Alerta de seguridad: Israel advirtió sobre presunta amenaza contra el Air Force One de EE. UU.</h2>
-      <!-- Recuerda guardar la foto en tu carpeta fotos como internacional1.jpeg -->
-      <img src="fotos/trump.jpg" alt="Air Force One y seguridad internacional">
-      <p class="bajada">Servicios de inteligencia alertaron sobre posibles riesgos en rutas aéreas en medio de crecientes tensiones en Medio Oriente.</p>
-      <p class="texto-noticia">
-        Informes diplomáticos y de seguridad encendieron las alarmas en Washington tras advertencias sobre el desplazamiento del avión presidencial estadounidense. Autoridades militares reforzaron los protocolos de vigilancia en el espacio aéreo estratégico de la región.
-      </p>
-    </article>
+        <div class="divisor-dorado"></div>
 
-    <!-- Noticia 2 -->
-    <article class="noticia" data-categoria="internacionales">
-      <span class="etiqueta">Internacionales</span>
-      <h3>Argentina cobrará atención médica en hospitales públicos a extranjeros no residentes</h3>
-      <img src="fotos/argentina.jpg" alt="Hospitales y salud en Argentina">
-      <p>La medida busca regular el gasto fiscal y frenar el denominado turismo de salud, priorizando la cobertura para los ciudadanos locales.</p>
-    </article>
+        <!-- CARRUSEL DINÁMICO DEL EQUIPO EDITORIAL -->
+        <div class="bloque-equipo-editorial">
+          <h3 class="titulo-equipo">Nuestro equipo editorial</h3>
+          <p class="subtitulo-equipo">Conoce a los periodistas detrás de las investigaciones e historias de La Gacela.</p>
 
-    <!-- Noticia 3 -->
-    <article class="noticia" data-categoria="internacionales">
-      <span class="etiqueta">Internacionales</span>
-      <h3>ONU advierte grave impacto del sismo en las regiones más vulnerables de Colombia</h3>
-      <img src="fotos/terremoto.jpg" alt="Respuesta humanitaria tras sismo en Colombia">
-      <p>Naciones Unidas coordina el envío de ayuda alimentaria y sanitaria de emergencia hacia los departamentos con menores recursos del país.</p>
-    </article>
+          <div class="carrusel-contenedor">
+            <button class="carrusel-flecha flecha-izquierda" id="btn-carrusel-prev" aria-label="Anterior">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
 
-    <!-- ESPECTÁCULOS (3 NOTICIAS ACTUALIZADAS) -->
-    
-    <!-- Noticia 1 (Principal de Espectáculos) -->
-    <article class="noticia principal" data-categoria="espectaculos">
-      <span class="etiqueta">Espectáculos</span>
-      <h2>Actriz denuncia a director vinculado a productora por realizar presunto casting en su departamento</h2>
-      <!-- Reemplaza la imagen por una foto tuya si la guardaste en tu carpeta fotos -->
-      <img src="fotos/actriz.jpeg" alt="Denuncia en casting">
-      <p class="bajada">La joven presentó grabaciones de seguridad que registraron lo ocurrido; la productora informó la separación del involucrado.</p>
-      <p class="texto-noticia">
-        El hecho generó una fuerte ola de reacciones en el medio artístico local. Según el testimonio, la citación para la audición se llevó a cabo fuera de los estudios formales de grabación, lo que motivó el inicio de investigaciones y el pronunciamiento público de la empresa.
-      </p>
-    </article>
+            <div class="tarjeta-equipo" id="tarjeta-miembro">
+              <div class="avatar-miembro-wrapper">
+                <img id="miembro-foto" src="fotos/LAGACELAICONODORADO.jpg" alt="Foto de miembro">
+              </div>
+              <h4 id="miembro-nombre" class="nombre-miembro">Cargando...</h4>
+              <p id="miembro-cargo" class="cargo-miembro">Cargo</p>
+              <p id="miembro-bio" class="bio-miembro">Descripción del redactor...</p>
+            </div>
 
-    <!-- Noticia 2 -->
-    <article class="noticia" data-categoria="espectaculos">
-      <span class="etiqueta">Espectáculos</span>
-      <h3>Solicitan medidas judiciales contra César Sánchez tras denuncias en el ámbito musical</h3>
-      <img src="fotos/cesar sanchez.jpg" alt="Caso judicial espectaculos">
-      <p>El Ministerio Público inició investigaciones preliminares para evaluar la situación legal del director musical tras los recientes testimonios.</p>
-    </article>
+            <button class="carrusel-flecha flecha-derecha" id="btn-carrusel-next" aria-label="Siguiente">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
 
-    <!-- Noticia 3 -->
-    <article class="noticia" data-categoria="espectaculos">
-      <span class="etiqueta">Espectáculos</span>
-      <h3>Daniela Cilloniz: 10 años de relación, pensó en separarse, fue “tóxica”, revela su secreto para una buena convivencia y más.</h3>
-      <img src="fotos/daniela cilloniz.jpg" alt="Farandula nacional">
-      <p>Dice que la convivencia no es fácil, pero cuando hay amor y madurez se supera todo. Revela que antes le revisaba el celular a su pareja, pero que con el tiempo llegó a confiar.</p>
-    </article>
+          <div class="carrusel-indicadores" id="carrusel-indicadores"></div>
+        </div>
 
-    <!-- SECCIÓN DEPORTES (3 NOTICIAS) -->
-
-    <!-- Noticia 1 (Principal de Deportes) -->
-    <article class="noticia principal" data-categoria="deportes">
-      <span class="etiqueta">Deportes</span>
-      <h2>Copa Sudamericana: Cienciano y un choque decisivo frente a Botafogo</h2>
-      <!-- Recuerda guardar la foto en tu carpeta fotos como deportes1.jpeg -->
-      <img src="fotos/cienciano.jpg" alt="Cienciano en Copa Sudamericana">
-      <p class="bajada">El 'Papá' afronta una llave clave a nivel continental buscando dar el golpe ante el conjunto brasileño.</p>
-      <p class="texto-noticia">
-        El cuadro cusqueño salta al terreno internacional con la consigna de imponer su localía y hacer historia en el torneo de la CONMEBOL. Con el respaldo de su hinchada y la estrategia afinada, el equipo busca asegurar una ventaja determinante en la serie.
-      </p>
-    </article>
-
-    <!-- Noticia 2 -->
-    <article class="noticia" data-categoria="deportes">
-      <span class="etiqueta">Deportes</span>
-      <h3>El dilema de Julián Álvarez en el mercado de fichajes europeo</h3>
-      <img src="fotos/julian.jpg" alt="Julián Álvarez fútbol europeo">
-      <p>El rol táctico del delantero argentino y el interés de grandes clubes del continente generan intenso debate en la prensa deportiva internacional.</p>
-    </article>
-
-    <!-- Noticia 3 -->
-    <article class="noticia" data-categoria="deportes">
-      <span class="etiqueta">Deportes</span>
-      <h3>Mundial de Vóley Sub 17: Perú se mide ante la potencia de Italia</h3>
-      <img src="fotos/voley.jpg" alt="Selección Peruana de Vóley Sub 17">
-      <p>La selección nacional juvenil afronta un duro desafío en los octavos de final con el objetivo de seguir avanzando en la cita mundialista.</p>
-    </article>
+      </div>
+    </section>
 
   </main>
 
- <!-- SECCIÓN QUIÉNES SOMOS -->
-<div class="presentacion-institucional">
-  <h2 class="titulo-seccion">¿Quiénes somos?</h2>
-  
-  <div class="contenedor-foto-institucional">
-    <img src="fotos/LAGACELAICONODORADO.png" alt="Isotipo La Gacela" class="foto-institucional">
-  </div>
-
-  <div class="manifiesto-texto">
-    <p>
-      Somos <strong>La Gacela</strong>, el periódico universitario fundado por estudiantes de Ciencias de la Comunicación de la <strong>Universidad Nacional Federico Villarreal</strong>. Nuestro compromiso es ejercer un periodismo ético, riguroso y transparente que aporte contexto a los hechos de mayor relevancia. Buscamos ser un espacio de confianza donde el rigor informativo y el análisis crítico guíen cada una de nuestras coberturas.
-    </p>
-  </div>
-
-  <div class="divisor-dorado"></div>
-
-  <h2 class="titulo-seccion">Nuestro equipo editorial</h2>
-  <p class="subtitulo-seccion">Conoce a los periodistas detrás de las investigaciones e historias de La Gacela.</p>
-
-    <!-- CARRUSEL INTERACTIVO -->
-    <div class="carrusel-equipo-contenedor">
-      <button class="btn-carrusel prev" id="btn-prev-equipo" aria-label="Anterior">&#10094;</button>
-
-      <div class="carrusel-ventana">
-        <div class="grid-periodistas carrusel-track" id="track-periodistas">
-
-          <div class="tarjeta-periodista">
-            <img src="fotos/Belen.jpg" alt="Belen Yaranga">
-            <h3>Belen Lucero Yaranga Rojas</h3>
-            <span class="cargo">Editor de Política</span>
-            <a href="mailto:belen.yaranga.rojas.13@gmail.com" class="correo">belen.yaranga.rojas.13@gmail.com</a>
-          </div>
-
-          <div class="tarjeta-periodista">
-            <img src="fotos/Adriana.jpg" alt="Adriana Peña">
-            <h3>Adriana Judith Peña Cotos</h3>
-            <span class="cargo">Editor de Internacionales</span>
-            <a href="mailto:p.adriana2106@gmail.com" class="correo">p.adriana2106@gmail.com</a>
-          </div>
-
-          <div class="tarjeta-periodista">
-            <img src="fotos/Yamilet.jpg" alt="Yamilet Chapilliquen">
-            <h3>Lidia Yamilet Chapilliquen Charca</h3>
-            <span class="cargo">Editor de Espectáculos</span>
-            <a href="mailto:lidiayamiletchapilliquen@gmail.com" class="correo">lidiayamiletchapilliquen@gmail.com</a>
-          </div>
-
-          <div class="tarjeta-periodista">
-            <img src="fotos/Jhordan.jpg" alt="Jhordan Valverde">
-            <h3>Jhordan David Valverde Soto</h3>
-            <span class="cargo">Editor de Deportes</span>
-            <a href="mailto:jhordanv1806@gmail.com" class="correo">jhordanv1806@gmail.com</a>
-          </div>
-
-          <div class="tarjeta-periodista">
-            <img src="fotos/yo.jpg" alt="Gianella Orellana">
-            <h3>Gianella Alondra Orellana Perez</h3>
-            <span class="cargo">Editor de Diseño Web</span>
-            <a href="mailto:gianellaalondraorellanaperez@gmail.com" class="correo">gianellaalondraorellanaperez@gmail.com</a>
-          </div>
-
-        </div>
-      </div>
-
-      <button class="btn-carrusel next" id="btn-next-equipo" aria-label="Siguiente">&#10095;</button>
+  <!-- PIE DE PÁGINA -->
+  <footer class="pie-pagina">
+    <div class="contenido-footer">
+      <p class="logo-footer">LA GACELA</p>
+      <p>© 2026 La Gacela - Escuela Profesional de Ciencias de la Comunicación (UNFV)</p>
     </div>
-
-    <!-- PUNTOS INDICADORES -->
-    <div class="carrusel-indicadores" id="indicadores-equipo"></div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
