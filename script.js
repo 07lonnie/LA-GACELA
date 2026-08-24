@@ -7,39 +7,39 @@ let seccionActual = 'inicio';
 
 const equipoEditorial = [
   {
-    nombre: "Belen Lucero Yaranga Rojas",
+    nombre: "Yamilet Chapilliquen",
     cargo: "Director(a) & Editor(a) de Espectáculos",
     correo: "espectaculos@lagacela.unfv.edu.pe",
     bio: "Dirección general del medio e investigaciones de la agenda cultural, artística y de entretenimiento.",
-    foto: "fotos/LAGACELAICONODORADO.jpg"
+    foto: "fotos/Yamilet.jpg"
   },
   {
-    nombre: "Redacción de Política",
+    nombre: "Belen Yaranga",
     cargo: "Editor(a) de Política",
     correo: "politica@lagacela.unfv.edu.pe",
     bio: "Cobertura de asuntos institucionales, política nacional, comisiones parlamentarias e investigaciones coyunturales.",
-    foto: "fotos/LAGACELAICONODORADO.jpg"
+    foto: "fotos/Belen.jpg"
   },
   {
-    nombre: "Redacción de Internacionales",
+    nombre: "Adriana Peña",
     cargo: "Editor(a) de Internacionales",
     correo: "internacionales@lagacela.unfv.edu.pe",
     bio: "Análisis geopolítico global, seguimiento de conflictos internacionales y acuerdos diplomáticos multilaterales.",
-    foto: "fotos/LAGACELAICONODORADO.jpg"
+    foto: "fotos/Adriana.jpg"
   },
   {
-    nombre: "Redacción de Deportes",
+    nombre: "Jhordan Valverde",
     cargo: "Editor(a) de Deportes",
     correo: "deportes@lagacela.unfv.edu.pe",
     bio: "Seguimiento y cobertura del deporte universitario, disciplinas locales, competencias nacionales e internacionales.",
-    foto: "fotos/LAGACELAICONODORADO.jpg"
+    foto: "fotos/Jhordan.jpg"
   },
   {
-    nombre: "Mesa de Desarrollo Digital",
+    nombre: "Gianella Orellana",
     cargo: "Editor(a) de Diseño Web",
     correo: "webmaster@lagacela.unfv.edu.pe",
     bio: "Responsable de la maquetación digital, arquitectura web, experiencia de usuario e innovación gráfica del diario.",
-    foto: "fotos/LAGACELAICONODORADO.jpg"
+    foto: "fotos/yo.jpg"
   }
 ];
 
