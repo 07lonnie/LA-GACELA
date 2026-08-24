@@ -1,28 +1,45 @@
 /* ==========================================================
-   LA GACELA - NAVEGACIÓN, FILTRADO Y CARRUSEL EDITORIAL
+   LA GACELA - NAVEGACIÓN, FILTRADO Y 5 SLIDES EDITORIALES
    ========================================================== */
 
 let noticiasGlobales = [];
 let seccionActual = 'inicio';
 
-// DATOS DEL EQUIPO EDITORIAL PARA EL CARRUSEL
+// CONFIGURACIÓN DE LOS 5 CARGOS SOLICITADOS
 const equipoEditorial = [
   {
     nombre: "Belen Lucero Yaranga Rojas",
-    cargo: "Directora Editorial & Redactora de Política",
-    bio: "Estudiante de Ciencias de la Comunicación de la UNFV. Especializada en la cobertura de asuntos institucionales, política nacional e investigaciones periodísticas.",
+    cargo: "Director(a) & Editor(a) de Espectáculos",
+    correo: "espectaculos@lagacela.unfv.edu.pe",
+    bio: "Dirección general del medio e investigaciones de la agenda cultural, artística y de entretenimiento.",
+    foto: "fotos/LAGACELAICONODORADO.jpg"
+  },
+  {
+    nombre: "Redacción de Política",
+    cargo: "Editor(a) de Política",
+    correo: "politica@lagacela.unfv.edu.pe",
+    bio: "Cobertura de asuntos institucionales, política nacional, comisiones parlamentarias e investigaciones coyunturales.",
     foto: "fotos/LAGACELAICONODORADO.jpg"
   },
   {
     nombre: "Redacción de Internacionales",
-    cargo: "Coordinación de Política Exterior",
-    bio: "Equipo encargado de analizar los conflictos internacionales, eventos geopolíticos globales y acuerdos multilaterales con rigor y diplomacia.",
+    cargo: "Editor(a) de Internacionales",
+    correo: "internacionales@lagacela.unfv.edu.pe",
+    bio: "Análisis geopolítico global, seguimiento de conflictos internacionales y acuerdos diplomáticos multilaterales.",
     foto: "fotos/LAGACELAICONODORADO.jpg"
   },
   {
-    nombre: "Mesa de Deportes y Cultura",
-    cargo: "Edición de Deportes y Espectáculos",
-    bio: "Periodistas comprometidos con la difusión del talento deportivo universitario, la cobertura cultural, artística y de entretenimiento.",
+    nombre: "Redacción de Deportes",
+    cargo: "Editor(a) de Deportes",
+    correo: "deportes@lagacela.unfv.edu.pe",
+    bio: "Seguimiento y cobertura del deporte universitario, disciplinas locales, competencias nacionales e internacionales.",
+    foto: "fotos/LAGACELAICONODORADO.jpg"
+  },
+  {
+    nombre: "Mesa de Desarrollo Digital",
+    cargo: "Editor(a) de Diseño Web",
+    correo: "webmaster@lagacela.unfv.edu.pe",
+    bio: "Responsable de la maquetación digital, arquitectura web, experiencia de usuario e innovación gráfica del diario.",
     foto: "fotos/LAGACELAICONODORADO.jpg"
   }
 ];
@@ -36,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cargarNoticiasDesdeGitHub();
 });
 
-/* 1. NAVEGACIÓN Y FILTRADO DE CONTENIDOS */
+/* 1. NAVEGACIÓN ENTRE SECCIONES */
 function inicializarNavegacion() {
   const botonesNav = document.querySelectorAll('.nav-btn');
 
@@ -44,7 +61,6 @@ function inicializarNavegacion() {
     btn.addEventListener('click', () => {
       const seccion = btn.getAttribute('data-seccion');
 
-      // Actualizar estado activo en los botones
       botonesNav.forEach(b => b.classList.remove('activo'));
       btn.classList.add('activo');
 
@@ -67,11 +83,9 @@ function cambiarVistaSeccion(seccion) {
     return;
   }
 
-  // Mostrar la sección de noticias
   secQuienesSomos.classList.remove('activo');
   secNoticias.classList.add('activo');
 
-  // Actualizar encabezados según la categoría elegida
   const nombresTitulos = {
     'inicio': 'Últimas Publicaciones',
     'politica': 'Noticias de Política',
@@ -95,7 +109,7 @@ function cambiarVistaSeccion(seccion) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* 2. CARGA DINÁMICA DE NOTICIAS DESDE GITHUB API */
+/* 2. OBTENER NOTICIAS DE GITHUB */
 async function cargarNoticiasDesdeGitHub() {
   const grid = document.getElementById('grid-noticias');
   if (!grid) return;
@@ -106,7 +120,7 @@ async function cargarNoticiasDesdeGitHub() {
     const repo = "07lonnie/LA-GACELA";
     const res = await fetch(`https://api.github.com/repos/${repo}/contents/contenido/noticias`);
 
-    if (!res.ok) throw new Error('No se encontraron noticias en el servidor');
+    if (!res.ok) throw new Error('Sin noticias');
 
     const archivos = await res.json();
     const archivosMarkdown = archivos.filter(f => f.name.endsWith('.md'));
@@ -146,12 +160,11 @@ async function cargarNoticiasDesdeGitHub() {
     renderizarNoticiasProcesadas();
 
   } catch (err) {
-    console.warn('Cargando plantilla de contingencia:', err);
     grid.innerHTML = '<p class="mensaje-vacio">Aún no se han cargado publicaciones en esta sección.</p>';
   }
 }
 
-/* 3. RENDERIZADO FILTRADO */
+/* 3. FILTRAR POR CATEGORÍA */
 function renderizarNoticiasProcesadas() {
   const grid = document.getElementById('grid-noticias');
   if (!grid) return;
@@ -196,7 +209,7 @@ function renderizarNoticiasProcesadas() {
   `).join('');
 }
 
-/* 4. CARRUSEL DEL EQUIPO EDITORIAL */
+/* 4. LOGICA DEL CARRUSEL DE 5 INTEGRANTES */
 function inicializarCarruselEquipo() {
   const btnPrev = document.getElementById('btn-carrusel-prev');
   const btnNext = document.getElementById('btn-carrusel-next');
@@ -220,6 +233,7 @@ function actualizarTarjetaEquipo() {
   const miembro = equipoEditorial[indiceEquipo];
   const elNombre = document.getElementById('miembro-nombre');
   const elCargo = document.getElementById('miembro-cargo');
+  const elCorreo = document.getElementById('miembro-correo');
   const elBio = document.getElementById('miembro-bio');
   const elFoto = document.getElementById('miembro-foto');
   const contenedorIndicadores = document.getElementById('carrusel-indicadores');
@@ -228,7 +242,13 @@ function actualizarTarjetaEquipo() {
 
   elNombre.textContent = miembro.nombre;
   elCargo.textContent = miembro.cargo;
-  elBio.textContent = miembro.bio;
+  
+  if (elCorreo) {
+    elCorreo.textContent = miembro.correo;
+    elCorreo.href = `mailto:${miembro.correo}`;
+  }
+  
+  if (elBio) elBio.textContent = miembro.bio;
   if (elFoto) elFoto.src = miembro.foto;
 
   if (contenedorIndicadores) {

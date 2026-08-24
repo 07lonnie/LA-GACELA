@@ -1,5 +1,5 @@
 /* ==========================================================
-   LA GACELA - ESTILOS VISUALES COMPLETOS Y CORREGIDOS
+   LA GACELA - ESTILOS VISUALES COMPLETOS
    ========================================================== */
 
 :root {
@@ -84,7 +84,7 @@ body {
   color: var(--dorado);
 }
 
-/* NAVEGACIÓN CORREGIDA (SIN BOTONES BLANCOS) */
+/* NAVEGACIÓN POR PESTAÑAS */
 .navegacion {
   background-color: var(--verde-oscuro);
   border-bottom: 2px solid var(--dorado);
@@ -145,13 +145,7 @@ body {
   color: var(--blanco) !important;
 }
 
-.nav-btn-destacado.activo {
-  background-color: var(--verde-esmeralda) !important;
-  color: var(--dorado) !important;
-  border: 1.5px solid var(--dorado) !important;
-}
-
-/* SECCIONES Y VISTAS */
+/* SECCIONES Y CONTENIDO */
 .contenedor-principal {
   max-width: 1200px;
   margin: 40px auto 80px auto;
@@ -271,7 +265,7 @@ body {
   border-top: 1px solid #f0f0f0;
 }
 
-/* SECCIÓN QUIÉNES SOMOS */
+/* SECCIÓN QUIÉNES SOMOS & ISOTIPO */
 .presentacion-institucional {
   max-width: 850px;
   margin: 0 auto;
@@ -282,14 +276,20 @@ body {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 36px;
   color: var(--verde-esmeralda);
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-.divisor-dorado {
-  width: 80px;
-  height: 3px;
-  background-color: var(--dorado);
-  margin: 25px auto;
+.contenedor-foto-institucional {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 25px auto;
+}
+
+.foto-institucional {
+  max-width: 110px;
+  height: auto;
+  display: block;
 }
 
 .manifiesto-texto p {
@@ -299,7 +299,14 @@ body {
   text-align: justify;
 }
 
-/* CARRUSEL DEL EQUIPO EDITORIAL */
+.divisor-dorado {
+  width: 80px;
+  height: 3px;
+  background-color: var(--dorado);
+  margin: 30px auto;
+}
+
+/* CARRUSEL EDITORIAL CON FOTO MÁS GRANDE */
 .bloque-equipo-editorial {
   margin-top: 40px;
 }
@@ -328,23 +335,23 @@ body {
 .tarjeta-equipo {
   background-color: #ffffff;
   border-radius: 12px;
-  padding: 35px 30px;
+  padding: 40px 35px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);
   border: 1px solid var(--borde-suave);
-  max-width: 580px;
+  max-width: 600px;
   width: 100%;
   text-align: center;
-  transition: all 0.3s ease;
 }
 
+/* TAMAÑO DE LA FOTO AUMENTADO A 140PX */
 .avatar-miembro-wrapper {
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 15px auto;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 20px auto;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid var(--dorado);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border: 4px solid var(--dorado);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.12);
 }
 
 .avatar-miembro-wrapper img {
@@ -355,18 +362,33 @@ body {
 
 .nombre-miembro {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 22px;
+  font-size: 24px;
   color: var(--verde-esmeralda);
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .cargo-miembro {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--dorado-hover);
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: 15px;
+  margin-bottom: 6px;
+}
+
+.correo-miembro {
+  display: inline-block;
+  font-size: 13.5px;
+  color: var(--verde-esmeralda);
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: 18px;
+  transition: color 0.2s ease;
+}
+
+.correo-miembro:hover {
+  color: var(--dorado);
+  text-decoration: underline;
 }
 
 .bio-miembro {
@@ -417,7 +439,7 @@ body {
   border-radius: 10px;
 }
 
-/* MENSAJES Y PIE DE PÁGINA */
+/* MENSAJES Y FOOTER */
 .bloque-vacio-seccion {
   grid-column: 1 / -1;
   text-align: center;
@@ -469,4 +491,8 @@ body.modo-oscuro .bajada-tarjeta,
 body.modo-oscuro .bio-miembro,
 body.modo-oscuro .manifiesto-texto p {
   color: #cbd5e1;
+}
+
+body.modo-oscuro .correo-miembro {
+  color: var(--dorado);
 }

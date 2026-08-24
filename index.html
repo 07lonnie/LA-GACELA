@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La Gacela - Periodico Universitario</title>
+  <title>La Gacela - Periódico Universitario</title>
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -22,7 +22,7 @@
     <p class="slogan">Información con agilidad, rigor y elegancia</p>
   </header>
 
-  <!-- BARRA DE NAVEGACIÓN ESTILIZADA POR SECCIONES -->
+  <!-- BARRA DE NAVEGACIÓN -->
   <nav class="navegacion">
     <ul class="nav-menu">
       <li><button class="nav-btn activo" data-seccion="inicio">Inicio</button></li>
@@ -34,10 +34,10 @@
     </ul>
   </nav>
 
-  <!-- CONTENEDOR PRINCIPAL DE SECCIONES -->
+  <!-- CONTENEDOR PRINCIPAL -->
   <main class="contenedor-principal">
 
-    <!-- SECCIÓN DE NOTICIAS (FILTRABLE) -->
+    <!-- SECCIÓN NOTICIAS -->
     <section id="sec-noticias" class="seccion-vista activo">
       <div class="encabezado-seccion-actual">
         <h2 id="titulo-seccion-actual" class="titulo-seccion-bloque">Últimas Publicaciones</h2>
@@ -45,16 +45,16 @@
       </div>
 
       <div id="grid-noticias" class="grid-noticias">
-        <!-- Las noticias se cargan dinámicamente desde script.js -->
+        <!-- Noticia(s) dinámicas -->
       </div>
     </section>
 
-    <!-- SECCIÓN QUIÉNES SOMOS + CARRUSEL EDITORIAL -->
+    <!-- SECCIÓN QUIÉNES SOMOS -->
     <section id="sec-quienes-somos" class="seccion-vista">
       <div class="presentacion-institucional">
         <h2>¿Quiénes somos?</h2>
-        <div class="divisor-dorado"></div>
 
+        <!-- ISOTIPO UBICADO DIRECTAMENTE DEBAJO DEL TÍTULO -->
         <div class="contenedor-foto-institucional">
           <img src="fotos/LAGACELAICONODORADO.jpg" alt="Isotipo La Gacela" class="foto-institucional" onerror="this.style.display='none'">
         </div>
@@ -67,7 +67,7 @@
 
         <div class="divisor-dorado"></div>
 
-        <!-- CARRUSEL DINÁMICO DEL EQUIPO EDITORIAL -->
+        <!-- NUESTRO EQUIPO EDITORIAL (5 SLIDES) -->
         <div class="bloque-equipo-editorial">
           <h3 class="titulo-equipo">Nuestro equipo editorial</h3>
           <p class="subtitulo-equipo">Conoce a los periodistas detrás de las investigaciones e historias de La Gacela.</p>
@@ -77,12 +77,14 @@
               <i class="fa-solid fa-chevron-left"></i>
             </button>
 
+            <!-- TARJETA DEL MIEMBRO CON FOTO MÁS GRANDE -->
             <div class="tarjeta-equipo" id="tarjeta-miembro">
               <div class="avatar-miembro-wrapper">
                 <img id="miembro-foto" src="fotos/LAGACELAICONODORADO.jpg" alt="Foto de miembro">
               </div>
               <h4 id="miembro-nombre" class="nombre-miembro">Cargando...</h4>
               <p id="miembro-cargo" class="cargo-miembro">Cargo</p>
+              <a id="miembro-correo" href="#" class="correo-miembro">correo@lagacela.pe</a>
               <p id="miembro-bio" class="bio-miembro">Descripción del redactor...</p>
             </div>
 
