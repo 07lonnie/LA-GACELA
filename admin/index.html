@@ -6,6 +6,7 @@
   <title>Panel Editorial - La Gacela</title>
   
   <script>
+    // Desactivar carga automática duplicada de config.yml
     window.CMS_MANUAL_INIT = true;
   </script>
 </head>
@@ -14,10 +15,10 @@
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
   
   <script>
-    // Configuración limpia sin depender de parseos externos
+    // 1. CONFIGURACIÓN ÚNICA DEL CMS (SIN DUPLICAR COLECCIONES)
     CMS.init({
-      load_config_file: false,
       config: {
+        load_config_file: false, // Evita la duplicación de 'noticias'
         backend: {
           name: "git-gateway",
           repo: "07lonnie/LA-GACELA",
@@ -68,10 +69,11 @@
       }
     });
 
+    // 2. REGISTRO DE FUENTES Y ESTILOS
     CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap");
     CMS.registerPreviewStyle("../styles.css");
 
-    // Plantilla de vista previa limpia (sin textos de números ni etiquetas)
+    // 3. PLANTILLA DE VISTA PREVIA LIMPIA
     var NoticiasPreview = createClass({
       render: function() {
         var entry = this.props.entry;
@@ -155,3 +157,10 @@
   </script>
 </body>
 </html>
+```
+
+### Pasos para publicar:
+1. Reemplaza el contenido de `admin/index.html` en VS Code.
+2. Guarda los cambios con **`Ctrl` + `S`**.
+3. En la pestaña **Control de código fuente** (las 3 ramitas), presiona **Commit** y **Sync Changes**.
+4. Recarga tu navegador con **`Ctrl` + `F5`**. El error desaparecerá inmediatamente y te dará acceso al panel.
