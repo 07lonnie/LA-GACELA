@@ -1,5 +1,5 @@
 /* ==========================================================
-   LA GACELA - ESTILOS VISUALES COMPLETOS
+   LA GACELA - ESTILOS VISUALES, HERO Y MODO OSCURO ARMONIOSO
    ========================================================== */
 
 :root {
@@ -9,6 +9,7 @@
   --dorado-hover: #b8952b;
   --blanco: #ffffff;
   --fondo-claro: #f1f5f9;
+  --tarjeta-bg: #ffffff;
   --texto-principal: #1a1a1a;
   --texto-secundario: #555555;
   --borde-suave: #e2e8f0;
@@ -25,6 +26,7 @@ body {
   background-color: var(--fondo-claro);
   color: var(--texto-principal);
   line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ENCABEZADO */
@@ -57,6 +59,7 @@ body {
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
+  transition: all 0.25s ease;
 }
 
 #btn-modo:hover {
@@ -84,7 +87,7 @@ body {
   color: var(--dorado);
 }
 
-/* NAVEGACIÓN POR PESTAÑAS */
+/* NAVEGACIÓN */
 .navegacion {
   background-color: var(--verde-oscuro);
   border-bottom: 2px solid var(--dorado);
@@ -145,7 +148,7 @@ body {
   color: var(--blanco) !important;
 }
 
-/* SECCIONES Y CONTENIDO */
+/* CONTENEDOR PRINCIPAL */
 .contenedor-principal {
   max-width: 1200px;
   margin: 40px auto 80px auto;
@@ -178,7 +181,108 @@ body {
   color: var(--texto-secundario);
 }
 
-/* TARJETAS DE NOTICIAS */
+/* ==========================================================
+   NOTICIA DESTACADA (HERO LAYOUT GRANDE)
+   ========================================================== */
+.tarjeta-destacada-hero {
+  background-color: var(--tarjeta-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  border: 1px solid var(--borde-suave);
+  margin-bottom: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tarjeta-destacada-hero:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.14);
+}
+
+.enlace-destacada {
+  text-decoration: none;
+  color: inherit;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+}
+
+@media (max-width: 850px) {
+  .enlace-destacada {
+    grid-template-columns: 1fr;
+  }
+}
+
+.imagen-destacada-wrapper {
+  position: relative;
+  min-height: 380px;
+  background-color: #e2e8f0;
+}
+
+.imagen-destacada-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.badge-categoria-destacada {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: var(--verde-esmeralda);
+  color: var(--blanco);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  border: 1px solid var(--dorado);
+}
+
+.contenido-destacada {
+  padding: 40px 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.etiqueta-destacada-alerta {
+  color: var(--dorado);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.titulo-destacada {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 30px;
+  line-height: 1.25;
+  color: var(--texto-principal);
+  margin-bottom: 15px;
+  font-weight: 900;
+}
+
+.bajada-destacada {
+  font-size: 16px;
+  color: var(--texto-secundario);
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.meta-destacada {
+  font-size: 13px;
+  color: #777;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid var(--borde-suave);
+}
+
+.meta-destacada strong {
+  color: var(--verde-esmeralda);
+}
+
+/* RETÍCULA DE NOTICIAS SECUNDARIAS */
 .grid-noticias {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -186,7 +290,7 @@ body {
 }
 
 .tarjeta-noticia-portada {
-  background-color: var(--blanco);
+  background-color: var(--tarjeta-bg);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0,0,0,0.06);
@@ -262,10 +366,12 @@ body {
   color: #777777;
   margin-top: auto;
   padding-top: 10px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--borde-suave);
 }
 
-/* SECCIÓN QUIÉNES SOMOS & ISOTIPO */
+/* ==========================================================
+   QUIÉNES SOMOS & ISOTIPO
+   ========================================================== */
 .presentacion-institucional {
   max-width: 850px;
   margin: 0 auto;
@@ -295,7 +401,7 @@ body {
 .manifiesto-texto p {
   font-size: 17px;
   line-height: 1.8;
-  color: #333;
+  color: var(--texto-principal);
   text-align: justify;
 }
 
@@ -306,7 +412,7 @@ body {
   margin: 30px auto;
 }
 
-/* CARRUSEL EDITORIAL CON FOTO MÁS GRANDE */
+/* CARRUSEL EDITORIAL */
 .bloque-equipo-editorial {
   margin-top: 40px;
 }
@@ -320,7 +426,7 @@ body {
 
 .subtitulo-equipo {
   font-size: 15px;
-  color: #666;
+  color: var(--texto-secundario);
   margin-bottom: 30px;
 }
 
@@ -333,7 +439,7 @@ body {
 }
 
 .tarjeta-equipo {
-  background-color: #ffffff;
+  background-color: var(--tarjeta-bg);
   border-radius: 12px;
   padding: 40px 35px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);
@@ -343,7 +449,6 @@ body {
   text-align: center;
 }
 
-/* TAMAÑO DE LA FOTO AUMENTADO A 140PX */
 .avatar-miembro-wrapper {
   width: 140px;
   height: 140px;
@@ -393,7 +498,7 @@ body {
 
 .bio-miembro {
   font-size: 15px;
-  color: #555;
+  color: var(--texto-secundario);
   line-height: 1.6;
 }
 
@@ -439,15 +544,15 @@ body {
   border-radius: 10px;
 }
 
-/* MENSAJES Y FOOTER */
+/* MENSAJES Y PIE DE PÁGINA */
 .bloque-vacio-seccion {
   grid-column: 1 / -1;
   text-align: center;
   padding: 60px 20px;
-  background-color: #ffffff;
+  background-color: var(--tarjeta-bg);
   border-radius: 8px;
-  border: 1px dashed #cbd5e1;
-  color: #666;
+  border: 1px dashed var(--borde-suave);
+  color: var(--texto-secundario);
 }
 
 .pie-pagina {
@@ -467,32 +572,48 @@ body {
   letter-spacing: 2px;
 }
 
-/* MODO OSCURO */
+/* ==========================================================
+   MODO OSCURO EDITORIAL Y ARMONIOSO
+   ========================================================== */
 body.modo-oscuro {
-  background-color: #0f172a;
-  color: #f8fafc;
+  --fondo-claro: #0b1311;
+  --tarjeta-bg: #13241e;
+  --texto-principal: #f3f4f6;
+  --texto-secundario: #cbd5e1;
+  --borde-suave: #1e3d33;
 }
 
-body.modo-oscuro .tarjeta-noticia-portada,
-body.modo-oscuro .tarjeta-equipo,
-body.modo-oscuro .bloque-vacio-seccion {
-  background-color: #1e293b;
-  border-color: #334155;
+body.modo-oscuro .encabezado {
+  background-color: #061712;
 }
 
-body.modo-oscuro .titulo-tarjeta,
-body.modo-oscuro .nombre-miembro,
+body.modo-oscuro .navegacion {
+  background-color: #04100c;
+}
+
+body.modo-oscuro .titulo-seccion-bloque,
 body.modo-oscuro .presentacion-institucional h2,
-body.modo-oscuro .titulo-seccion-bloque {
-  color: #ffffff;
+body.modo-oscuro .titulo-equipo,
+body.modo-oscuro .nombre-miembro {
+  color: #e2f1ec;
 }
 
-body.modo-oscuro .bajada-tarjeta,
-body.modo-oscuro .bio-miembro,
-body.modo-oscuro .manifiesto-texto p {
-  color: #cbd5e1;
+body.modo-oscuro .titulo-destacada,
+body.modo-oscuro .titulo-tarjeta {
+  color: #ffffff;
 }
 
 body.modo-oscuro .correo-miembro {
   color: var(--dorado);
+}
+
+body.modo-oscuro .meta-destacada strong,
+body.modo-oscuro .meta-tarjeta strong {
+  color: var(--dorado);
+}
+
+body.modo-oscuro .tarjeta-destacada-hero,
+body.modo-oscuro .tarjeta-noticia-portada,
+body.modo-oscuro .tarjeta-equipo {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
 }

@@ -1,11 +1,10 @@
 /* ==========================================================
-   LA GACELA - NAVEGACIÓN, FILTRADO Y 5 SLIDES EDITORIALES
+   LA GACELA - NOTICIA DESTACADA, FILTROS Y CARRUSEL
    ========================================================== */
 
 let noticiasGlobales = [];
 let seccionActual = 'inicio';
 
-// CONFIGURACIÓN DE LOS 5 CARGOS SOLICITADOS
 const equipoEditorial = [
   {
     nombre: "Belen Lucero Yaranga Rojas",
@@ -164,10 +163,14 @@ async function cargarNoticiasDesdeGitHub() {
   }
 }
 
-/* 3. FILTRAR POR CATEGORÍA */
+/* 3. RENDERIZADO: NOTICIA DESTACADA + TARJETAS NORMALES */
 function renderizarNoticiasProcesadas() {
+  const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
-  if (!grid) return;
+  if (!grid || !contenedorDestacada) return;
+
+  contenedorDestacada.innerHTML = '';
+  grid.innerHTML = '';
 
   let noticiasFiltradas = noticiasGlobales;
 
@@ -189,7 +192,40 @@ function renderizarNoticiasProcesadas() {
     'deportes': 'DEPORTES'
   };
 
-  grid.innerHTML = noticiasFiltradas.map(n => `
+  // EN INICIO: La primera noticia toma formato destacado (Hero)
+  if (seccionActual === 'inicio') {
+    const destacada = noticiasFiltradas[0];
+    contenedorDestacada.innerHTML = `
+      <article class="tarjeta-destacada-hero">
+        <a href="noticia.html?id=${destacada.id}" class="enlace-destacada">
+          <div class="imagen-destacada-wrapper">
+            <img src="${destacada.thumbnail}" alt="${destacada.title}" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
+            <span class="badge-categoria-destacada">${mapaCatTexto[destacada.categoria] || destacada.categoria.toUpperCase()}</span>
+          </div>
+          <div class="contenido-destacada">
+            <span class="etiqueta-destacada-alerta">★ NOTICIA PRINCIPAL</span>
+            <h2 class="titulo-destacada">${destacada.title}</h2>
+            <p class="bajada-destacada">${destacada.bajada}</p>
+            <div class="meta-destacada">
+              <span>Por <strong>${destacada.autor}</strong></span>
+              <span>• ${destacada.date}</span>
+            </div>
+          </div>
+        </a>
+      </article>
+    `;
+
+    // Las siguientes se muestran en formato estándar
+    const restantes = noticiasFiltradas.slice(1);
+    grid.innerHTML = restantes.map(n => generarTarjetaHTML(n, mapaCatTexto)).join('');
+  } else {
+    // En secciones específicas se muestran en formato estándar
+    grid.innerHTML = noticiasFiltradas.map(n => generarTarjetaHTML(n, mapaCatTexto)).join('');
+  }
+}
+
+function generarTarjetaHTML(n, mapaCatTexto) {
+  return `
     <article class="tarjeta-noticia-portada">
       <a href="noticia.html?id=${n.id}" class="enlace-noticia">
         <div class="imagen-portada-wrapper">
@@ -206,10 +242,10 @@ function renderizarNoticiasProcesadas() {
         </div>
       </a>
     </article>
-  `).join('');
+  `;
 }
 
-/* 4. LOGICA DEL CARRUSEL DE 5 INTEGRANTES */
+/* 4. CARRUSEL EDITORIAL */
 function inicializarCarruselEquipo() {
   const btnPrev = document.getElementById('btn-carrusel-prev');
   const btnNext = document.getElementById('btn-carrusel-next');
