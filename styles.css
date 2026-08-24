@@ -383,54 +383,35 @@ a {
   color: var(--verde-esmeralda);
 }
 
-/* 6. ¿QUIÉNES SOMOS? Y NUEVO ISOTIPO LIMPIO (MÁS GRANDE Y SIN MARCO) */
-.presentacion-institucional {
-  max-width: 850px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.presentacion-institucional h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 36px;
-  color: var(--verde-esmeralda);
-  margin-bottom: 15px;
-}
-
+/* ISOTIPO LIMPIO, MÁS GRANDE Y CON FONDO TRANSPARENTE */
 .contenedor-isotipo-quienes-somos {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto 30px auto;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 15px auto 30px auto !important;
   background: transparent !important;
 }
 
 .isotipo-limpio {
-  width: 130px;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.06));
+  width: 140px !important;       /* Tamaño más grande y visible */
+  max-width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  mix-blend-mode: multiply !important; /* QUITA EL FONDO BLANCO AUTOMÁTICAMENTE */
+  border: none !important;      /* Sin marcos */
+  box-shadow: none !important;  /* Sin sombras de caja */
   transition: transform 0.3s ease;
 }
 
 .isotipo-limpio:hover {
-  transform: scale(1.05);
+  transform: scale(1.06);
 }
 
-.manifiesto-texto p {
-  font-size: 17px;
-  line-height: 1.8;
-  color: var(--texto-principal);
-  text-align: justify;
-}
-
-.divisor-dorado {
-  width: 80px;
-  height: 3px;
-  background-color: var(--dorado);
-  margin: 30px auto;
+/* En Modo Oscuro */
+body.modo-oscuro .isotipo-limpio {
+  mix-blend-mode: screen !important;
+  filter: brightness(1.2);
 }
 
 /* 7. CARRUSEL EDITORIAL */
