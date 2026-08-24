@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noticia - La Gacela</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Librería para convertir el texto Markdown a HTML -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+  <header class="encabezado">
+    <div class="top-bar">
+      <span>Edición Digital | 2026</span>
+      <button id="btn-modo">🌙 Modo Oscuro</button>
+    </div>
+    <a href="index.html" style="text-decoration:none;"><h1 class="logo">LA GACELA</h1></a>
+    <p class="slogan">Información con agilidad, rigor y elegancia</p>
+  </header>
+
+  <main class="articulo-contenedor" id="articulo-completo">
+    <div class="articulo-categoria" id="art-categoria">CARGANDO...</div>
+    <h1 class="articulo-titulo" id="art-titulo">Cargando titular...</h1>
+    <p class="articulo-bajada" id="art-bajada"></p>
+    
+    <div class="articulo-metadatos">
+      <span>Por <strong id="art-autor">Redacción</strong></span>
+      <span>•</span>
+      <span id="art-fecha"></span>
+    </div>
+
+    <div class="articulo-foto-principal" id="contenedor-foto">
+      <img id="art-foto" src="" alt="" style="display:none;">
+      <span class="pie-foto" id="art-pie-foto"></span>
+    </div>
+
+    <article class="articulo-cuerpo" id="art-cuerpo"></article>
+
+    <div class="contenedor-video" id="contenedor-video" style="display:none;">
+      <iframe id="art-video" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <div class="volver-portada">
+      <a href="index.html" class="btn-volver">← Volver a la portada</a>
+    </div>
+  </main>
+
+  <script>
+    // Cargar la noticia según el parámetro de la URL
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const archivoNoticia = params.get('id');
+
+      if (!archivoNoticia) {
+        document.getElementById('art-titulo').textContent = 'Noticia no encontrada';
+        return;
+      }
+
+      try {
+        const respuesta = await fetch(`contenido/noticias/${archivoNoticia}`);
+        if (!respuesta.ok) throw new Error('No se pudo cargar la nota');
+        
+        const texto = await respuesta.text();
+
+        // Extraer metadatos (Frontmatter YAML)
+        const partes = texto.split('---');
+        if (partes.length < 3) return;
+
+        const metadatosRaw = partes[1];
+        const cuerpoMarkdown = partes.slice(2).join('---');
+
+        const obtenerValor = (clave) => {
+          const regex = new RegExp(`^${clave}:\\s*["']?(.*?)["']?$`, 'm');
+          const match = metadatosRaw.match(regex);
+          return match ? match[1].trim() : '';
+        };
+
+        const titulo = obtenerValor('title');
+        const categoria = obtenerValor('categoria');
+        const autor = obtenerValor('autor');
+        const fecha = obtenerValor('date');
+        const bajada = obtenerValor('bajada');
+        const thumbnail = obtenerValor('thumbnail');
+        const pieFoto = obtenerValor('pie_foto');
+        const videoUrl = obtenerValor('video_url');
+
+        document.title = `${titulo} - La Gacela`;
+        document.getElementById('art-titulo').textContent = titulo;
+        document.getElementById('art-categoria').textContent = categoria.toUpperCase();
+        document.getElementById('art-autor').textContent = autor;
+        document.getElementById('art-fecha').textContent = fecha;
+        document.getElementById('art-bajada').textContent = bajada;
+
+        if (thumbnail) {
+          const img = document.getElementById('art-foto');
+          img.src = thumbnail;
+          img.style.display = 'block';
+        }
+        if (pieFoto) document.getElementById('art-pie-foto').textContent = pieFoto;
+
+        if (videoUrl) {
+          const videoFrame = document.getElementById('art-video');
+          let embedUrl = videoUrl;
+          if (videoUrl.includes('watch?v=')) {
+            embedUrl = videoUrl.replace('watch?v=', 'embed/');
+          } else if (videoUrl.includes('youtu.be/')) {
+            embedUrl = videoUrl.replace('youtu.be/', 'www.youtube.com/embed/');
+          }
+          videoFrame.src = embedUrl;
+          document.getElementById('contenedor-video').style.display = 'block';
+        }
+
+        // Renderizar cuerpo del texto enriquecido
+        document.getElementById('art-cuerpo').innerHTML = marked.parse(cuerpoMarkdown);
+
+      } catch (e) {
+        document.getElementById('art-titulo').textContent = 'Error al cargar la noticia';
+      }
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
