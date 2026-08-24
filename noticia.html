@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Noticia - La Gacela</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <!-- Librería para convertir el texto Markdown a HTML -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Convertidor Markdown a HTML -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
+  <!-- ENCABEZADO EDITORIAL -->
   <header class="encabezado">
     <div class="top-bar">
       <span>Edición Digital | 2026</span>
@@ -20,51 +21,79 @@
     <p class="slogan">Información con agilidad, rigor y elegancia</p>
   </header>
 
-  <main class="articulo-contenedor" id="articulo-completo">
-    <div class="articulo-categoria" id="art-categoria">CARGANDO...</div>
-    <h1 class="articulo-titulo" id="art-titulo">Cargando titular...</h1>
-    <p class="articulo-bajada" id="art-bajada"></p>
+  <!-- SECCIÓN PRINCIPAL DE LA NOTICIA -->
+  <article class="noticia-periodistica-container">
     
-    <div class="articulo-metadatos">
-      <span>Por <strong id="art-autor">Redacción</strong></span>
-      <span>•</span>
-      <span id="art-fecha"></span>
+    <!-- 1. VOLADA / CATEGORÍA -->
+    <div class="noticia-volada" id="art-volada">POLÍTICA</div>
+
+    <!-- 2. TITULAR PRINCIPAL -->
+    <h1 class="noticia-titular" id="art-titulo">Cargando titular de la noticia...</h1>
+
+    <!-- 3. BAJADA O RESUMEN -->
+    <p class="noticia-bajada" id="art-bajada"></p>
+
+    <!-- 4. CRÉDITO Y FECHA DE PUBLICACIÓN -->
+    <div class="noticia-creditos-fecha">
+      <div class="autor-info">
+        <span>Por <strong id="art-autor">Redacción La Gacela</strong></span>
+      </div>
+      <div class="fecha-info">
+        <span id="art-fecha">24 de Agosto, 2026</span>
+      </div>
     </div>
 
-    <div class="articulo-foto-principal" id="contenedor-foto">
-      <img id="art-foto" src="" alt="" style="display:none;">
-      <span class="pie-foto" id="art-pie-foto"></span>
+    <!-- 5. FOTOGRAFÍA PRINCIPAL Y LEYENDA -->
+    <figure class="noticia-media-wrapper" id="contenedor-foto" style="display:none;">
+      <div class="marco-imagen">
+        <img id="art-foto" src="" alt="Imagen periodística">
+      </div>
+      <figcaption class="noticia-leyenda" id="art-pie-foto"></figcaption>
+    </figure>
+
+    <!-- 6. CUERPO DE LA NOTICIA (LEAD + DESARROLLO) -->
+    <div class="noticia-cuerpo-redaccion" id="art-cuerpo"></div>
+
+    <!-- 7. RECURSO DE VIDEO (SI TIENE YOUTUBE) -->
+    <div class="noticia-recurso-video" id="contenedor-video" style="display:none;">
+      <h4 class="subtitulo-recurso">cobertura en video:</h4>
+      <div class="iframe-responsive">
+        <iframe id="art-video" src="" frameborder="0" allowfullscreen></iframe>
+      </div>
     </div>
 
-    <article class="articulo-cuerpo" id="art-cuerpo"></article>
-
-    <div class="contenedor-video" id="contenedor-video" style="display:none;">
-      <iframe id="art-video" src="" frameborder="0" allowfullscreen></iframe>
+    <!-- 8. ETIQUETAS / SEPA MÁS (TAGS) -->
+    <div class="noticia-sepa-mas" id="contenedor-tags">
+      <h3>Sepa más:</h3>
+      <div class="tags-list">
+        <span class="tag-item">La Gacela</span>
+        <span class="tag-item">UNFV</span>
+        <span class="tag-item">Periodismo</span>
+      </div>
     </div>
 
-    <div class="volver-portada">
-      <a href="index.html" class="btn-volver">← Volver a la portada</a>
+    <!-- BOTÓN VOLVER -->
+    <div class="volver-contenedor">
+      <a href="index.html" class="btn-volver-portada">← Volver a la portada</a>
     </div>
-  </main>
+
+  </article>
 
   <script>
-    // Cargar la noticia según el parámetro de la URL
     document.addEventListener('DOMContentLoaded', async () => {
       const params = new URLSearchParams(window.location.search);
       const archivoNoticia = params.get('id');
 
       if (!archivoNoticia) {
-        document.getElementById('art-titulo').textContent = 'Noticia no encontrada';
+        document.getElementById('art-titulo').textContent = 'Noticia no especificada';
         return;
       }
 
       try {
         const respuesta = await fetch(`contenido/noticias/${archivoNoticia}`);
-        if (!respuesta.ok) throw new Error('No se pudo cargar la nota');
+        if (!respuesta.ok) throw new Error('No se pudo encontrar la nota');
         
         const texto = await respuesta.text();
-
-        // Extraer metadatos (Frontmatter YAML)
         const partes = texto.split('---');
         if (partes.length < 3) return;
 
@@ -75,6 +104,17 @@
           const regex = new RegExp(`^${clave}:\\s*["']?(.*?)["']?$`, 'm');
           const match = metadatosRaw.match(regex);
           return match ? match[1].trim() : '';
+        };
+
+        // Formateador ortográfico de categorías con tildes
+        const normalizarCategoria = (cat) => {
+          const mapa = {
+            'politica': 'POLÍTICA',
+            'internacionales': 'INTERNACIONALES',
+            'espectaculos': 'ESPECTÁCULOS',
+            'deportes': 'DEPORTES'
+          };
+          return mapa[cat.toLowerCase()] || cat.toUpperCase();
         };
 
         const titulo = obtenerValor('title');
@@ -88,18 +128,23 @@
 
         document.title = `${titulo} - La Gacela`;
         document.getElementById('art-titulo').textContent = titulo;
-        document.getElementById('art-categoria').textContent = categoria.toUpperCase();
-        document.getElementById('art-autor').textContent = autor;
+        document.getElementById('art-volada').textContent = normalizarCategoria(categoria);
+        document.getElementById('art-autor').textContent = autor || 'Redacción La Gacela';
         document.getElementById('art-fecha').textContent = fecha;
         document.getElementById('art-bajada').textContent = bajada;
 
+        // Mostrar imagen garantizando que NO se recorte
         if (thumbnail) {
           const img = document.getElementById('art-foto');
           img.src = thumbnail;
-          img.style.display = 'block';
+          document.getElementById('contenedor-foto').style.display = 'block';
         }
-        if (pieFoto) document.getElementById('art-pie-foto').textContent = pieFoto;
 
+        if (pieFoto) {
+          document.getElementById('art-pie-foto').textContent = pieFoto;
+        }
+
+        // Mostrar video si existe
         if (videoUrl) {
           const videoFrame = document.getElementById('art-video');
           let embedUrl = videoUrl;
@@ -112,11 +157,11 @@
           document.getElementById('contenedor-video').style.display = 'block';
         }
 
-        // Renderizar cuerpo del texto enriquecido
+        // Cargar cuerpo enriquecido
         document.getElementById('art-cuerpo').innerHTML = marked.parse(cuerpoMarkdown);
 
       } catch (e) {
-        document.getElementById('art-titulo').textContent = 'Error al cargar la noticia';
+        document.getElementById('art-titulo').textContent = 'Error al cargar la noticia seleccionada';
       }
     });
   </script>

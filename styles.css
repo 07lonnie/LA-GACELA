@@ -605,3 +605,246 @@ body.modo-oscuro #btn-modo {
   display: block !important;
   margin: 0 auto !important;
 }
+
+/* ==========================================================
+   ESTILOS PERIODÍSTICOS PROFESIONALES (ESTRUCTURA NOTICIA)
+   ========================================================== */
+
+.noticia-periodistica-container {
+  max-width: 820px;
+  margin: 40px auto 100px auto;
+  padding: 40px 35px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+/* 1. VOLADA / CATEGORÍA */
+.noticia-volada {
+  font-family: 'Inter', sans-serif;
+  color: var(--dorado, #D4AF37);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* 2. TITULAR */
+.noticia-titular {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 900;
+  color: #1a1a1a;
+  margin: 0 0 18px 0;
+}
+
+/* 3. BAJADA */
+.noticia-bajada {
+  font-family: 'Inter', sans-serif;
+  font-size: 19px;
+  line-height: 1.5;
+  color: #4a4a4a;
+  margin-bottom: 25px;
+  font-weight: 400;
+}
+
+/* 4. CRÉDITOS Y FECHA */
+.noticia-creditos-fecha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  padding: 12px 0;
+  margin-bottom: 30px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  color: #666666;
+}
+
+.noticia-creditos-fecha strong {
+  color: var(--verde-esmeralda, #0e3b2e);
+}
+
+/* 5. MEDIDAS DE FOTOGRAFÍA (EVITA QUE SE VEA ENTRECORTADA) */
+.noticia-media-wrapper {
+  margin: 0 0 35px 0;
+  width: 100%;
+}
+
+.marco-imagen {
+  width: 100%;
+  max-height: 520px;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.marco-imagen img {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain; /* Garantiza que la imagen aparezca COMPLETA sin cortarse */
+  display: block;
+}
+
+.noticia-leyenda {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #666666;
+  font-style: italic;
+  margin-top: 10px;
+  line-height: 1.4;
+  border-left: 3px solid var(--dorado, #D4AF37);
+  padding-left: 10px;
+}
+
+/* 6. CUERPO Y REDACCIÓN */
+.noticia-cuerpo-redaccion {
+  font-family: 'Georgia', serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #2b2b2b;
+}
+
+.noticia-cuerpo-redaccion p {
+  margin-bottom: 22px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* Destacado del Lead (Primer párrafo) */
+.noticia-cuerpo-redaccion p:first-of-type {
+  font-size: 19.5px;
+  font-weight: 500;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+
+.noticia-cuerpo-redaccion h2,
+.noticia-cuerpo-redaccion h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--verde-esmeralda, #0e3b2e);
+  margin: 35px 0 15px 0;
+}
+
+.noticia-cuerpo-redaccion blockquote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--verde-esmeralda, #0e3b2e);
+  border-left: 4px solid var(--dorado, #D4AF37);
+  margin: 30px 0;
+  padding: 10px 0 10px 20px;
+  background-color: #fbfbf9;
+}
+
+/* 7. RECURSO DE VIDEO */
+.noticia-recurso-video {
+  margin: 40px 0;
+}
+
+.subtitulo-recurso {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888888;
+  margin-bottom: 10px;
+}
+
+.iframe-responsive {
+  position: relative;
+  padding-bottom: 56.25%; /* Relación 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.iframe-responsive iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 8. TAGS / SEPA MÁS */
+.noticia-sepa-mas {
+  margin-top: 45px;
+  padding-top: 25px;
+  border-top: 2px solid #f0f0f0;
+}
+
+.noticia-sepa-mas h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--verde-esmeralda, #0e3b2e);
+  margin-bottom: 12px;
+}
+
+.tags-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tag-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  background-color: #f2f4f3;
+  color: #444444;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #e0e0e0;
+}
+
+/* BOTÓN VOLVER */
+.volver-contenedor {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.btn-volver-portada {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: var(--verde-esmeralda, #0e3b2e);
+  text-decoration: none;
+  padding: 10px 20px;
+  border: 1px solid var(--verde-esmeralda, #0e3b2e);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-volver-portada:hover {
+  background-color: var(--verde-esmeralda, #0e3b2e);
+  color: #ffffff;
+}
+
+/* MODIFICACIÓN EN MODO OSCURO PARA LA NOTICIA */
+body.modo-oscuro .noticia-periodistica-container {
+  background-color: #1a1e24 !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+body.modo-oscuro .noticia-titular,
+body.modo-oscuro .noticia-cuerpo-redaccion p:first-of-type {
+  color: #ffffff !important;
+}
+
+body.modo-oscuro .noticia-bajada,
+body.modo-oscuro .noticia-cuerpo-redaccion {
+  color: #cccccc !important;
+}
+
+body.modo-oscuro .marco-imagen {
+  background-color: #121417 !important;
+}
