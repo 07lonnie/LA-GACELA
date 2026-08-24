@@ -193,27 +193,32 @@
     function transformarRedesSociales(textoMarkdown) {
       if (!textoMarkdown) return '';
 
-      let resultado = textoMarkdown;
+      let lineas = textoMarkdown.split('\n');
+      let lineasProcesadas = lineas.map(linea => {
+        let l = linea.trim();
 
-      // 1. YouTube
-      const regexYoutube = /(?:^|\n)(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{11})(?:\S+)?(?:\n|$)/g;
-      resultado = resultado.replace(regexYoutube, (match, videoId) => {
-        return `\n<div class="iframe-responsive-inline"><iframe src="https://www.youtube-nocookie.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe></div>\n`;
+        // 1. YouTube
+        let ytMatch = l.match(/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})(?:[^\s]*)$/i);
+        if (ytMatch && ytMatch[1]) {
+          return `<div class="iframe-responsive-inline"><iframe src="https://www.youtube-nocookie.com/embed/${ytMatch[1]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+        }
+
+        // 2. Twitter / X
+        let twMatch = l.match(/^(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/([\w]+)\/status\/([\d]+)(?:[^\s]*)$/i);
+        if (twMatch && twMatch[2]) {
+          return `<div class="contenedor-red-social"><blockquote class="twitter-tweet" data-dnt="true" align="center"><a href="https://twitter.com/${twMatch[1]}/status/${twMatch[2]}"></a></blockquote></div>`;
+        }
+
+        // 3. TikTok
+        let ttMatch = l.match(/^(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com)\/@([\w.-]+)\/video\/([\d]+)(?:[^\s]*)$/i);
+        if (ttMatch && ttMatch[2]) {
+          return `<div class="contenedor-red-social"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${ttMatch[1]}/video/${ttMatch[2]}" data-video-id="${ttMatch[2]}" style="max-width: 605px;min-width: 325px;"><section></section></blockquote></div>`;
+        }
+
+        return linea;
       });
 
-      // 2. Twitter / X
-      const regexTwitter = /(?:^|\n)(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/([\w]+)\/status\/([\d]+)(?:\S+)?(?:\n|$)/g;
-      resultado = resultado.replace(regexTwitter, (match, user, tweetId) => {
-        return `\n<div class="contenedor-red-social"><blockquote class="twitter-tweet" data-dnt="true" align="center"><a href="https://twitter.com/${user}/status/${tweetId}"></a></blockquote></div>\n`;
-      });
-
-      // 3. TikTok
-      const regexTikTok = /(?:^|\n)(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com)\/@([\w.-]+)\/video\/([\d]+)(?:\S+)?(?:\n|$)/g;
-      resultado = resultado.replace(regexTikTok, (match, user, videoId) => {
-        return `\n<div class="contenedor-red-social"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${user}/video/${videoId}" data-video-id="${videoId}" style="max-width: 605px;min-width: 325px;"><section></section></blockquote></div>\n`;
-      });
-
-      return resultado;
+      return lineasProcesadas.join('\n');
     }
 
     // PARSER FRONTMATTER ROBUSTO
