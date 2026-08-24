@@ -7,10 +7,6 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <style>
-    body { background-color: #f1f5f9; }
-    .noticia-periodistica-container { background-color: #ffffff; }
-  </style>
 </head>
 <body>
 
@@ -24,16 +20,30 @@
   </header>
 
   <article class="noticia-periodistica-container">
-    <div class="noticia-volada" id="art-volada"></div>
-    <h1 class="noticia-titular" id="art-titulo">Cargando noticia...</h1>
     
-    <div class="noticia-bajada" id="art-bajada"></div>
-
-    <div class="noticia-creditos-fecha">
-      <div class="autor-info"><span>Por <strong id="art-autor"></strong></span></div>
-      <div class="fecha-info"><span id="art-fecha"></span></div>
+    <!-- ENCABEZADO DE CATEGORÍA Y VOLADA SEPARADOS -->
+    <div class="noticia-meta-encabezado">
+      <span class="noticia-categoria-badge" id="art-categoria">POLÍTICA</span>
+      <span class="noticia-volada-texto" id="art-volada" style="display:none;"></span>
     </div>
 
+    <!-- TITULAR -->
+    <h1 class="noticia-titular" id="art-titulo">Cargando titular...</h1>
+
+    <!-- BAJADA -->
+    <div class="noticia-bajada" id="art-bajada"></div>
+
+    <!-- CRÉDITO Y FECHA -->
+    <div class="noticia-creditos-fecha">
+      <div class="autor-info">
+        <span>Por <strong id="art-autor">Redacción La Gacela</strong></span>
+      </div>
+      <div class="fecha-info">
+        <span id="art-fecha"></span>
+      </div>
+    </div>
+
+    <!-- FOTOGRAFÍA PRINCIPAL COMPLETA -->
     <figure class="noticia-media-wrapper" id="contenedor-foto" style="display:none;">
       <div class="marco-imagen">
         <img id="art-foto" src="" alt="Fotografía informativa">
@@ -41,17 +51,21 @@
       <figcaption class="noticia-leyenda" id="art-pie-foto"></figcaption>
     </figure>
 
+    <!-- LEAD / ENTRADILLA DESTACADA -->
     <div class="noticia-lead-destacado" id="art-lead" style="display:none;"></div>
-    
+
+    <!-- CUERPO DE LA NOTICIA -->
     <div class="noticia-cuerpo-redaccion" id="art-cuerpo"></div>
 
+    <!-- REPRODUCTOR DE VIDEO INCRUSTADO -->
     <div class="noticia-recurso-video" id="contenedor-video" style="display:none;">
-      <h4 class="subtitulo-recurso">Cobertura en video:</h4>
+      <h4 class="subtitulo-recurso">Cobertura en Video:</h4>
       <div class="iframe-responsive">
-        <iframe id="art-video" src="" frameborder="0" allowfullscreen></iframe>
+        <iframe id="art-video" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
 
+    <!-- ETIQUETAS / SEPA MÁS -->
     <div class="noticia-sepa-mas" id="contenedor-tags" style="display:none;">
       <h3>Sepa más:</h3>
       <div class="tags-list" id="tags-lista"></div>
@@ -60,6 +74,7 @@
     <div class="volver-contenedor">
       <a href="index.html" class="btn-volver-portada">← Volver a la portada</a>
     </div>
+
   </article>
 
   <script>
@@ -71,22 +86,19 @@
 
       try {
         const respuesta = await fetch(`contenido/noticias/${archivoNoticia}`);
+        if (!respuesta.ok) throw new Error('No se encontró la noticia');
+
         const texto = await respuesta.text();
         const partes = texto.split('---');
+        if (partes.length < 3) return;
+
         const metadatosRaw = partes[1];
         const cuerpoMarkdown = partes.slice(2).join('---');
 
         const obtenerValor = (clave) => {
-          const regex = new RegExp(`^${clave}:\\s*([\\s\\S]*?)(?=\\n^[a-z_]+:|$)`, 'm');
+          const regex = new RegExp(`^${clave}:\\s*["']?(.*?)["']?$`, 'm');
           const match = metadatosRaw.match(regex);
-          if (match) {
-            let valor = match[1].trim();
-            if (valor.startsWith("'") && valor.endsWith("'") || valor.startsWith('"') && valor.endsWith('"')) {
-              valor = valor.substring(1, valor.length - 1);
-            }
-            return valor;
-          }
-          return '';
+          return match ? match[1].trim() : '';
         };
 
         const normalizarCategoria = (cat) => {
@@ -94,40 +106,59 @@
           return mapa[cat.toLowerCase()] || cat.toUpperCase();
         };
 
+        // Función para extraer URL embed de cualquier link de YouTube
+        const obtenerYoutubeEmbedUrl = (url) => {
+          if (!url) return '';
+          const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+          const match = url.match(regExp);
+          return (match && match[2].length === 11) ? `https://www.youtube-nocookie.com/embed/${match[2]}` : '';
+        };
+
         const titulo = obtenerValor('title');
         const volada = obtenerValor('volada');
         const categoria = obtenerValor('categoria');
+        const autor = obtenerValor('autor');
+        const fecha = obtenerValor('date');
         const bajada = obtenerValor('bajada');
         const lead = obtenerValor('lead');
-        
+        const thumbnail = obtenerValor('thumbnail');
+        const pieFoto = obtenerValor('pie_foto');
+        const videoUrl = obtenerValor('video_url');
+        const tags = obtenerValor('tags');
+
         document.title = `${titulo} - La Gacela`;
         document.getElementById('art-titulo').textContent = titulo;
-        document.getElementById('art-volada').textContent = volada ? volada.toUpperCase() : normalizarCategoria(categoria);
-        document.getElementById('art-autor').textContent = obtenerValor('autor') || 'Redacción';
-        document.getElementById('art-fecha').textContent = obtenerValor('date');
+        document.getElementById('art-categoria').textContent = normalizarCategoria(categoria);
         
-        document.getElementById('art-bajada').innerHTML = marked.parse(bajada);
+        if (volada) {
+          const elVolada = document.getElementById('art-volada');
+          elVolada.textContent = `| ${volada.toUpperCase()}`;
+          elVolada.style.display = 'inline-block';
+        }
+
+        document.getElementById('art-autor').textContent = autor || 'Redacción La Gacela';
+        document.getElementById('art-fecha').textContent = fecha;
         
+        if (bajada) document.getElementById('art-bajada').innerHTML = marked.parse(bajada);
         if (lead) {
           document.getElementById('art-lead').innerHTML = marked.parse(lead);
           document.getElementById('art-lead').style.display = 'block';
         }
 
-        const thumbnail = obtenerValor('thumbnail');
         if (thumbnail) {
           document.getElementById('art-foto').src = thumbnail;
           document.getElementById('contenedor-foto').style.display = 'block';
-          document.getElementById('art-pie-foto').textContent = obtenerValor('pie_foto');
         }
 
-        const videoUrl = obtenerValor('video_url');
-        if (videoUrl) {
-          let embedUrl = videoUrl.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/');
+        if (pieFoto) document.getElementById('art-pie-foto').textContent = pieFoto;
+
+        // Cargar video interactivo de YouTube
+        const embedUrl = obtenerYoutubeEmbedUrl(videoUrl);
+        if (embedUrl) {
           document.getElementById('art-video').src = embedUrl;
           document.getElementById('contenedor-video').style.display = 'block';
         }
 
-        const tags = obtenerValor('tags');
         if (tags) {
           document.getElementById('tags-lista').innerHTML = tags.split(',').map(t => `<span class="tag-item">${t.trim()}</span>`).join('');
           document.getElementById('contenedor-tags').style.display = 'block';

@@ -1,164 +1,96 @@
-// --- 1. MODO OSCURO (INDEPENDIENTE Y SEGURO) ---
-const aplicarModoOscuro = () => {
-  const btnModo = document.getElementById('btn-modo');
-  const esOscuro = localStorage.getItem('modoOscuro') === 'activo';
+/* ==========================================================
+   CARGA DINÁMICA DE NOTICIAS DESDE DECAP CMS (GITHUB API)
+   ========================================================== */
 
-  if (esOscuro) {
-    document.body.classList.add('modo-oscuro');
-    if (btnModo) btnModo.textContent = '☀️ Modo Claro';
-  } else {
-    document.body.classList.remove('modo-oscuro');
-    if (btnModo) btnModo.textContent = '🌙 Modo Oscuro';
-  }
-
-  if (btnModo) {
-    btnModo.onclick = () => {
-      document.body.classList.toggle('modo-oscuro');
-      const activo = document.body.classList.contains('modo-oscuro');
-      btnModo.textContent = activo ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
-      localStorage.setItem('modoOscuro', activo ? 'activo' : 'inactivo');
-    };
-  }
-};
-
-// --- 2. RESTO DE NAVEGACIÓN Y CARRUSEL ---
 document.addEventListener('DOMContentLoaded', () => {
-  aplicarModoOscuro();
-
-  const botonesNav = document.querySelectorAll('.btn-nav');
-  const noticias = document.querySelectorAll('.noticia');
-  const seccionNoticias = document.getElementById('seccion-noticias');
-  const seccionQuienesSomos = document.getElementById('seccion-quienes-somos');
-
-  let categoriaSeleccionada = 'todos';
-  let categoriaActualEnPantalla = '';
-
-  function marcarBotonActivo(categoria) {
-    if (categoriaActualEnPantalla === categoria) return;
-    categoriaActualEnPantalla = categoria;
-
-    botonesNav.forEach((b) => {
-      const dataCat = b.getAttribute('data-categoria');
-      const esInicio =
-        (categoria === 'todos' || categoria === 'todas') &&
-        (dataCat === 'todos' || dataCat === 'todas' || b.id === 'btn-inicio');
-
-      if (b.id === categoria || dataCat === categoria || esInicio) {
-        b.classList.add('active');
-      } else {
-        b.classList.remove('active');
-      }
+  // Inicializar modo oscuro
+  const btnModo = document.getElementById('btn-modo');
+  if (btnModo) {
+    btnModo.addEventListener('click', () => {
+      document.body.classList.toggle('modo-oscuro');
+      btnModo.textContent = document.body.classList.contains('modo-oscuro') ? '☀️ Modo Claro' : '🌙 Modo Oscuro';
     });
   }
 
-  function navegarA(categoriaOId) {
-    if (!categoriaOId) return;
-
-    categoriaSeleccionada = categoriaOId;
-    localStorage.setItem('seccionActiva', categoriaOId);
-    marcarBotonActivo(categoriaOId);
-
-    if (categoriaOId === 'btn-quienes-somos' || categoriaOId === 'quienes-somos') {
-      if (seccionNoticias) seccionNoticias.classList.add('oculta');
-      if (seccionQuienesSomos) seccionQuienesSomos.classList.remove('oculta');
-    } else {
-      if (seccionQuienesSomos) seccionQuienesSomos.classList.add('oculta');
-      if (seccionNoticias) seccionNoticias.classList.remove('oculta');
-
-      noticias.forEach((noticia) => {
-        const catNoticia = noticia.getAttribute('data-categoria');
-        if (categoriaOId === 'todos' || categoriaOId === 'todas' || catNoticia === categoriaOId) {
-          noticia.style.display = '';
-        } else {
-          noticia.style.display = 'none';
-        }
-      });
-    }
-  }
-
-  botonesNav.forEach((boton) => {
-    boton.addEventListener('click', () => {
-      const destino =
-        boton.id === 'btn-quienes-somos'
-          ? 'btn-quienes-somos'
-          : boton.getAttribute('data-categoria');
-      navegarA(destino);
-    });
-  });
-
-  window.addEventListener('scroll', () => {
-    if (categoriaSeleccionada !== 'todos' && categoriaSeleccionada !== 'todas') return;
-    if (seccionQuienesSomos && !seccionQuienesSomos.classList.contains('oculta')) return;
-
-    if (window.scrollY < 250) {
-      marcarBotonActivo('todos');
-      return;
-    }
-
-    let categoriaEncontrada = null;
-    const lineaReferencia = window.innerHeight * 0.35;
-
-    noticias.forEach((noticia) => {
-      const rect = noticia.getBoundingClientRect();
-      if (rect.top <= lineaReferencia && rect.bottom >= lineaReferencia) {
-        categoriaEncontrada = noticia.getAttribute('data-categoria');
-      }
-    });
-
-    if (categoriaEncontrada) {
-      marcarBotonActivo(categoriaEncontrada);
-    }
-  });
-
-  const seccionPrevia = localStorage.getItem('seccionActiva') || 'todos';
-  navegarA(seccionPrevia);
-
-  // CARRUSEL
-  const track = document.getElementById('track-periodistas');
-  const btnPrev = document.getElementById('btn-prev-equipo');
-  const btnNext = document.getElementById('btn-next-equipo');
-  const contenedorIndicadores = document.getElementById('indicadores-equipo');
-
-  if (track && btnPrev && btnNext) {
-    const tarjetas = track.querySelectorAll('.tarjeta-periodista');
-    const totalTarjetas = tarjetas.length;
-    let indiceActual = 0;
-
-    if (contenedorIndicadores) {
-      contenedorIndicadores.innerHTML = '';
-      tarjetas.forEach((_, i) => {
-        const punto = document.createElement('button');
-        punto.classList.add('indicador');
-        if (i === 0) punto.classList.add('activo');
-        punto.setAttribute('aria-label', `Ir a periodista ${i + 1}`);
-        punto.addEventListener('click', () => {
-          indiceActual = i;
-          actualizarCarrusel();
-        });
-        contenedorIndicadores.appendChild(punto);
-      });
-    }
-
-    function actualizarCarrusel() {
-      track.style.transform = `translateX(-${indiceActual * 100}%)`;
-      const puntos = document.querySelectorAll('.indicador');
-      puntos.forEach((p, idx) => {
-        if (idx === indiceActual) {
-          p.classList.add('activo');
-        } else {
-          p.classList.remove('activo');
-        }
-      });
-    }
-
-    btnNext.addEventListener('click', () => {
-      indiceActual = (indiceActual + 1) % totalTarjetas;
-      actualizarCarrusel();
-    });
-
-    btnPrev.addEventListener('click', () => {
-      indiceActual = (indiceActual - 1 + totalTarjetas) % totalTarjetas;
-      actualizarCarrusel();
-    });
-  }
+  // Cargar noticias en la portada
+  cargarNoticiasPortada();
 });
+
+async function cargarNoticiasPortada() {
+  const contenedorNoticias = document.getElementById('contenedor-noticias-dinamicas') || document.querySelector('.grid-noticias') || document.querySelector('main');
+  
+  if (!contenedorNoticias) return;
+
+  try {
+    // Consulta a la API de GitHub para obtener los archivos de la carpeta contenido/noticias
+    const repo = "07lonnie/LA-GACELA";
+    const respuesta = await fetch(`https://api.github.com/repos/${repo}/contents/contenido/noticias`);
+    
+    if (!respuesta.ok) return;
+
+    const archivos = await respuesta.json();
+    const archivosMarkdown = archivos.filter(f => f.name.endsWith('.md'));
+
+    if (archivosMarkdown.length === 0) return;
+
+    let htmlCards = '';
+
+    for (const archivo of archivosMarkdown) {
+      const resFile = await fetch(archivo.download_url);
+      const texto = await resFile.text();
+
+      const partes = texto.split('---');
+      if (partes.length < 3) continue;
+
+      const metadatosRaw = partes[1];
+      
+      const obtenerValor = (clave) => {
+        const regex = new RegExp(`^${clave}:\\s*["']?(.*?)["']?$`, 'm');
+        const match = metadatosRaw.match(regex);
+        return match ? match[1].trim() : '';
+      };
+
+      const titulo = obtenerValor('title');
+      const categoria = obtenerValor('categoria');
+      const autor = obtenerValor('autor');
+      const fecha = obtenerValor('date');
+      const bajada = obtenerValor('bajada').replace(/[*_#]/g, ''); // Limpiar markdown simple
+      const thumbnail = obtenerValor('thumbnail') || 'fotos/default-news.jpg';
+
+      const mapaCategorias = { 'politica': 'POLÍTICA', 'internacionales': 'INTERNACIONALES', 'espectaculos': 'ESPECTÁCULOS', 'deportes': 'DEPORTES' };
+      const catFormateada = mapaCategorias[categoria.toLowerCase()] || categoria.toUpperCase();
+
+      htmlCards += `
+        <article class="tarjeta-noticia-portada">
+          <a href="noticia.html?id=${archivo.name}" class="enlace-noticia">
+            <div class="imagen-portada-wrapper">
+              <img src="${thumbnail}" alt="${titulo}" loading="lazy">
+              <span class="badge-categoria-portada">${catFormateada}</span>
+            </div>
+            <div class="contenido-tarjeta-portada">
+              <h2 class="titulo-tarjeta">${titulo}</h2>
+              <p class="bajada-tarjeta">${bajada.substring(0, 110)}...</p>
+              <div class="meta-tarjeta">
+                <span>Por <strong>${autor || 'Redacción'}</strong></span>
+                <span>• ${fecha}</span>
+              </div>
+            </div>
+          </a>
+        </article>
+      `;
+    }
+
+    // Insertar las noticias publicadas al inicio del contenedor
+    const seccionDinamica = document.createElement('div');
+    seccionDinamica.className = 'seccion-noticias-publicadas';
+    seccionDinamica.innerHTML = `
+      <h3 class="subtitulo-bloque-portada">Últimas Publicaciones</h3>
+      <div class="grid-noticias-dinamicas">${htmlCards}</div>
+    `;
+
+    contenedorNoticias.prepend(seccionDinamica);
+
+  } catch (e) {
+    console.error('Error al cargar noticias dinámicas:', e);
+  }
+}
