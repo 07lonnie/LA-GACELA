@@ -47,7 +47,7 @@
       <!-- TITULAR PRINCIPAL -->
       <h1 class="noticia-titular" id="art-titulo">Cargando noticia...</h1>
 
-      <!-- BAJADA / SUMARIO -->
+      <!-- BAJADA / SUMARIO COMPLETO -->
       <div class="noticia-bajada" id="art-bajada"></div>
 
       <!-- CRÉDITO Y FECHA -->
@@ -56,7 +56,7 @@
         <div class="fecha-info" id="art-fecha"></div>
       </div>
 
-      <!-- FOTOGRAFÍA PRINCIPAL ENCUADRADA Y CON MARCO -->
+      <!-- FOTOGRAFÍA PRINCIPAL ENCUADRADA -->
       <figure class="noticia-media-wrapper" id="contenedor-foto" style="display:none;">
         <div class="marco-imagen">
           <img id="art-foto" src="" alt="Fotografía informativa">
@@ -64,10 +64,10 @@
         <figcaption class="noticia-leyenda" id="art-pie-foto"></figcaption>
       </figure>
 
-      <!-- LEAD / ENTRADILLA DESTACADA -->
+      <!-- LEAD / ENTRADILLA DESTACADA COMPLETA -->
       <div class="noticia-lead-destacado" id="art-lead" style="display:none;"></div>
 
-      <!-- CUERPO DE LA NOTICIA -->
+      <!-- CUERPO COMPLETO DE LA NOTICIA -->
       <div class="noticia-cuerpo-redaccion" id="art-cuerpo"></div>
 
       <!-- VIDEO DE YOUTUBE -->
@@ -102,7 +102,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
-      // Modo oscuro
       const btnModo = document.getElementById('btn-modo');
       if (btnModo) {
         btnModo.addEventListener('click', () => {
@@ -124,21 +123,11 @@
         if (!respuesta.ok) throw new Error('No se encontró la noticia');
 
         const texto = await respuesta.text();
-        const partes = texto.split('---');
-        if (partes.length < 3) return;
-
-        const metadatosRaw = partes[1];
-        const cuerpoMarkdown = partes.slice(2).join('---');
-
-        const obtenerValor = (clave) => {
-          const regex = new RegExp(`^${clave}:\\s*["']?(.*?)["']?$`, 'm');
-          const match = metadatosRaw.match(regex);
-          return match ? match[1].trim() : '';
-        };
+        const { metadatos, cuerpo } = parseFrontmatter(texto);
 
         const normalizarCategoria = (cat) => {
           const mapa = { 'politica': 'POLÍTICA', 'internacionales': 'INTERNACIONALES', 'espectaculos': 'ESPECTÁCULOS', 'deportes': 'DEPORTES' };
-          return mapa[cat.toLowerCase()] || cat.toUpperCase();
+          return mapa[(cat || '').toLowerCase()] || (cat || '').toUpperCase();
         };
 
         const obtenerYoutubeEmbedUrl = (url) => {
@@ -148,26 +137,26 @@
           return (match && match[2].length === 11) ? `https://www.youtube-nocookie.com/embed/${match[2]}` : '';
         };
 
-        const titulo = obtenerValor('title');
-        const volada = obtenerValor('volada');
-        const categoria = obtenerValor('categoria');
-        const autor = obtenerValor('autor');
-        const fecha = obtenerValor('date');
-        const bajada = obtenerValor('bajada');
-        const lead = obtenerValor('lead');
-        const thumbnail = obtenerValor('thumbnail');
-        const pieFoto = obtenerValor('pie_foto');
-        const videoUrl = obtenerValor('video_url');
-        const tags = obtenerValor('tags');
+        const titulo = metadatos.title || 'Sin título';
+        const volada = metadatos.volada;
+        const categoria = metadatos.categoria;
+        const autor = metadatos.autor;
+        const fecha = metadatos.date;
+        const bajada = metadatos.bajada;
+        const lead = metadatos.lead;
+        const thumbnail = metadatos.thumbnail;
+        const pieFoto = metadatos.pie_foto;
+        const videoUrl = metadatos.video_url;
+        const tags = metadatos.tags;
 
         document.title = `${titulo} - La Gacela`;
-        document.getElementById('art-titulo').textContent = titulo || 'Sin título';
+        document.getElementById('art-titulo').textContent = titulo;
         
         const voladaTexto = volada ? volada.toUpperCase() : (categoria ? normalizarCategoria(categoria) : 'NOTICIA');
         document.getElementById('art-volada').textContent = voladaTexto;
 
         document.getElementById('art-autor').textContent = autor || 'Redacción La Gacela';
-        document.getElementById('art-fecha').textContent = fecha;
+        document.getElementById('art-fecha').textContent = fecha || '';
 
         if (bajada) {
           document.getElementById('art-bajada').innerHTML = marked.parse(bajada);
@@ -197,13 +186,55 @@
           document.getElementById('contenedor-tags').style.display = 'block';
         }
 
-        document.getElementById('art-cuerpo').innerHTML = marked.parse(cuerpoMarkdown);
+        document.getElementById('art-cuerpo').innerHTML = marked.parse(cuerpo);
 
       } catch (e) {
         console.error(e);
         document.getElementById('art-titulo').textContent = 'Error al cargar la noticia seleccionada';
       }
     });
+
+    // PARSER MULTILÍNEA COMPLETO
+    function parseFrontmatter(texto) {
+      const partes = texto.split(/^---$/m);
+      if (partes.length < 3) return { metadatos: {}, cuerpo: texto };
+
+      const yamlRaw = partes[1];
+      const cuerpo = partes.slice(2).join('---').trim();
+      const metadatos = {};
+
+      const lineas = yamlRaw.split('\n');
+      let claveActual = null;
+      let acumulador = [];
+
+      for (let linea of lineas) {
+        const matchClave = linea.match(/^([a-zA-Z0-9_]+):\s*(.*)$/);
+        if (matchClave) {
+          if (claveActual) {
+            metadatos[claveActual] = limpiarValorYaml(acumulador.join(' '));
+          }
+          claveActual = matchClave[1];
+          acumulador = [matchClave[2]];
+        } else if (claveActual) {
+          acumulador.push(linea.trim());
+        }
+      }
+      if (claveActual) {
+        metadatos[claveActual] = limpiarValorYaml(acumulador.join(' '));
+      }
+
+      return { metadatos, cuerpo };
+    }
+
+    function limpiarValorYaml(val) {
+      if (!val) return '';
+      let str = val.trim();
+      str = str.replace(/^[|>-]+\s*/, '');
+      if ((str.startsWith('"') && str.endsWith('"')) || (str.startsWith("'") && str.endsWith("'"))) {
+        str = str.substring(1, str.length - 1);
+      }
+      return str.trim();
+    }
   </script>
 </body>
 </html>

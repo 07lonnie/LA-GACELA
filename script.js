@@ -1,5 +1,5 @@
 /* ==========================================================
-   LA GACELA - NOTICIA DESTACADA, FILTROS Y CARRUSEL
+   LA GACELA - NAVEGACIÓN, FILTRADO, CARRUSEL Y PARSER YAML
    ========================================================== */
 
 let noticiasGlobales = [];
@@ -52,7 +52,49 @@ document.addEventListener('DOMContentLoaded', () => {
   cargarNoticiasDesdeGitHub();
 });
 
-/* 1. NAVEGACIÓN ENTRE SECCIONES */
+/* PARSER MULTILÍNEA ROBUSTO DE FRONTMATTER (EVITA CORTES EN BAJADA Y LEAD) */
+function parseFrontmatter(texto) {
+  const partes = texto.split(/^---$/m);
+  if (partes.length < 3) return { metadatos: {}, cuerpo: texto };
+
+  const yamlRaw = partes[1];
+  const cuerpo = partes.slice(2).join('---').trim();
+  const metadatos = {};
+
+  const lineas = yamlRaw.split('\n');
+  let claveActual = null;
+  let acumulador = [];
+
+  for (let linea of lineas) {
+    const matchClave = linea.match(/^([a-zA-Z0-9_]+):\s*(.*)$/);
+    if (matchClave) {
+      if (claveActual) {
+        metadatos[claveActual] = limpiarValorYaml(acumulador.join(' '));
+      }
+      claveActual = matchClave[1];
+      acumulador = [matchClave[2]];
+    } else if (claveActual) {
+      acumulador.push(linea.trim());
+    }
+  }
+  if (claveActual) {
+    metadatos[claveActual] = limpiarValorYaml(acumulador.join(' '));
+  }
+
+  return { metadatos, cuerpo };
+}
+
+function limpiarValorYaml(val) {
+  if (!val) return '';
+  let str = val.trim();
+  str = str.replace(/^[|>-]+\s*/, '');
+  if ((str.startsWith('"') && str.endsWith('"')) || (str.startsWith("'") && str.endsWith("'"))) {
+    str = str.substring(1, str.length - 1);
+  }
+  return str.trim();
+}
+
+/* NAVEGACIÓN */
 function inicializarNavegacion() {
   const botonesNav = document.querySelectorAll('.nav-btn');
 
@@ -108,7 +150,7 @@ function cambiarVistaSeccion(seccion) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* 2. OBTENER NOTICIAS DE GITHUB */
+/* CARGAR NOTICIAS DESDE GITHUB USANDO EL NUEVO PARSER */
 async function cargarNoticiasDesdeGitHub() {
   const grid = document.getElementById('grid-noticias');
   if (!grid) return;
@@ -135,24 +177,16 @@ async function cargarNoticiasDesdeGitHub() {
       const resContenido = await fetch(file.download_url);
       const texto = await resContenido.text();
 
-      const partes = texto.split('---');
-      if (partes.length < 3) continue;
-
-      const metaRaw = partes[1];
-      const obtenerValor = (k) => {
-        const regex = new RegExp(`^${k}:\\s*["']?(.*?)["']?$`, 'm');
-        const m = metaRaw.match(regex);
-        return m ? m[1].trim() : '';
-      };
+      const { metadatos, cuerpo } = parseFrontmatter(texto);
 
       noticiasGlobales.push({
         id: file.name,
-        title: obtenerValor('title') || 'Sin título',
-        categoria: (obtenerValor('categoria') || 'politica').toLowerCase(),
-        autor: obtenerValor('autor') || 'Redacción',
-        date: obtenerValor('date') || '2026',
-        bajada: obtenerValor('bajada').replace(/[*_#]/g, ''),
-        thumbnail: obtenerValor('thumbnail') || 'fotos/LAGACELAICONODORADO.jpg'
+        title: metadatos.title || 'Sin título',
+        categoria: (metadatos.categoria || 'politica').toLowerCase(),
+        autor: metadatos.autor || 'Redacción',
+        date: metadatos.date || '2026',
+        bajada: (metadatos.bajada || '').replace(/[*_#]/g, ''),
+        thumbnail: metadatos.thumbnail || 'fotos/LAGACELAICONODORADO.jpg'
       });
     }
 
@@ -163,7 +197,7 @@ async function cargarNoticiasDesdeGitHub() {
   }
 }
 
-/* 3. RENDERIZADO: NOTICIA DESTACADA + TARJETAS NORMALES */
+/* RENDERIZADO CON TEXTO COMPLETO Y CORTE LIMPIO EN TARJETAS */
 function renderizarNoticiasProcesadas() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
@@ -192,7 +226,6 @@ function renderizarNoticiasProcesadas() {
     'deportes': 'DEPORTES'
   };
 
-  // EN INICIO: La primera noticia toma formato destacado (Hero)
   if (seccionActual === 'inicio') {
     const destacada = noticiasFiltradas[0];
     contenedorDestacada.innerHTML = `
@@ -215,16 +248,16 @@ function renderizarNoticiasProcesadas() {
       </article>
     `;
 
-    // Las siguientes se muestran en formato estándar
     const restantes = noticiasFiltradas.slice(1);
     grid.innerHTML = restantes.map(n => generarTarjetaHTML(n, mapaCatTexto)).join('');
   } else {
-    // En secciones específicas se muestran en formato estándar
     grid.innerHTML = noticiasFiltradas.map(n => generarTarjetaHTML(n, mapaCatTexto)).join('');
   }
 }
 
 function generarTarjetaHTML(n, mapaCatTexto) {
+  const bajadaCorta = n.bajada.length > 150 ? n.bajada.substring(0, 150) + '...' : n.bajada;
+
   return `
     <article class="tarjeta-noticia-portada">
       <a href="noticia.html?id=${n.id}" class="enlace-noticia">
@@ -234,7 +267,7 @@ function generarTarjetaHTML(n, mapaCatTexto) {
         </div>
         <div class="contenido-tarjeta-portada">
           <h3 class="titulo-tarjeta">${n.title}</h3>
-          <p class="bajada-tarjeta">${n.bajada.substring(0, 120)}...</p>
+          <p class="bajada-tarjeta">${bajadaCorta}</p>
           <div class="meta-tarjeta">
             <span>Por <strong>${n.autor}</strong></span>
             <span>• ${n.date}</span>
@@ -245,7 +278,7 @@ function generarTarjetaHTML(n, mapaCatTexto) {
   `;
 }
 
-/* 4. CARRUSEL EDITORIAL */
+/* CARRUSEL EDITORIAL */
 function inicializarCarruselEquipo() {
   const btnPrev = document.getElementById('btn-carrusel-prev');
   const btnNext = document.getElementById('btn-carrusel-next');
@@ -294,7 +327,7 @@ function actualizarTarjetaEquipo() {
   }
 }
 
-/* 5. MODO OSCURO */
+/* MODO OSCURO */
 function inicializarModoOscuro() {
   const btnModo = document.getElementById('btn-modo');
   if (btnModo) {
