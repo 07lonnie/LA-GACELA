@@ -23,6 +23,8 @@ tags: Paulo Londra, Perú, Lima, Estadio Nacional, Next Rounds Tour, Gonzalo
 ---
 El espectáculo está programado para este sábado y tendrá como escenario el **[Estadio Nacional](https://share.google/1DhEpCNE2Ge2wIukH),** ubicado en la avenida José Díaz, en Lima. La presentación forma parte del recorrido internacional de Londra, quien ha llevado su propuesta de música urbana a diferentes escenarios de Latinoamérica.
 
+<https://www.tiktok.com/@conciertoslima.pe/video/7607892078940392712?is_from_webapp=1&sender_device=pc&web_id=7636999679101044240>
+
 Uno de los atractivos de la jornada será la participación del artista peruano **[Gonzalo Genek](https://www.instagram.com/gonzalogenek?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==)**, quien fue confirmado como encargado de abrir el concierto. Su presencia sumará una representación local al espectáculo y permitirá que el público disfrute de una propuesta vinculada a la escena urbana peruana antes de la presentación principal.
 
 El repertorio de Londra incluirá canciones que marcaron su trayectoria, entre ellas «Adán y Eva», «Nena Maldición» y «Tal vez». Estos temas forman parte de la producción musical con la que el argentino alcanzó reconocimiento internacional dentro de la música urbana en español.
