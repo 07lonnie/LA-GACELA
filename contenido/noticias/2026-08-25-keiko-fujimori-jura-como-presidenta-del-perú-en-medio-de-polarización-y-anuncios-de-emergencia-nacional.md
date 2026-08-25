@@ -17,11 +17,7 @@ pie_foto: "Keiko Fujimori luciendo la banda presidencial tras asumir la jefatura
   de Estado del Perú el 28 de julio de 2026. /Fotografía: Ernesto Vera"
 tags: Keiko Fujimori, gobierno, congreso
 ---
-La ceremonia solemne de investidura se llevó a cabo en el Hemiciclo del Congreso de la República ante el primer Parlamento bicameralinstalado en el país desde 1990. El presidente del Congreso y del Senado,Miguel Ángel Torres Morales, tomó el juramento de ley de la mandataria y leimpuso la banda presidencial. En el mismo acto protocolar, Luis GalarretaVelarde juró como primer vicepresidente y Miguel Torres Morales como segundovicepresidente de la República.
-
-Presidenta Keiko Fujimori anuncia aumento del sueldo mínimo a S/1300. / Fuente: TV Perú. 
-
-<https://www.youtube.com/watch?v=swDR9p1mIq>
+La ceremonia solemne de investidura se llevó a cabo en el Hemiciclo del Congreso de la República ante el primer Parlamento bicameralinstalado en el país desde 1990. El presidente del Congreso y del Senado, Miguel Ángel Torres Morales, tomó el juramento de ley de la mandataria y leimpuso la banda presidencial. En el mismo acto protocolar, Luis Galarreta Velarde juró como primer vicepresidente y Miguel Torres Morales como segundo vicepresidente de la República.
 
 #### Tensionesen el Hemiciclo y protestas ciudadanas
 
@@ -31,6 +27,6 @@ En ella participó el excandidato presidencial Roberto Sánchez. El despliegue d
 
 #### **Gabinete ministerial e inicio de gestión**
 
-Keiko Fujimori asumió la presidencia de la República trasimponerse en la ajustada segunda vuelta electoral del 7 de junio de 2026 frentea Roberto Sánchez (Juntos por el Perú). Según los resultados oficiales de laONPE, Fujimori obtuvo 9 223 396 votos válidos (50,13% frente al 49,87% deSánchez), siendo proclamada oficialmente el 3 de julio por el JuradoNacional de Elecciones (JNE).
+Keiko Fujimori asumió la presidencia de la República tras imponerse en la ajustada segunda vuelta electoral del 7 de junio de 2026 frente a Roberto Sánchez (Juntos por el Perú). Según los resultados oficiales de la ONPE, Fujimori obtuvo 9 223 396 votos válidos (50,13% frente al 49,87% de Sánchez), siendo proclamada oficialmente el 3 de julio por el Jurado Nacional de Elecciones (JNE).
 
-Pocas horas después de juramentar en el Parlamento, lajefa de Estado tomó juramento a su primer Gabinete Ministerial en Palacio deGobierno. Este primer Consejo de ministros está presidido por LuisFernando Galarreta Velarde, secundado por Elmer Cuba en la carterade Economía y Finanzas, el abogado Carlos Espá en Relaciones Exteriores,César Astudillo en el Ministerio del Interior y Rafael Belaúnde Llosaen el Ministerio de Defensa. El nuevo gobierno inicia formalmente sus funcionesllamando a la reconciliación y convocando al diálogo con las diversas fuerzasde la oposición.
+Pocas horas después de juramentar en el Parlamento, la jefa de Estado tomó juramento a su primer Gabinete Ministerial en Palacio de Gobierno. Este primer Consejo de ministros está presidido por Luis Fernando Galarreta Velarde, secundado por Elmer Cuba en la cartera de Economía y Finanzas, el abogado Carlos Espá en Relaciones Exteriores, César Astudillo en el Ministerio del Interior y Rafael Belaúnde Llosaen el Ministerio de Defensa. El nuevo gobierno inicia formalmente sus funciones llamando a la reconciliación y convocando al diálogo con las diversas fuerzas de la oposición.
