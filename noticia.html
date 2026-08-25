@@ -36,7 +36,7 @@
     </ul>
   </nav>
 
-  <!-- CONTENEDOR DE LA NOTICIA CENTRADA (MAX 820PX) -->
+  <!-- CONTENEDOR DE LA NOTICIA CENTRADA (MÁXIMO 820PX) -->
   <div class="noticia-pagina-wrapper">
     <article class="noticia-periodistica-container">
       
@@ -151,7 +151,8 @@
         }
 
         if (thumbnail) {
-          document.getElementById('art-foto').src = thumbnail;
+          let rutaThumb = thumbnail.startsWith('/') ? thumbnail.substring(1) : thumbnail;
+          document.getElementById('art-foto').src = rutaThumb;
           document.getElementById('contenedor-foto').style.display = 'block';
           if (pieFoto) {
             document.getElementById('art-pie-foto').textContent = pieFoto;
@@ -163,10 +164,12 @@
           document.getElementById('contenedor-tags').style.display = 'block';
         }
 
+        // Renderizado de imágenes dentro del cuerpo con corrección de rutas
         const renderer = new marked.Renderer();
         renderer.image = function(href, title, text) {
+          let rutaLimpia = href.startsWith('/') ? href.substring(1) : href;
           const leyendaHTML = text ? `<figcaption class="noticia-leyenda-inline">${text}</figcaption>` : '';
-          return `<figure class="noticia-figura-inline"><div class="marco-imagen-inline"><img src="${href}" alt="${text || ''}" loading="lazy"></div>${leyendaHTML}</figure>`;
+          return `<figure class="noticia-figura-inline"><div class="marco-imagen-inline"><img src="${rutaLimpia}" alt="${text || ''}" loading="lazy"></div>${leyendaHTML}</figure>`;
         };
 
         marked.setOptions({ renderer: renderer });
@@ -177,6 +180,7 @@
         const contenedorCuerpo = document.getElementById('art-cuerpo');
         contenedorCuerpo.innerHTML = htmlRenderizado;
 
+        // Carga única de widgets de Twitter
         if (contenedorCuerpo.querySelector('.twitter-tweet')) {
           if (!window.twttr) {
             const scriptTwitter = document.createElement('script');
@@ -200,16 +204,19 @@
 
       html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
 
+      // YouTube: convierte enlaces sueltos o enlaces <a> en reproductores
       const regexYouTube = /<p>(?:<a[^>]*>)?(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})[^\s<]*(?:<\/a>)?<\/p>/gi;
       html = html.replace(regexYouTube, function(match, id) {
         return `<div class="iframe-responsive-inline"><iframe src="https://www.youtube-nocookie.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
       });
 
+      // Twitter / X: convierte enlaces sueltos en blockquotes oficiales
       const regexTwitterLink = /<p>(?:<a[^>]*>)?(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/([\w]+)\/status\/([\d]+)[^\s<]*(?:<\/a>)?<\/p>/gi;
       html = html.replace(regexTwitterLink, function(match, user, id) {
         return `<div class="contenedor-red-social"><blockquote class="twitter-tweet" data-dnt="true" align="center"><a href="https://twitter.com/${user}/status/${id}"></a></blockquote></div>`;
       });
 
+      // TikTok: convierte enlaces sueltos en embed
       const regexTikTok = /<p>(?:<a[^>]*>)?(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com)\/@([\w.-]+)\/video\/([\d]+)[^\s<]*(?:<\/a>)?<\/p>/gi;
       html = html.replace(regexTikTok, function(match, user, id) {
         return `<div class="contenedor-red-social"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${user}/video/${id}" data-video-id="${id}" style="max-width: 605px;min-width: 325px;"><section></section></blockquote></div>`;

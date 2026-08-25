@@ -1,5 +1,5 @@
 /* ==========================================================
-   LA GACELA - HOJA DE ESTILOS DEFINITIVA, COMPLETA Y UNIFICADA
+   LA GACELA - HOJA DE ESTILOS DEFINITIVA Y UNIFICADA
    ========================================================== */
 
 :root {
@@ -159,7 +159,7 @@ a {
   color: var(--blanco) !important;
 }
 
-/* 3. CONTROL DE SECCIONES (OCULTAR INACTIVAS) */
+/* 3. CONTROL DE SECCIONES */
 .contenedor-principal {
   max-width: 1200px;
   margin: 40px auto 80px auto;
@@ -891,7 +891,7 @@ body.modo-oscuro .correo-miembro {
   color: var(--dorado) !important;
 }
 
-/* EL LOGO EN MODO OSCURO SE CONVIERTE EN BLANCO BRILLANTE Y DESTACADO */
+/* RESPLANDOR Y VISIBILIDAD DEL LOGO EN MODO OSCURO */
 body.modo-oscuro .isotipo-limpio {
-  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(212, 175, 55, 0.4)) !important;
+  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(212, 175, 55, 0.5)) !important;
 }
