@@ -4,7 +4,7 @@ title: Vizcarra fue dado de alta de hospital y regresa al penal de Barbadillo
 categoria: politica
 bajada: Las autoridades del Estado verificaron su estado de salud para que pueda
   cumplir con su sentencia de 14 años en dicho penal.
-autor: Belen Yaranga
+autor: Redacción La Gacela
 date: 2026-08-25
 lead: El expresidente Martín Vizcarra regresó el sábado 15 de agosto de 2026 al
   penal de Barbadillo, en el distrito de Ate, tras pasar tres días en un centro
