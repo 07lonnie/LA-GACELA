@@ -8,7 +8,7 @@ bajada: Los operadores podrían perder temporalmente el control de las
   instalaciones si las autoridades consideran que demoran demasiado en reparar
   los daños, en medio de los problemas económicos y sociales causados por los
   ataques relacionados con la guerra en Ucrania.
-autor: Adriana Peña
+autor: "La Gacela "
 date: 2026-08-24
 lead: Ante la implacable ofensiva aérea que ha debilitado la capacidad
   industrial del país, el Kremlin ha tomado una decisión drástica que sacude el
