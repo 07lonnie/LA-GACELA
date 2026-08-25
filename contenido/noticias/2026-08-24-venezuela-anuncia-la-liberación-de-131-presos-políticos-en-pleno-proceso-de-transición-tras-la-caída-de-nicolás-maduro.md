@@ -18,7 +18,7 @@ thumbnail: fotos/subidas/captura-de-pantalla-2026-08-25-002802.png
 pie_foto: La ex presa política Ángela Vásquez abraza a su hermano tras su
   liberación a las afueras de la prisión El Rodeo I en Guatire, estado Miranda,
   Venezuela, el 14 de agosto de 2026 [AFP].
-tags: "Estados Unidos, Venezuela, Nicolás Maduro, Delcy Rodríguez,  "
+tags: Estados Unidos, Venezuela, Nicolás Maduro, Delcy Rodríguez
 ---
 El pasado viernes 14 de agosto de 2026, decenas de familias venezolanas protagonizaron emotivos reencuentros a las afueras de diversos centros penitenciarios de alta seguridad, entre ellos el penal El Rodeo I en el estado de Miranda. El gobierno interino de coalición, liderado administrativamente por la presidenta interina Delcy Rodríguez (y respaldado por los bloques del legislativo que presiden Jorge Rodríguez y la líder opositora Dinorah Figuera), formalizó la excarcelación de 131 presos de conciencia bajo el amparo del nuevo "Programa para la Paz y la Coexistencia Democrática". Esta iniciativa cuenta con el beneplácito de la comunidad internacional y el Departamento de Estado de los EE. UU.
 
