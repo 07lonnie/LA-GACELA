@@ -29,4 +29,6 @@ El repertorio de Londra incluirá canciones que marcaron su trayectoria, entre e
 
 La llegada del cantante a Lima también coincide con el inicio de una nueva etapa de su carrera. El pasado 12 de agosto lanzó **[«me asfixia LA CIUDAD»](https://youtu.be/LkYUH1pvw-0?si=hggdC3IYpCYBOzeQ)**, sencillo que funciona como adelanto de su próximo álbum de estudio y que presenta una propuesta más íntima y emocional.
 
+<https://youtu.be/LkYUH1pvw-0?si=RqengbSnY4x1YPhl>
+
 De esta manera, el concierto en Lima se produce en un momento de renovación artística para Londra y representa una nueva oportunidad para reencontrarse con el público peruano. Las entradas para el espectáculo se comercializan mediante [Teleticket.](https://teleticket.com.pe/paulo-londra-2026)
