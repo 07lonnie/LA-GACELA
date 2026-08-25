@@ -1,6 +1,6 @@
 ---
 volada: actualidad
-title: "VIZCARRA FUE DADO DE ALTA DEL HOSPITAL Y REGRESA  AL PENAL DE BARBADILLO "
+title: Vizcarra fue dado de alta de hospital y regresa al penal de Barbadillo
 categoria: politica
 bajada: Las autoridades del Estado verificaron su estado de salud para que pueda
   cumplir con su sentencia de 14 años en dicho penal.
