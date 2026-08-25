@@ -17,11 +17,9 @@ pie_foto: "Keiko Fujimori luciendo la banda presidencial tras asumir la jefatura
   de Estado del Perú el 28 de julio de 2026. /Fotografía: Ernesto Vera"
 tags: Keiko Fujimori, gobierno, congreso
 ---
-La ceremonia solemne de investidura se llevó a cabo en elHemiciclo del Congreso de la República ante el primer Parlamento bicameralinstalado en el país desde 1990. El presidente del Congreso y del Senado,Miguel Ángel Torres Morales, tomó el juramento de ley de la mandataria y leimpuso la banda presidencial. En el mismo acto protocolar, Luis GalarretaVelarde juró como primer vicepresidente y Miguel Torres Morales como segundovicepresidente de la República.
+La ceremonia solemne de investidura se llevó a cabo en el Hemiciclo del Congreso de la República ante el primer Parlamento bicameralinstalado en el país desde 1990. El presidente del Congreso y del Senado,Miguel Ángel Torres Morales, tomó el juramento de ley de la mandataria y leimpuso la banda presidencial. En el mismo acto protocolar, Luis GalarretaVelarde juró como primer vicepresidente y Miguel Torres Morales como segundovicepresidente de la República.
 
-Tensionesen el Hemiciclo y protestas ciudadanas
-
-Presidenta Keiko Fujimori anuncia aumento del sueldo mínimoa S/1300. / Fuente: TV Perú. <https://www.youtube.com/watch?v=swDR9p1mIq>
+Presidenta Keiko Fujimori anuncia aumento del sueldo mínimo a S/1300. / Fuente: TV Perú. <https://www.youtube.com/watch?v=swDR9p1mIq>
 
 Paralelamente, en las afueras del Palacio Legislativo, cientosde ciudadanos se movilizaron en el centro histórico de Lima para manifestar surechazo al nuevo gobierno. La marcha se concentró en la Plaza San Martín y congregó a colectivos de derechos humanos, familiares de víctimas de la violencia política de los años 2022 y 2023 y delegaciones regionales procedentes de Arequipa y Puno. En ella participó el excandidato presidencial Roberto Sánchez. El despliegue de las manifestaciones fue supervisado de manera permanente por la Defensoría del Pueblo para verificar el respeto a los derechos fundamentales y garantizar que la jornada se realizara pacíficamente.
 
