@@ -19,11 +19,17 @@ tags: Keiko Fujimori, gobierno, congreso
 ---
 La ceremonia solemne de investidura se llevó a cabo en el Hemiciclo del Congreso de la República ante el primer Parlamento bicameralinstalado en el país desde 1990. El presidente del Congreso y del Senado,Miguel Ángel Torres Morales, tomó el juramento de ley de la mandataria y leimpuso la banda presidencial. En el mismo acto protocolar, Luis GalarretaVelarde juró como primer vicepresidente y Miguel Torres Morales como segundovicepresidente de la República.
 
-Presidenta Keiko Fujimori anuncia aumento del sueldo mínimo a S/1300. / Fuente: TV Perú. <https://www.youtube.com/watch?v=swDR9p1mIq>
+Presidenta Keiko Fujimori anuncia aumento del sueldo mínimo a S/1300. / Fuente: TV Perú. 
 
-Paralelamente, en las afueras del Palacio Legislativo, cientosde ciudadanos se movilizaron en el centro histórico de Lima para manifestar surechazo al nuevo gobierno. La marcha se concentró en la Plaza San Martín y congregó a colectivos de derechos humanos, familiares de víctimas de la violencia política de los años 2022 y 2023 y delegaciones regionales procedentes de Arequipa y Puno. En ella participó el excandidato presidencial Roberto Sánchez. El despliegue de las manifestaciones fue supervisado de manera permanente por la Defensoría del Pueblo para verificar el respeto a los derechos fundamentales y garantizar que la jornada se realizara pacíficamente.
+<https://www.youtube.com/watch?v=swDR9p1mIq>
 
-**Gabinete ministeriale inicio de gestión**
+#### Tensionesen el Hemiciclo y protestas ciudadanas
+
+Paralelamente, en las afueras del Palacio Legislativo, cientosde ciudadanos se movilizaron en el centro histórico de Lima para manifestar surechazo al nuevo gobierno. La marcha se concentró en la Plaza San Martín y congregó a colectivos de derechos humanos, familiares de víctimas de la violencia política de los años 2022 y 2023 y delegaciones regionales procedentes de Arequipa y Puno. 
+
+En ella participó el excandidato presidencial Roberto Sánchez. El despliegue de las manifestaciones fue supervisado de manera permanente por la Defensoría del Pueblo para verificar el respeto a los derechos fundamentales y garantizar que la jornada se realizara pacíficamente.
+
+#### **Gabinete ministerial e inicio de gestión**
 
 Keiko Fujimori asumió la presidencia de la República trasimponerse en la ajustada segunda vuelta electoral del 7 de junio de 2026 frentea Roberto Sánchez (Juntos por el Perú). Según los resultados oficiales de laONPE, Fujimori obtuvo 9 223 396 votos válidos (50,13% frente al 49,87% deSánchez), siendo proclamada oficialmente el 3 de julio por el JuradoNacional de Elecciones (JNE).
 
