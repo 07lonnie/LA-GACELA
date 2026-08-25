@@ -1,9 +1,11 @@
 ---
-volada: POLÍTICA INTERNACIONAL
+volada: GAZA
 title: "Netanyahu se planta ante el equipo de paz de EE. UU. : no habrá retirada
   de Gaza sin el desarme total de Hamás"
 categoria: internacionales
-bajada: Jerusalén, Israel.
+bajada: El primer ministro israelí insiste en que sus soldados no saldrán de
+  Gaza hasta que Hamás entregue sus armas. Sin embargo, considera que la reunión
+  fue positiva y que se pudo avanzar en las conversaciones.
 autor: Adriana Peña
 date: 2026-08-24
 lead: El proceso de paz para Oriente Medio se encuentra nuevamente en un punto
