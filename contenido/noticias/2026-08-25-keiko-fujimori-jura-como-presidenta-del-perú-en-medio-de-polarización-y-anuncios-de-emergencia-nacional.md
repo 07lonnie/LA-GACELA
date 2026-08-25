@@ -31,4 +31,4 @@ Keiko Fujimori asumió la presidencia de la República tras imponerse en la ajus
 
 Pocas horas después de juramentar en el Parlamento, la jefa de Estado tomó juramento a su primer Gabinete Ministerial en Palacio de Gobierno. Este primer Consejo de ministros está presidido por Luis Fernando Galarreta Velarde, secundado por Elmer Cuba en la cartera de Economía y Finanzas, el abogado Carlos Espá en Relaciones Exteriores, César Astudillo en el Ministerio del Interior y Rafael Belaúnde Llosa en el Ministerio de Defensa. El nuevo gobierno inicia formalmente sus funciones llamando a la reconciliación y convocando al diálogo con las diversas fuerzas de la oposición.
 
-![Infografía sobre las principales propuestas del gobierno de Keiko Fujimori. /Fuente: NotebookLM ](fotos/subidas/1000378809.jpg "Infografía ")
+![Infografía sobre las principales propuestas del gobierno de Keiko Fujimori. /Fuente: Elaboración propia.](fotos/subidas/1000378809.jpg "Infografía ")
