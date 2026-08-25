@@ -6,7 +6,7 @@ categoria: internacionales
 bajada: Como los detenidos recibieron una alternativa a la cárcel, Estados
   Unidos considera que su liberación es un paso importante para lograr la
   reconciliación en Venezuela.
-autor: Adriana Peña
+autor: "La Gacela "
 date: 2026-08-24
 lead: En un hito histórico para el proceso de reconciliación social de
   Venezuela, el gobierno interino de transición ha hecho efectiva la liberación
