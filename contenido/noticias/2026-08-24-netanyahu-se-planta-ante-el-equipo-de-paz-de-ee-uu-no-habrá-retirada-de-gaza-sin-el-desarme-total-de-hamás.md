@@ -6,7 +6,7 @@ categoria: internacionales
 bajada: El primer ministro israelí insiste en que sus soldados no saldrán de
   Gaza hasta que Hamás entregue sus armas. Sin embargo, considera que la reunión
   fue positiva y que se pudo avanzar en las conversaciones.
-autor: Adriana Peña
+autor: "La Gacela "
 date: 2026-08-24
 lead: El proceso de paz para Oriente Medio se encuentra nuevamente en un punto
   muerto estratégico tras una intensa cumbre de tres horas. El primer ministro
