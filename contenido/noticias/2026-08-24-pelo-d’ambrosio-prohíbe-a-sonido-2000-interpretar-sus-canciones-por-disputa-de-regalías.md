@@ -15,15 +15,15 @@ lead: El cantante y compositor peruano Pelo D’Ambrosio anunció este viernes 2
   pagos por parte de la agrupación y advirtió que el caso podría llegar a
   instancias legales.
 thumbnail: fotos/subidas/chatgpt-image-24-ago-2026-11_23_18-p.m..png
-pie_foto: Pelo D’Ambrosio anunció la prohibición del uso de sus composiciones
-  por parte de Sonido 2000 debido a una disputa por derechos de autor y
-  regalías.
+pie_foto: ""
 tags: Pelo D’Ambrosio, Sonido 2000, Regalías, Derechos de autor, APDAYC, Música
   peruana, Tarapoto, Espectáculos
 ---
 La decisión fue comunicada por D’Ambrosio a través de sus redes sociales, donde señaló que la prohibición cuenta con el respaldo de la Asociación Peruana de Autores y Compositores (APDAYC). Según el cantante, la medida responde a la falta de reconocimiento y declaración de sus obras por parte de los actuales administradores de la agrupación.
 
-<https://www.instagram.com/reel/DcUck2cRQj7/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==>
+![Pelo D’Ambrosio anunció la prohibición del uso de sus composiciones por parte de Sonido 2000 debido a una disputa por derechos de autor y regalías.](fotos/subidas/whatsapp-image-2026-08-24-at-11.34.20-pm.jpeg)
+
+
 
 Entre las composiciones que quedarían fuera del repertorio de Sonido 2000 se encuentran **[“He sentido amor”](https://youtu.be/3mZKSDM4gXo?si=bgKnv8Dqw4IJux7n), “[¿Y qué pasó?](https://youtu.be/3fibYrqWncU?si=ZkT4d1Pd1towboTP)” y [“Me acuerdo de ti”](https://youtu.be/rIEHwSBz9co?si=0DdPjbVtJddZW7Qq)**, canciones que la agrupación de Tarapoto ha interpretado y contribuido a popularizar durante su trayectoria.
 
