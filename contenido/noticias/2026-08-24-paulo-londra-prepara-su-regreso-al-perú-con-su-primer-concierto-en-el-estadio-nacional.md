@@ -6,7 +6,7 @@ categoria: espectaculos
 bajada: El artista argentino se presentará este 29 de agosto en Lima como parte
   de su *Next Rounds Tour*. El concierto marcará su debut en el Estadio Nacional
   y contará con la participación del cantante peruano Gonzalo Genek.
-autor: Yamilet Chapilliquen
+autor: "La Gacela "
 date: 2026-08-24
 lead: Paulo Londra regresará al Perú este sábado 29 de agosto para ofrecer un
   concierto en el Estadio Nacional de Lima, como parte de su gira internacional
@@ -33,4 +33,4 @@ La llegada del cantante a Lima también coincide con el inicio de una nueva etap
 
 <https://youtu.be/LkYUH1pvw-0?si=RqengbSnY4x1YPhl>
 
-De esta manera, el concierto en Lima se produce en un momento de renovación artística para Londra y representa una nueva oportunidad para reencontrarse con el público peruano. Las entradas para el espectáculo se comercializan mediante [Teleticket.](https://teleticket.com.pe/paulo-londra-2026)
+De esta manera, el concierto en Lima se produce en un momento de renovación artística para Londra y representa una nueva oportunidad para reencontrarse con el público peruano. Las entradas para el espectáculo se comercializan mediante [**Teleticket**.](https://teleticket.com.pe/paulo-londra-2026)
