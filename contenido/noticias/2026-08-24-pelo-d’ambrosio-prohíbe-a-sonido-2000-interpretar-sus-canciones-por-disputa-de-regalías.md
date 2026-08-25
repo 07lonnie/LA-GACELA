@@ -8,12 +8,14 @@ bajada: El cantautor peruano anunció que la agrupación de Tarapoto ya no podr�
   respaldo de APDAYC.
 autor: Yamilet Chapilliquen
 date: 2026-08-24
-lead: El cantante y compositor peruano Pelo D’Ambrosio anunció este viernes 21
-  de agosto que Sonido 2000 ya no podrá interpretar sus canciones, debido a una
-  disputa relacionada con el reconocimiento de sus derechos de autor y el pago
-  de regalías. El artista señaló que durante los últimos años no habría recibido
-  pagos por parte de la agrupación y advirtió que el caso podría llegar a
-  instancias legales.
+lead: El cantante y compositor peruano [Pelo
+  D’Ambrosio](https://www.instagram.com/pelodambrosiomusic?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==)
+  anunció este viernes 21 de agosto que [Sonido
+  2000](https://www.instagram.com/sonido2000tarapoto?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==)
+  ya no podrá interpretar sus canciones, debido a una disputa relacionada con el
+  reconocimiento de sus derechos de autor y el pago de regalías. El artista
+  señaló que durante los últimos años no habría recibido pagos por parte de la
+  agrupación y advirtió que el caso podría llegar a instancias legales.
 thumbnail: fotos/subidas/chatgpt-image-24-ago-2026-11_23_18-p.m..png
 pie_foto: ""
 tags: Pelo D’Ambrosio, Sonido 2000, Regalías, Derechos de autor, APDAYC, Música
