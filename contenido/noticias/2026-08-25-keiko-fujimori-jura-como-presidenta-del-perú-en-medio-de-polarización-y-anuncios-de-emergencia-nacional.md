@@ -5,7 +5,7 @@ title: Keiko Fujimori jura como presidenta del Perú en medio de polarización y
 categoria: politica
 bajada: Ella se convierte en la primera mujer presidenta elegida mediante un
   proceso electoral en el Perú.
-autor: Belen Yaranga
+autor: Redacción La Gacela
 date: 2026-08-25
 lead: Keiko Sofía Fujimori Higuchi juró como presidenta constitucional de la
   República del Perú para el período 2026-2031. Su toma de mando, realizada el
@@ -15,7 +15,7 @@ lead: Keiko Sofía Fujimori Higuchi juró como presidenta constitucional de la
 thumbnail: fotos/subidas/keiko-fujimori-juramenta-como-presidenta_page-0001-e1785377224101.jpg
 pie_foto: "Keiko Fujimori luciendo la banda presidencial tras asumir la jefatura
   de Estado del Perú el 28 de julio de 2026. /Fotografía: Ernesto Vera"
-tags: Keiko Fujimori, gobierno, congreso
+tags: Keiko Fujimori, gobierno, Congreso, ministros
 ---
 La ceremonia solemne de investidura se llevó a cabo en el Hemiciclo del Congreso de la República ante el primer Parlamento bicameral instalado en el país desde 1990. El presidente del Congreso y del Senado, Miguel Ángel Torres Morales, tomó el juramento de ley de la mandataria y le impuso la banda presidencial. En el mismo acto protocolar, Luis Galarreta Velarde juró como primer vicepresidente y Miguel Torres Morales como segundo vicepresidente de la República.
 
