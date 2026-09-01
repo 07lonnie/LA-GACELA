@@ -15,6 +15,7 @@ lead: "Rescatistas trabajaban el lunes a contrarreloj para localizar a cientos
 thumbnail: fotos/subidas/captura-de-pantalla-2026-09-01-003553.png
 pie_foto: Rescatistas trabajan bajo tierra en los túneles de una obra
   hidroeléctrica que fue tapada por el alud
+tags: Nepal, China, aluvión, emergencia
 ---
 La región del Himalaya es escenario de una carrera desesperada contra el tiempo tras registrarse una de las peores catástrofes naturales en la historia moderna de la cordillera. Un colosal e imprevisto desprendimiento de un glaciar en las altas cumbres desencadenó un colosal alud de lodo, bloques de hielo y rocas gigantescas que descendió con furia destructiva a lo largo de la cuenca del río Trisuli. La masa aluvial sepultó carreteras, destruyó comunidades enteras y bloqueó por completo los accesos a una docena de complejos de generación de energía.
 
@@ -23,5 +24,7 @@ En medio de una devastación que ya reporta la escalofriante cifra de al menos 9
 La tragedia golpeó con especial crudeza a los trabajadores de la industria energética. Mohan Kumar Dangi, presidente de la Asociación de Productores Independientes de Energía de Nepal, encendió las alarmas internacionales al confirmar que al menos 900 operarios se encontraban completamente inlocalizables en 12 proyectos hidroeléctricos de la región tras el paso del alud. De esa cifra, los informes de ingeniería estiman que alrededor de 500 obreros permanecen atrapados en la absoluta oscuridad de los túneles y galerías de excavación subterránea, bloqueados por tapones compactos de fango y detritos de varias decenas de metros de espesor.
 
 ![Los bomberos y perros rastreadores realizan una búsqueda de personas desaparecidas a lo largo de una carretera que conduce al Puerto de Gyirong, tras un deslizamiento de tierra, en Shigatse, Región Autónoma del Tíbet, China (cnsphoto vía REUTERS)](fotos/subidas/captura-de-pantalla-2026-09-01-004413.png)
+
+![Oficiales de la Policía Armada del Pueblo Chino realizan operaciones de búsqueda y rescate cerca del puerto de Gyirong (China Daily vía REUTERS)](fotos/subidas/captura-de-pantalla-2026-09-01-004431.png)
 
 La esperanza, sin embargo, se reavivó de manera milagrosa en las últimas horas del lunes 31 de agosto. Especialistas en rescate minero y efectivos del ejército nepalí consiguieron establecer contacto acústico con varios de los grupos aislados a través de tuberías industriales y pequeños ductos de ventilación que no colapsaron. Aprovechando estas estrechas vías de comunicación, los ingenieros civiles instalaron sondas mecánicas de alta presión para comenzar a bombear oxígeno purificado y aire comprimido directamente al interior de las cámaras subterráneas, estabilizando la atmósfera respirable de los obreros atrapados. Mientras el flujo de oxígeno garantiza la supervivencia biológica de los trabajadores, cuadrillas de rescate equipadas con maquinaria pesada y excavadoras remueven toneladas de escombros de manera ininterrumpida, desafiando la inestabilidad del terreno y el constante riesgo de nuevos deslizamientos para abrir una vía de evacuación definitiva.
