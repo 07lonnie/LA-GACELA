@@ -31,6 +31,6 @@ D’Ambrosio explicó que su relación con Sonido 2000 se deterioró después de
 
 El cantautor también afirmó que en los últimos años no recibió regalías por el uso de sus composiciones y consideró que esta situación afecta directamente sus derechos como autor. Por ello, indicó que, si la agrupación continúa interpretando sus obras, **[APDAYC](https://www.apdayc.org.pe/)** podría tomar medidas judiciales para hacer cumplir la restricción.
 
-<https://vt.tiktok.com/ZSVK6wHmB/>
+[https://www.tiktok.com/@elpodertv/video/7678762937674108180?_r=1&_t=ZS-99N2kYzcViH](https://www.tiktok.com/@elpodertv/video/7678762937674108180?_r=1&_t=ZS-99N2kYzcViH)
 
 La controversia pone nuevamente en el centro del debate la importancia del reconocimiento de los derechos de autor y el pago de regalías dentro de la industria musical peruana. Hasta el momento, la información publicada recoge principalmente la posición expresada por D’Ambrosio sobre el conflicto.
