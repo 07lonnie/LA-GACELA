@@ -1,5 +1,5 @@
 /* ==========================================================
-   LA GACELA - ESTILOS PERIODÍSTICOS UNIFICADOS (MERRIWEATHER)
+   LA GACELA - ESTILOS PERIODÍSTICOS UNIFICADOS
    ========================================================== */
 
 :root {
@@ -192,7 +192,7 @@ a {
   color: var(--texto-secundario);
 }
 
-/* 4. NOTICIA DESTACADA COMPACTA (HERO POLÍTICA) */
+/* 4. NOTICIA DESTACADA COMPACTA */
 .tarjeta-destacada-hero {
   background-color: var(--tarjeta-bg);
   border-radius: 10px;
@@ -380,7 +380,7 @@ a {
   border-top: 1px solid var(--borde-suave);
 }
 
-/* 6. ¿QUIÉNES SOMOS? */
+/* 6. ¿QUIÉNES SOMOS? - TIPOGRAFÍA UNIFICADA */
 .presentacion-institucional {
   max-width: 850px;
   margin: 0 auto;
@@ -428,10 +428,11 @@ a {
   width: 100%;
 }
 
+/* UNIFICADO: Ambos párrafos usan Inter de forma limpia y moderna */
 .manifiesto-texto p {
-  font-family: 'Merriweather', Georgia, serif;
-  font-size: 17px;
-  line-height: 1.8;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 16.5px;
+  line-height: 1.75;
   color: var(--texto-principal);
   text-align: justify;
   margin-bottom: 20px;
@@ -460,6 +461,7 @@ a {
 }
 
 .subtitulo-equipo {
+  font-family: 'Inter', sans-serif !important;
   font-size: 15px;
   color: var(--texto-secundario);
   margin-bottom: 30px;
@@ -619,7 +621,6 @@ a {
   margin-bottom: 12px !important;
 }
 
-/* TITULAR CON LA MISMA FUENTE (MERRIWEATHER) */
 .noticia-titular {
   font-family: 'Merriweather', Georgia, serif !important;
   font-size: 34px !important;
@@ -674,7 +675,6 @@ a {
   margin: 0 auto !important;
 }
 
-/* LEYENDA */
 .noticia-leyenda {
   font-family: 'Inter', sans-serif !important;
   font-size: 15px !important;
@@ -686,7 +686,6 @@ a {
   line-height: 1.5 !important;
 }
 
-/* CUERPO Y ENTRADILLA CON LA MISMA FUENTE (MERRIWEATHER) Y TAMAÑO EXACTO */
 .noticia-lead-destacado, .noticia-lead-destacado p,
 .noticia-cuerpo-redaccion, .noticia-cuerpo-redaccion p {
   font-family: 'Merriweather', Georgia, serif !important;
@@ -700,7 +699,6 @@ a {
   text-align: justify !important;
 }
 
-/* FOTOS INTERMEDIAS */
 .noticia-figura-inline {
   margin: 28px 0 !important;
   width: 100% !important;
@@ -829,9 +827,7 @@ a {
   letter-spacing: 2px;
 }
 
-/* ==========================================================
-   10. MODO OSCURO ARMONIOSO Y VISIBILIDAD DE LOGO
-   ========================================================== */
+/* 10. MODO OSCURO */
 body.modo-oscuro {
   --fondo-claro: #0b1311 !important;
   --tarjeta-bg: #13241e !important;
