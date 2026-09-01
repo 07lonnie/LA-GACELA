@@ -1,4 +1,5 @@
 ---
+autor: La Gacela
 volada: Música
 title: Maná regresará al Perú con un único concierto como parte de su Vivir Sin
   Aire Tour 2026
@@ -6,7 +7,6 @@ categoria: espectaculos
 bajada: La banda mexicana de rock en español se presentará el miércoles 2 de
   diciembre de 2026 en el Estadio San Marcos. El espectáculo celebrará sus
   cuatro décadas de trayectoria y reunirá algunos de sus mayores éxitos.
-autor: La Gacela
 date: 2026-08-21
 lead: La reconocida banda mexicana [**Maná**
   ](https://www.instagram.com/manaoficial?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==)regresará
@@ -17,8 +17,7 @@ lead: La reconocida banda mexicana [**Maná**
 thumbnail: fotos/subidas/401640_1562653.avif
 pie_foto: "Maná llegará al Perú como parte de su gira internacional Vivir Sin
   Aire Tour 2026. / Fuente: RPP Noticias"
-tags: Maná, Fher Olvera, Vivir Sin Aire Tour 2026, Conciertos en Perú, Música,
-  Rock en español, Espectáculos, Estadio San Marcos
+tags: Maná, Conciertos en Perú, Rock en español, Estadio San Marcos
 ---
 La agrupación, encabezada por Fher Olvera e integrada también por Álex González, Sergio Vallín y Juan Calleros, se presentará en el Estadio San Marcos, ubicado en la Ciudad Universitaria de la Universidad Nacional Mayor de San Marcos, en el Cercado de Lima.
 
