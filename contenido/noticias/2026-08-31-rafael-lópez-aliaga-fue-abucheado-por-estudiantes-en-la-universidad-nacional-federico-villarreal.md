@@ -1,4 +1,5 @@
 ---
+autor: Redacción La Gacela
 volada: CERCADO DE LIMA
 title: Rafael López  Aliaga fue "abucheado" por estudiantes en la Universidad
   Nacional Federico Villarreal
@@ -7,7 +8,6 @@ bajada: El incidente duró aproximadamente un minuto y requirió la intervenció
   inmediata del personal de seguridad de la universidad. Los agentes tuvieron
   que sacar a los manifestantes del recinto para permitir que se cerraran las
   actividades de protocolo sin más problemas.
-autor: Redacción La Gacela
 date: 2026-08-31
 thumbnail: fotos/subidas/rafael-y-villa.png
 pie_foto: "López Aliaga en la Universidad Nacional Federico Villarreal.
