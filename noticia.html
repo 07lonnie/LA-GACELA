@@ -35,7 +35,7 @@
     </ul>
   </nav>
 
-  <!-- CONTENEDOR DE LA NOTICIA CENTRADA -->
+  <!-- CONTENEDOR DE LA NOTICIA -->
   <div class="noticia-pagina-wrapper">
     <article class="noticia-periodistica-container">
       
@@ -48,7 +48,7 @@
       <!-- BAJADA -->
       <div class="noticia-bajada" id="art-bajada"></div>
 
-      <!-- FECHA (SIN AUTOR) -->
+      <!-- FECHA -->
       <div class="noticia-creditos-fecha">
         <div class="fecha-info" id="art-fecha"></div>
       </div>
@@ -159,7 +159,7 @@
           document.getElementById('contenedor-tags').style.display = 'block';
         }
 
-        // Renderizado de imágenes internas
+        // Renderizado seguro de imágenes internas
         const renderer = new marked.Renderer();
         renderer.image = function(tokenOrHref, title, text) {
           let href = '';
@@ -179,17 +179,14 @@
 
         marked.setOptions({ renderer: renderer });
 
-        // 1. Convertir Markdown a HTML
+        // Procesamiento del cuerpo
         let htmlRenderizado = marked.parse(cuerpo || '');
-
-        // 2. Transformar enlaces a reproductores / embeds
         htmlRenderizado = procesarMediosSinDuplicados(htmlRenderizado);
 
-        // 3. Inyectar HTML en el contenedor
         const contenedorCuerpo = document.getElementById('art-cuerpo');
         contenedorCuerpo.innerHTML = htmlRenderizado;
 
-        // 4. Inicializar Widget de Twitter (X)
+        // Carga de widgets de Twitter
         if (contenedorCuerpo.querySelector('.twitter-tweet')) {
           if (!window.twttr) {
             const scriptTwitter = document.createElement('script');
@@ -202,7 +199,7 @@
           }
         }
 
-        // 5. Inicializar Widget de TikTok si existe
+        // Carga de widgets de TikTok
         if (contenedorCuerpo.querySelector('.tiktok-embed')) {
           const scriptTikTok = document.createElement('script');
           scriptTikTok.src = "https://www.tiktok.com/embed.js";
@@ -215,27 +212,26 @@
       }
     });
 
-    // PARSER UNIVERSAL DE YOUTUBE, TWITTER/X Y TIKTOK
+    // PARSER CON PATRONES AMPLIOS PARA REDES SOCIALES
     function procesarMediosSinDuplicados(html) {
       if (!html) return '';
 
-      // Eliminar scripts que vengan pegados en el markdown
       html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
 
-      // 1. YouTube: Detecta URLs sueltas, dentro de <p> o envueltas en <a>
-      const regexYouTube = /<p>(?:<a[^>]*>)?(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})[^\s<]*(?:<\/a>)?<\/p>/gi;
+      // 1. YouTube (enlaces normales, cortos, embed y shorts, con parámetros opcionales)
+      const regexYouTube = /<p>(?:<a[^>]*>)?(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?(?:[^\s<]*&)?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})(?:[^\s<]*)(?:<\/a>)?<\/p>/gi;
       html = html.replace(regexYouTube, function(match, id) {
         return `<div class="iframe-responsive-inline"><iframe src="https://www.youtube-nocookie.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
       });
 
-      // 2. Twitter / X: Detecta URLs simples (x.com o twitter.com con o sin <a>)
-      const regexTwitterLink = /<p>(?:<a[^>]*>)?(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/([\w]+)\/status\/([\d]+)[^\s<]*(?:<\/a>)?<\/p>/gi;
+      // 2. Twitter / X (soporta cualquier nombre de usuario, incluyendo guiones bajos y números)
+      const regexTwitterLink = /<p>(?:<a[^>]*>)?(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/([^\s<>\/]+)\/status\/([\d]+)(?:[^\s<]*)(?:<\/a>)?<\/p>/gi;
       html = html.replace(regexTwitterLink, function(match, user, id) {
         return `<div class="contenedor-red-social"><blockquote class="twitter-tweet" data-dnt="true" align="center"><a href="https://twitter.com/${user}/status/${id}"></a></blockquote></div>`;
       });
 
-      // 3. TikTok: Detecta URLs simples
-      const regexTikTok = /<p>(?:<a[^>]*>)?(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com)\/@([\w.-]+)\/video\/([\d]+)[^\s<]*(?:<\/a>)?<\/p>/gi;
+      // 3. TikTok (soporta nombres con puntos, guiones y caracteres válidos)
+      const regexTikTok = /<p>(?:<a[^>]*>)?(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com)\/@([^\s<>\/]+)\/video\/([\d]+)(?:[^\s<]*)(?:<\/a>)?<\/p>/gi;
       html = html.replace(regexTikTok, function(match, user, id) {
         return `<div class="contenedor-red-social"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${user}/video/${id}" data-video-id="${id}" style="max-width: 605px;min-width: 325px;"><section></section></blockquote></div>`;
       });
