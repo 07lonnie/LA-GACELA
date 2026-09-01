@@ -6,15 +6,15 @@ bajada: Las autoridades del Estado verificaron su estado de salud para que pueda
   cumplir con su sentencia de 14 años en dicho penal.
 autor: Redacción La Gacela
 date: 2026-08-25
-lead: El expresidente Martín Vizcarra regresó el sábado 15 de agosto de 2026 al
-  penal de Barbadillo, en el distrito de Ate, tras pasar tres días en un centro
-  de salud por problemas graves en el sistema renal.
+lead: ""
 thumbnail: fotos/subidas/ja3tg7n255fjngltqiyugtr4nq-1-.jpg
 pie_foto: "Vizcarra retornando al penal de Barbadillo escoltado por la policía.
   /Fuente: Infobae "
 tags: Vizcarra, policía, corrupción
 ---
-#### **Un cuadro clínico persistente**
+El expresidente Martín Vizcarra regresó el sábado 15 de agosto de 2026 al penal de Barbadillo, en el distrito de Ate, tras pasar tres días en un centro de salud por problemas graves en el sistema renal.
+
+**Un cuadro clínico persistente**
 
 La afección que motivó este traslado es el séptimo caso del año. Tiene su origen en enero de 2026, cuando el exjefe de Estado desarrolló una obstrucción renal severa mientras estaba privado de libertad. Según declaraciones del expresidente y los informes médicos, el riñón izquierdo del expresidente funciona a solo el 10 % su capacidad. Esto requiere monitoreo clínico constante y evaluaciones periódicas para evitar una falla multiorgánica. 
 
