@@ -10,6 +10,8 @@ bajada: El incidente duró aproximadamente un minuto y requirió la intervenció
 autor: Redacción La Gacela
 date: 2026-08-31
 thumbnail: fotos/subidas/rafael-y-villa.png
+pie_foto: "López Aliaga en la Universidad Nacional Federico Villarreal.
+  /Composición: LG."
 tags: López Aliaga, universidad, estudiantes, protestas
 ---
 El líder de Renovación Popular, Rafael López Aliaga, pasó por un momento tenso en la Universidad Nacional Federico Villarreal (UNFV) el 21 de agosto de 2026. Al terminar su charla sobre políticas públicas en el Paraninfo Universitario, fue abucheado por parte de los estudiantes. 
