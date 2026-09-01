@@ -380,7 +380,7 @@ a {
   border-top: 1px solid var(--borde-suave);
 }
 
-/* 6. ¿QUIÉNES SOMOS? - TIPOGRAFÍA UNIFICADA */
+/* 6. ¿QUIÉNES SOMOS? - COLOR Y TIPOGRAFÍA UNIFICADOS */
 .presentacion-institucional {
   max-width: 850px;
   margin: 0 auto;
@@ -428,14 +428,17 @@ a {
   width: 100%;
 }
 
-/* UNIFICADO: Ambos párrafos usan Inter de forma limpia y moderna */
 .manifiesto-texto p {
   font-family: 'Inter', sans-serif !important;
-  font-size: 16.5px;
-  line-height: 1.75;
-  color: var(--texto-principal);
+  font-size: 15px !important;
+  line-height: 1.75 !important;
+  color: var(--texto-secundario) !important;
   text-align: justify;
   margin-bottom: 20px;
+}
+
+.manifiesto-texto p strong {
+  color: var(--texto-principal);
 }
 
 .divisor-dorado {
@@ -462,8 +465,8 @@ a {
 
 .subtitulo-equipo {
   font-family: 'Inter', sans-serif !important;
-  font-size: 15px;
-  color: var(--texto-secundario);
+  font-size: 15px !important;
+  color: var(--texto-secundario) !important;
   margin-bottom: 30px;
   text-align: center;
 }
@@ -587,9 +590,7 @@ a {
   border-radius: 10px;
 }
 
-/* ==========================================================
-   8. PÁGINA DE LECTURA DE NOTICIA (noticia.html)
-   ========================================================== */
+/* 8. PÁGINA DE LECTURA DE NOTICIA */
 .noticia-pagina-wrapper {
   background-color: var(--fondo-claro) !important;
   padding: 35px 15px 70px 15px !important;
@@ -868,7 +869,8 @@ body.modo-oscuro .nombre-miembro {
 }
 
 body.modo-oscuro .manifiesto-texto p,
-body.modo-oscuro .bio-miembro {
+body.modo-oscuro .bio-miembro,
+body.modo-oscuro .subtitulo-equipo {
   color: #cbd5e1 !important;
 }
 
