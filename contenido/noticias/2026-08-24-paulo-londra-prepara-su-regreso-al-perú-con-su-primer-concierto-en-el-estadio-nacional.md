@@ -6,7 +6,7 @@ categoria: espectaculos
 bajada: El artista argentino se presentará este 29 de agosto en Lima como parte
   de su *Next Rounds Tour*. El concierto marcará su debut en el Estadio Nacional
   y contará con la participación del cantante peruano Gonzalo Genek.
-autor: Yamilet Chapilliquen
+autor: "La Gacela "
 date: 2026-08-24
 lead: Paulo Londra regresará al Perú este sábado 29 de agosto para ofrecer un
   concierto en el Estadio Nacional de Lima, como parte de su gira internacional
@@ -23,6 +23,8 @@ tags: Paulo Londra, Perú, Lima, Estadio Nacional, Next Rounds Tour, Gonzalo
 ---
 El espectáculo está programado para este sábado y tendrá como escenario el **[Estadio Nacional](https://share.google/1DhEpCNE2Ge2wIukH),** ubicado en la avenida José Díaz, en Lima. La presentación forma parte del recorrido internacional de Londra, quien ha llevado su propuesta de música urbana a diferentes escenarios de Latinoamérica.
 
+<https://www.tiktok.com/@conciertoslima.pe/video/7607892078940392712?is_from_webapp=1&sender_device=pc&web_id=7636999679101044240>
+
 Uno de los atractivos de la jornada será la participación del artista peruano **[Gonzalo Genek](https://www.instagram.com/gonzalogenek?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==)**, quien fue confirmado como encargado de abrir el concierto. Su presencia sumará una representación local al espectáculo y permitirá que el público disfrute de una propuesta vinculada a la escena urbana peruana antes de la presentación principal.
 
 El repertorio de Londra incluirá canciones que marcaron su trayectoria, entre ellas «Adán y Eva», «Nena Maldición» y «Tal vez». Estos temas forman parte de la producción musical con la que el argentino alcanzó reconocimiento internacional dentro de la música urbana en español.
@@ -31,4 +33,4 @@ La llegada del cantante a Lima también coincide con el inicio de una nueva etap
 
 <https://youtu.be/LkYUH1pvw-0?si=RqengbSnY4x1YPhl>
 
-De esta manera, el concierto en Lima se produce en un momento de renovación artística para Londra y representa una nueva oportunidad para reencontrarse con el público peruano. Las entradas para el espectáculo se comercializan mediante [Teleticket.](https://teleticket.com.pe/paulo-londra-2026)
+De esta manera, el concierto en Lima se produce en un momento de renovación artística para Londra y representa una nueva oportunidad para reencontrarse con el público peruano. Las entradas para el espectáculo se comercializan mediante [**Teleticket**.](https://teleticket.com.pe/paulo-londra-2026)
