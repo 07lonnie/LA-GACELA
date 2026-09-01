@@ -1,207 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel Editorial - La Gacela</title>
-  
-  <script>
-    window.CMS_MANUAL_INIT = true;
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Gacela - Periódico Universitario</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-  
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  <script async src="https://www.tiktok.com/embed.js"></script>
-  
-  <script>
-    CMS.init({
-      config: {
-        load_config_file: false,
-        backend: {
-          name: "git-gateway",
-          repo: "07lonnie/LA-GACELA",
-          branch: "main",
-          auth_type: "pkce",
-          base_url: "https://auth.decapbridge.com",
-          auth_endpoint: "/sites/6f935bce-10e7-4f4f-acee-854e0d188d8a/pkce",
-          auth_token_endpoint: "/sites/6f935bce-10e7-4f4f-acee-854e0d188d8a/token",
-          gateway_url: "https://gateway.decapbridge.com"
-        },
-        logo_url: "https://decapbridge.com/decapcms-with-bridge.svg",
-        site_url: "https://la-gacela.vercel.app",
-        media_folder: "fotos/subidas",
-        public_folder: "fotos/subidas",
-        collections: [
-          {
-            name: "noticias",
-            label: "Noticias",
-            folder: "contenido/noticias",
-            create: true,
-            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
-            fields: [
-              { label: "1. Volada / Antetítulo (Opcional)", name: "volada", widget: "string", required: false, hint: "Ejemplo: GOBIERNO, CRISIS INSTITUCIONAL" },
-              { label: "2. Titular Principal (Encabezado)", name: "title", widget: "string", hint: "Titular informativo principal" },
-              { 
-                label: "3. Categoría", 
-                name: "categoria", 
-                widget: "select", 
-                options: [
-                  { label: "Política", value: "politica" },
-                  { label: "Internacionales", value: "internacionales" },
-                  { label: "Espectáculos", value: "espectaculos" },
-                  { label: "Deportes", value: "deportes" }
-                ]
-              },
-              { label: "4. Bajada / Sumario", name: "bajada", widget: "markdown", buttons: ["bold", "italic", "link"], hint: "Síntesis inicial que va debajo del titular" },
-              { 
-                label: "5. Fecha de Publicación", 
-                name: "date", 
-                widget: "datetime", 
-                format: "YYYY-MM-DD", 
-                dateFormat: "YYYY-MM-DD", 
-                timeFormat: false,
-                pickerUtc: false
-              },
-              { label: "6. Lead / Entradilla (Opcional)", name: "lead", widget: "markdown", required: false, buttons: ["bold", "italic", "link"], hint: "Primer párrafo destacado" },
-              { label: "7. Fotografía Principal (Portada)", name: "thumbnail", widget: "image", required: false },
-              { label: "8. Leyenda / Pie de Foto Principal", name: "pie_foto", widget: "string", required: false, hint: "Ejemplo: Dina Boluarte en el Congreso. | Fuente: Presidencia" },
-              { label: "9. Etiquetas / Sepa más (separadas por comas)", name: "tags", widget: "string", required: false, hint: "Ejemplo: Congreso, Elecciones, Política" },
-              { label: "10. Cuerpo de la Noticia (Párrafos, fotos, videos y redes sociales)", name: "body", widget: "markdown", hint: "Pega en su propia línea enlaces de YouTube, tweets (X) o TikTok para que se incrusten automáticamente." }
-            ]
-          }
-        ]
-      }
-    });
 
-    CMS.registerPreviewStyle("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap");
-    CMS.registerPreviewStyle("../styles.css");
+  <!-- ENCABEZADO Y LOGO -->
+  <header class="encabezado">
+    <div class="top-bar">
+      <span>Edición Digital</span>
+      <button id="btn-modo">🌙 Modo Oscuro</button>
+    </div>
+    <a href="index.html" class="enlace-logo">
+      <h1 class="logo">LA GACELA</h1>
+    </a>
+    <p class="slogan">Información con agilidad, rigor y elegancia</p>
+  </header>
 
-    function procesarCuerpoPreview(texto) {
-      if (!texto) return '';
+  <!-- BARRA DE NAVEGACIÓN -->
+  <nav class="navegacion">
+    <ul class="nav-menu">
+      <li><button class="nav-btn activo" data-seccion="inicio">Inicio</button></li>
+      <li><button class="nav-btn" data-seccion="politica">Política</button></li>
+      <li><button class="nav-btn" data-seccion="internacionales">Internacionales</button></li>
+      <li><button class="nav-btn" data-seccion="espectaculos">Espectáculos</button></li>
+      <li><button class="nav-btn" data-seccion="deportes">Deportes</button></li>
+      <li><button class="nav-btn nav-btn-destacado" data-seccion="quienes-somos">¿Quiénes somos?</button></li>
+    </ul>
+  </nav>
 
-      const renderer = new marked.Renderer();
-      renderer.image = function(tokenOrHref, title, text) {
-        let href = typeof tokenOrHref === 'object' && tokenOrHref !== null ? (tokenOrHref.href || '') : (tokenOrHref || '');
-        let alt = typeof tokenOrHref === 'object' && tokenOrHref !== null ? (tokenOrHref.text || '') : (text || title || '');
-        let ruta = href;
-        if (ruta.startsWith('/')) ruta = '..' + ruta;
-        else if (!ruta.startsWith('http') && !ruta.startsWith('../')) ruta = '../' + ruta;
-        const leyendaHTML = alt ? `<figcaption class="noticia-leyenda-inline">${alt}</figcaption>` : '';
-        return `<figure class="noticia-figura-inline"><div class="marco-imagen-inline"><img src="${ruta}" alt="${alt}"></div>${leyendaHTML}</figure>`;
-      };
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="contenedor-principal">
 
-      let html = marked.parse(texto, { renderer: renderer });
+    <!-- SECCIÓN NOTICIAS -->
+    <section id="sec-noticias" class="seccion-vista activo">
+      <div class="encabezado-seccion-actual">
+        <h2 id="titulo-seccion-actual" class="titulo-seccion-bloque">Últimas Publicaciones</h2>
+        <p id="bajada-seccion-actual" class="subtitulo-seccion-texto">Las noticias más relevantes de la jornada universitaria y nacional.</p>
+      </div>
 
-      let partes = html.split('</p>');
-      let resultado = partes.map(bloque => {
-        if (!bloque.includes('<p>')) return bloque;
+      <!-- NOTICIA DESTACADA (HERO POLÍTICA) -->
+      <div id="contenedor-destacada"></div>
 
-        let contenidoP = bloque.substring(bloque.indexOf('<p>') + 3);
-        let textoPlano = contenidoP.replace(/<[^>]*>/g, '').trim();
+      <!-- RETÍCULA DE NOTICIAS SECUNDARIAS -->
+      <div id="grid-noticias" class="grid-noticias"></div>
+    </section>
 
-        // 1. YouTube
-        let ytMatch = textoPlano.match(/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?(?:[^\s]*&)?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})(?:[^\s]*)$/i);
-        if (ytMatch && ytMatch[1]) {
-          return `<div class="iframe-responsive-inline"><iframe src="https://www.youtube-nocookie.com/embed/${ytMatch[1]}" frameborder="0" allowfullscreen></iframe></div>`;
-        }
-
-        // 2. Twitter / X
-        let twMatch = textoPlano.match(/^(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/([^\s<>\/]+)\/status\/([\d]+)(?:[^\s]*)$/i);
-        if (twMatch && twMatch[2]) {
-          return `<div class="contenedor-red-social"><blockquote class="twitter-tweet" data-dnt="true" align="center"><a href="https://twitter.com/${twMatch[1]}/status/${twMatch[2]}"></a></blockquote></div>`;
-        }
-
-        // 3. TikTok
-        let ttMatch = textoPlano.match(/^(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com)\/@([^\s<>\/]+)\/video\/([\d]+)(?:[^\s]*)$/i);
-        if (ttMatch && ttMatch[2]) {
-          return `<div class="contenedor-red-social"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${ttMatch[1]}/video/${ttMatch[2]}" data-video-id="${ttMatch[2]}" style="max-width: 605px;min-width: 325px;"><section></section></blockquote></div>`;
-        }
-
-        return bloque + '</p>';
-      });
-
-      return resultado.join('');
-    }
-
-    var NoticiasPreview = createClass({
-      componentDidMount: function() {
-        this.recargarWidgets();
-      },
-      componentDidUpdate: function() {
-        this.recargarWidgets();
-      },
-      recargarWidgets: function() {
-        if (window.twttr && window.twttr.widgets) {
-          window.twttr.widgets.load();
-        }
-      },
-      render: function() {
-        var entry = this.props.entry;
-        var title = entry.getIn(['data', 'title']) || 'Escribe un titular...';
-        var volada = entry.getIn(['data', 'volada']);
-        var categoria = entry.getIn(['data', 'categoria']);
+    <!-- SECCIÓN QUIÉNES SOMOS -->
+    <section id="sec-quienes-somos" class="seccion-vista">
+      <div class="presentacion-institucional">
         
-        var mapaCategorias = { 'politica': 'POLÍTICA', 'internacionales': 'INTERNACIONALES', 'espectaculos': 'ESPECTÁCULOS', 'deportes': 'DEPORTES' };
-        var catTexto = categoria ? (mapaCategorias[categoria] || categoria.toUpperCase()) : 'CATEGORÍA';
-        
-        var date = entry.getIn(['data', 'date']) || 'Fecha de publicación';
-        var thumbnail = this.props.getAsset(entry.getIn(['data', 'thumbnail']));
-        var pie_foto = entry.getIn(['data', 'pie_foto']);
-        var tags = entry.getIn(['data', 'tags']);
-        var bodyRaw = entry.getIn(['data', 'body']) || '';
+        <h2>¿Quiénes somos?</h2>
 
-        var tagsElements = [];
-        if (tags) {
-           var tagArray = tags.split(',');
-           for(var i=0; i < tagArray.length; i++){
-               tagsElements.push(h('span', {
-                 key: i, 
-                 className: 'tag-item'
-               }, tagArray[i].trim()));
-           }
-        }
+        <!-- ISOTIPO GRANDE, CENTRADO Y SIN MARCOS -->
+        <div class="contenedor-isotipo-quienes-somos">
+          <img src="fotos/LAGACELAICONODORADO.jpg" alt="Isotipo La Gacela" class="isotipo-limpio" onerror="this.onerror=null; this.src='fotos/LAGACELAICONODORADO.png';">
+        </div>
 
-        var cuerpoProcesadoHTML = procesarCuerpoPreview(bodyRaw);
+        <div class="manifiesto-texto">
+          <p>
+            Somos <strong>La Gacela</strong>, el periódico universitario fundado por estudiantes de Ciencias de la Comunicación de la <strong>Universidad Nacional Federico Villarreal</strong>. Nuestro compromiso es ejercer un periodismo ético, riguroso y transparente que aporte contexto a los hechos de mayor relevancia. Buscamos ser un espacio de confianza donde el rigor informativo y el análisis crítico guíen cada una de nuestras coberturas.
+          </p>
+        </div>
 
-        return h('div', { className: 'noticia-pagina-wrapper' },
-          h('article', { className: 'noticia-periodistica-container' },
-            
-            h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' } },
-              h('span', { style: { fontFamily: 'Inter', backgroundColor: '#0e3b2e', color: '#fff', fontSize: '11px', fontWeight: 'bold', padding: '4px 10px', borderRadius: '3px', letterSpacing: '1.5px' } }, catTexto),
-              volada ? h('span', { className: 'noticia-volada', style: { marginBottom: 0 } }, "| " + volada.toUpperCase()) : null
-            ),
-            
-            h('h1', { className: 'noticia-titular' }, title),
-            h('div', { className: 'noticia-bajada' }, this.props.widgetFor('bajada')),
-            h('div', { className: 'noticia-creditos-fecha' }, date.toString()),
+        <div class="divisor-dorado"></div>
 
-            thumbnail ? h('figure', { className: 'noticia-media-wrapper' },
-              h('div', { className: 'marco-imagen' },
-                h('img', { src: thumbnail.toString(), alt: 'Portada' })
-              ),
-              pie_foto ? h('figcaption', { className: 'noticia-leyenda' }, pie_foto) : null
-            ) : null,
+        <!-- EQUIPO EDITORIAL (5 SLIDES) -->
+        <div class="bloque-equipo-editorial">
+          <h3 class="titulo-equipo">Nuestro equipo editorial</h3>
+          <p class="subtitulo-equipo">Conoce a los periodistas detrás de las investigaciones e historias de La Gacela.</p>
 
-            h('div', { className: 'noticia-lead-destacado' }, this.props.widgetFor('lead')),
-            
-            h('div', { 
-              className: 'noticia-cuerpo-redaccion',
-              dangerouslySetInnerHTML: { __html: cuerpoProcesadoHTML }
-            }),
-            
-            tags ? h('div', { className: 'noticia-sepa-mas' }, 
-              h('h3', { style: { fontFamily: 'Inter', fontSize: '15px', color: '#0e3b2e', marginBottom: '12px' } }, "Sepa más:"), 
-              h('div', { style: { display: 'flex', flexWrap: 'wrap' } }, tagsElements)
-            ) : null
-          )
-        );
-      }
-    });
+          <div class="carrusel-contenedor">
+            <button class="carrusel-flecha flecha-izquierda" id="btn-carrusel-prev" aria-label="Anterior">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
 
-    CMS.registerPreviewTemplate("noticias", NoticiasPreview);
-  </script>
+            <div class="tarjeta-equipo" id="tarjeta-miembro">
+              <div class="avatar-miembro-wrapper">
+                <img id="miembro-foto" src="fotos/LAGACELAICONODORADO.jpg" alt="Foto de miembro" onerror="this.src='fotos/LAGACELAICONODORADO.png'">
+              </div>
+              <h4 id="miembro-nombre" class="nombre-miembro">Cargando...</h4>
+              <p id="miembro-cargo" class="cargo-miembro">Cargo</p>
+              <a id="miembro-correo" href="#" class="correo-miembro">correo@lagacela.pe</a>
+              <p id="miembro-bio" class="bio-miembro">Descripción del redactor...</p>
+            </div>
+
+            <button class="carrusel-flecha flecha-derecha" id="btn-carrusel-next" aria-label="Siguiente">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+
+          <div class="carrusel-indicadores" id="carrusel-indicadores"></div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA -->
+  <footer class="pie-pagina">
+    <div class="contenido-footer">
+      <p class="logo-footer">LA GACELA</p>
+      <p>© 2026 La Gacela - Escuela Profesional de Ciencias de la Comunicación (UNFV)</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>

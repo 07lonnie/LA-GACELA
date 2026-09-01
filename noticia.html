@@ -14,7 +14,7 @@
   <!-- ENCABEZADO -->
   <header class="encabezado">
     <div class="top-bar">
-      <span>Edición Digital | Universidad Nacional Federico Villarreal</span>
+      <span>Edición Digital</span>
       <button id="btn-modo">🌙 Modo Oscuro</button>
     </div>
     <a href="index.html" class="enlace-logo">
@@ -159,7 +159,7 @@
           document.getElementById('contenedor-tags').style.display = 'block';
         }
 
-        // Renderizado seguro de imágenes
+        // Renderizado de imágenes
         const renderer = new marked.Renderer();
         renderer.image = function(tokenOrHref, title, text) {
           let href = '';
@@ -179,16 +179,16 @@
 
         marked.setOptions({ renderer: renderer });
 
-        // 1. Renderizar Markdown a HTML
+        // 1. Convertir Markdown a HTML
         let htmlRenderizado = marked.parse(cuerpo || '');
 
-        // 2. Transformar enlaces párrafo por párrafo (sin borrar texto)
+        // 2. Transformar enlaces párrafo por párrafo
         htmlRenderizado = procesarMediosSinDuplicados(htmlRenderizado);
 
         const contenedorCuerpo = document.getElementById('art-cuerpo');
         contenedorCuerpo.innerHTML = htmlRenderizado;
 
-        // 3. Activar widget de Twitter
+        // 3. Activar widget de Twitter (X)
         if (contenedorCuerpo.querySelector('.twitter-tweet')) {
           if (!window.twttr) {
             const scriptTwitter = document.createElement('script');
@@ -201,7 +201,7 @@
           }
         }
 
-        // 4. Activar widget de TikTok
+        // 4. Activar widget de TikTok (carga y recarga forzada)
         if (contenedorCuerpo.querySelector('.tiktok-embed')) {
           const scriptTikTok = document.createElement('script');
           scriptTikTok.src = "https://www.tiktok.com/embed.js";
@@ -214,7 +214,7 @@
       }
     });
 
-    // PROCESADOR SEGURO: TRANSFORMA SÓLO PÁRRAFOS INDIVIDUALES
+    // PARSER FLEXIBLE DE MEDIOS
     function procesarMediosSinDuplicados(html) {
       if (!html) return '';
 
@@ -227,22 +227,28 @@
         let contenidoP = bloque.substring(bloque.indexOf('<p>') + 3);
         let textoPlano = contenidoP.replace(/<[^>]*>/g, '').trim();
 
-        // 1. YouTube
-        let ytMatch = textoPlano.match(/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?(?:[^\s]*&)?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})(?:[^\s]*)$/i);
+        // 1. YouTube (enlaces normales, cortos, shorts y con parámetros)
+        let ytMatch = textoPlano.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?(?:[^\s]*&)?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/i);
         if (ytMatch && ytMatch[1]) {
           return `<div class="iframe-responsive-inline"><iframe src="https://www.youtube-nocookie.com/embed/${ytMatch[1]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
         }
 
-        // 2. Twitter / X
-        let twMatch = textoPlano.match(/^(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/([^\s<>\/]+)\/status\/([\d]+)(?:[^\s]*)$/i);
+        // 2. Twitter / X (admite cualquier usuario, ID numérico y parámetros)
+        let twMatch = textoPlano.match(/(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/([^\s<>\/\?]+)\/status\/([\d]+)/i);
         if (twMatch && twMatch[2]) {
           return `<div class="contenedor-red-social"><blockquote class="twitter-tweet" data-dnt="true" align="center"><a href="https://twitter.com/${twMatch[1]}/status/${twMatch[2]}"></a></blockquote></div>`;
         }
 
-        // 3. TikTok
-        let ttMatch = textoPlano.match(/^(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com)\/@([^\s<>\/]+)\/video\/([\d]+)(?:[^\s]*)$/i);
+        // 3. TikTok (formato estándar con usuario e ID)
+        let ttMatch = textoPlano.match(/(?:https?:\/\/)?(?:www\.)?tiktok\.com\/@([^\s<>\/\?]+)\/video\/([\d]+)/i);
         if (ttMatch && ttMatch[2]) {
           return `<div class="contenedor-red-social"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${ttMatch[1]}/video/${ttMatch[2]}" data-video-id="${ttMatch[2]}" style="max-width: 605px;min-width: 325px;"><section></section></blockquote></div>`;
+        }
+
+        // 4. TikTok (formato corto de móvil vt.tiktok.com / vm.tiktok.com)
+        let ttShortMatch = textoPlano.match(/(?:https?:\/\/)?(?:www\.)?(?:vt|vm)\.tiktok\.com\/([a-zA-Z0-9]+)/i);
+        if (ttShortMatch && ttShortMatch[1]) {
+          return `<div class="contenedor-red-social"><blockquote class="tiktok-embed" cite="https://vm.tiktok.com/${ttShortMatch[1]}" style="max-width: 605px;min-width: 325px;"><section></section></blockquote></div>`;
         }
 
         return bloque + '</p>';
