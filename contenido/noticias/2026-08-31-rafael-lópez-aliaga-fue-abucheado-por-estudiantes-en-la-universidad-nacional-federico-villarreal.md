@@ -18,13 +18,13 @@ El líder de Renovación Popular, Rafael López Aliaga, pasó por un momento ten
 
 A pesar de que los organizadores del evento le entregaron una placa como reconocimiento por su conferencia sobre economía, algunos alumnos expresaron con fuerza su desacuerdo con su presencia. Las manifestaciones incluyeron gritos y críticas políticas. 
 
-https://www.tiktok.com/@elbuho.pe/video/7677653410983709973 
+[https://www.tiktok.com/@elbuho.pe/video/7677653410983709973 ](https://www.tiktok.com/@elbuho.pe/video/7677653410983709973)
 
 **Cuestionamientos políticos y rechazo estudiantil**
 
 El descontento de los universitarios se muestra con consignascomo "La Villa es del pueblo y no de los corruptos". Este descontento se basa en controversias políticas y legales que involucran al exalcalde de Lima. Por un lado, el ministro de Transportes, Rafael Rey, aclaró que los trenes gestionados por la Municipalidad Metropolitana de Lima fueron comprados y no donados, como se había señalado inicialmente.
 
-https://x.com/N60Noticias/status/2091186921162637629  
+[https://x.com/N60Noticias/status/2091186921162637629 ](https://x.com/N60Noticias/status/2091186921162637629)
 
 Por otro lado, la postulación como primer regidor ha sido objetode críticas por parte de diversos especialistas. Los especialistas advierten que la condición de senador electo y la prohibición de la reelección municipal inmediata invalidarían una eventual asunción al cargo de alcalde si la agrupación resulta ganadora.
 
@@ -36,6 +36,6 @@ Cuando comenzaron las protestas estudiantiles, la señal oficialse interrumpió 
 
 Sin embargo, el político minimizó el incidente en sus redes sociales oficiales. Allí agradeció a los alumnos de la UNFV y compartió fotos en las que aparece interactuando de forma pacífica con un grupo de personas que se le acercaron para pedirle autógrafos y tomarse fotos.
 
-https://x.com/AntesLaLibertad/status/2091243845639893366 
+[https://x.com/AntesLaLibertad/status/2091243845639893366 ](https://x.com/AntesLaLibertad/status/2091243845639893366)
 
 ![Rafael López Aliaga junto a las autoridades y estudiantes villarrealinos. /Autor: desconocido.](fotos/subidas/4ece1515-4f2e-4ffc-a5da-0adb3792cfbf-1-.jpg "Foto oficial")
