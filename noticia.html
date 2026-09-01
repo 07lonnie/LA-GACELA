@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Noticia - La Gacela</title>
   <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script async src="https://www.tiktok.com/embed.js"></script>
@@ -49,9 +49,8 @@
       <!-- BAJADA -->
       <div class="noticia-bajada" id="art-bajada"></div>
 
-      <!-- CRÉDITO Y FECHA -->
+      <!-- FECHA (SIN AUTOR) -->
       <div class="noticia-creditos-fecha">
-        <div class="autor-info">Por <strong id="art-autor">Redacción La Gacela</strong></div>
         <div class="fecha-info" id="art-fecha"></div>
       </div>
 
@@ -124,7 +123,6 @@
         const titulo = metadatos.title || 'Sin título';
         const volada = metadatos.volada;
         const categoria = metadatos.categoria;
-        const autor = metadatos.autor;
         const fecha = metadatos.date;
         const bajada = metadatos.bajada;
         const lead = metadatos.lead;
@@ -138,7 +136,6 @@
         const voladaTexto = volada ? volada.toUpperCase() : (categoria ? normalizarCategoria(categoria) : 'NOTICIA');
         document.getElementById('art-volada').textContent = voladaTexto;
 
-        document.getElementById('art-autor').textContent = autor || 'Redacción La Gacela';
         document.getElementById('art-fecha').textContent = fecha || '';
 
         if (bajada) {
@@ -164,7 +161,6 @@
           document.getElementById('contenedor-tags').style.display = 'block';
         }
 
-        // Renderizado blindado de imágenes (compatible con cualquier versión de Marked)
         const renderer = new marked.Renderer();
         renderer.image = function(tokenOrHref, title, text) {
           let href = '';
@@ -190,7 +186,6 @@
         const contenedorCuerpo = document.getElementById('art-cuerpo');
         contenedorCuerpo.innerHTML = htmlRenderizado;
 
-        // Carga de widgets de Twitter si existen
         if (contenedorCuerpo.querySelector('.twitter-tweet')) {
           if (!window.twttr) {
             const scriptTwitter = document.createElement('script');

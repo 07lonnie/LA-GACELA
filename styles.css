@@ -1,5 +1,5 @@
 /* ==========================================================
-   LA GACELA - HOJA DE ESTILOS DEFINITIVA Y UNIFICADA
+   LA GACELA - TIPOGRAFÍA PERIODÍSTICA Y ESTILOS UNIFICADOS
    ========================================================== */
 
 :root {
@@ -95,7 +95,7 @@ a {
   color: var(--dorado);
 }
 
-/* 2. BARRA DE NAVEGACIÓN Y PESTAÑAS */
+/* 2. BARRA DE NAVEGACIÓN */
 .navegacion {
   background-color: var(--verde-oscuro);
   border-bottom: 2px solid var(--dorado);
@@ -192,7 +192,7 @@ a {
   color: var(--texto-secundario);
 }
 
-/* 4. NOTICIA DESTACADA (HERO EN PORTADA) */
+/* 4. NOTICIA DESTACADA (HERO POLÍTICA) */
 .tarjeta-destacada-hero {
   background-color: var(--tarjeta-bg);
   border-radius: 12px;
@@ -273,6 +273,7 @@ a {
 }
 
 .bajada-destacada {
+  font-family: 'Inter', sans-serif;
   font-size: 15px;
   color: var(--texto-secundario);
   line-height: 1.6;
@@ -285,10 +286,6 @@ a {
   margin-top: auto;
   padding-top: 15px;
   border-top: 1px solid var(--borde-suave);
-}
-
-.meta-destacada strong {
-  color: var(--verde-esmeralda);
 }
 
 /* 5. RETÍCULA DE TARJETAS SECUNDARIAS */
@@ -379,11 +376,7 @@ a {
   border-top: 1px solid var(--borde-suave);
 }
 
-.meta-tarjeta strong {
-  color: var(--verde-esmeralda);
-}
-
-/* 6. ¿QUIÉNES SOMOS? Y LOGO OPTIMIZADO */
+/* 6. ¿QUIÉNES SOMOS? */
 .presentacion-institucional {
   max-width: 850px;
   margin: 0 auto;
@@ -432,7 +425,8 @@ a {
 }
 
 .manifiesto-texto p {
-  font-size: 17.5px;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 17px;
   line-height: 1.8;
   color: var(--texto-principal);
   text-align: justify;
@@ -538,6 +532,7 @@ a {
 }
 
 .bio-miembro {
+  font-family: 'Inter', sans-serif;
   font-size: 15px;
   color: var(--texto-secundario);
   line-height: 1.6;
@@ -639,9 +634,6 @@ a {
 }
 
 .noticia-creditos-fecha {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
   border-top: 1px solid #eaeaea !important;
   border-bottom: 1px solid #eaeaea !important;
   padding: 12px 0 !important;
@@ -649,10 +641,6 @@ a {
   font-family: 'Inter', sans-serif !important;
   font-size: 13.5px !important;
   color: #666666 !important;
-}
-
-.noticia-creditos-fecha strong {
-  color: var(--verde-esmeralda) !important;
 }
 
 .noticia-media-wrapper {
@@ -681,38 +669,33 @@ a {
   margin: 0 auto !important;
 }
 
+/* LEYENDA MÁS GRANDE */
 .noticia-leyenda {
   font-family: 'Inter', sans-serif !important;
-  font-size: 13px !important;
-  color: #666666 !important;
+  font-size: 15px !important;
+  color: #555555 !important;
   font-style: italic !important;
   margin-top: 10px !important;
   border-left: 3px solid var(--dorado) !important;
-  padding-left: 10px !important;
+  padding-left: 12px !important;
+  line-height: 1.5 !important;
 }
 
-.noticia-lead-destacado, .noticia-lead-destacado p {
-  font-family: 'Georgia', serif !important;
-  font-size: 19.5px !important;
-  font-weight: 500 !important;
-  color: var(--texto-principal) !important;
-  line-height: 1.7 !important;
-  margin-bottom: 22px !important;
-}
-
-.noticia-cuerpo-redaccion {
-  font-family: 'Georgia', serif !important;
+/* MISMO TAMAÑO DE FUENTE EN TODO EL CUERPO (18PX) Y SIN SANGRÍA EXTRA */
+.noticia-lead-destacado, .noticia-lead-destacado p,
+.noticia-cuerpo-redaccion, .noticia-cuerpo-redaccion p {
+  font-family: 'Merriweather', Georgia, serif !important;
   font-size: 18px !important;
-  line-height: 1.8 !important;
+  line-height: 1.85 !important;
   color: #2b2b2b !important;
-}
-
-.noticia-cuerpo-redaccion p {
   margin-bottom: 22px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  text-indent: 0 !important;
   text-align: justify !important;
 }
 
-/* FOTOS INTERMEDIAS Y REPRODUCTORES EN EL CUERPO */
+/* FOTOS INTERMEDIAS */
 .noticia-figura-inline {
   margin: 30px 0 !important;
   width: 100% !important;
@@ -741,12 +724,13 @@ a {
 
 .noticia-leyenda-inline {
   font-family: 'Inter', sans-serif !important;
-  font-size: 13px !important;
-  color: #666666 !important;
+  font-size: 15px !important;
+  color: #555555 !important;
   font-style: italic !important;
   margin-top: 8px !important;
   border-left: 3px solid var(--dorado) !important;
-  padding-left: 10px !important;
+  padding-left: 12px !important;
+  line-height: 1.5 !important;
 }
 
 .contenedor-red-social {
@@ -891,7 +875,6 @@ body.modo-oscuro .correo-miembro {
   color: var(--dorado) !important;
 }
 
-/* RESPLANDOR Y VISIBILIDAD DEL LOGO EN MODO OSCURO */
 body.modo-oscuro .isotipo-limpio {
   filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(212, 175, 55, 0.5)) !important;
 }

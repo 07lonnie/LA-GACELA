@@ -7,39 +7,39 @@ let seccionActual = 'inicio';
 
 const equipoEditorial = [
   {
-    nombre: "Yamilet Chapilliquen",
+    nombre: "Belen Lucero Yaranga Rojas",
     cargo: "Director(a) & Editor(a) de Espectáculos",
     correo: "espectaculos@lagacela.unfv.edu.pe",
     bio: "Dirección general del medio e investigaciones de la agenda cultural, artística y de entretenimiento.",
-    foto: "fotos/Yamilet.jpg"
+    foto: "fotos/LAGACELAICONODORADO.jpg"
   },
   {
-    nombre: "Belen Yaranga",
+    nombre: "Redacción de Política",
     cargo: "Editor(a) de Política",
     correo: "politica@lagacela.unfv.edu.pe",
     bio: "Cobertura de asuntos institucionales, política nacional, comisiones parlamentarias e investigaciones coyunturales.",
-    foto: "fotos/Belen.jpg"
+    foto: "fotos/LAGACELAICONODORADO.jpg"
   },
   {
-    nombre: "Adriana Peña",
+    nombre: "Redacción de Internacionales",
     cargo: "Editor(a) de Internacionales",
     correo: "internacionales@lagacela.unfv.edu.pe",
     bio: "Análisis geopolítico global, seguimiento de conflictos internacionales y acuerdos diplomáticos multilaterales.",
-    foto: "fotos/Adriana.jpg"
+    foto: "fotos/LAGACELAICONODORADO.jpg"
   },
   {
-    nombre: "Jhordan Valverde",
+    nombre: "Redacción de Deportes",
     cargo: "Editor(a) de Deportes",
     correo: "deportes@lagacela.unfv.edu.pe",
     bio: "Seguimiento y cobertura del deporte universitario, disciplinas locales, competencias nacionales e internacionales.",
-    foto: "fotos/Jhordan.jpg"
+    foto: "fotos/LAGACELAICONODORADO.jpg"
   },
   {
-    nombre: "Gianella Orellana",
+    nombre: "Mesa de Desarrollo Digital",
     cargo: "Editor(a) de Diseño Web",
     correo: "webmaster@lagacela.unfv.edu.pe",
     bio: "Responsable de la maquetación digital, arquitectura web, experiencia de usuario e innovación gráfica del diario.",
-    foto: "fotos/yo.jpg"
+    foto: "fotos/LAGACELAICONODORADO.jpg"
   }
 ];
 
@@ -183,7 +183,6 @@ async function cargarNoticiasDesdeGitHub() {
         id: file.name,
         title: metadatos.title || 'Sin título',
         categoria: (metadatos.categoria || 'politica').toLowerCase(),
-        autor: metadatos.autor || 'Redacción',
         date: metadatos.date || '2026',
         bajada: (metadatos.bajada || '').replace(/[*_#]/g, ''),
         thumbnail: metadatos.thumbnail || 'fotos/LAGACELAICONODORADO.jpg'
@@ -197,7 +196,7 @@ async function cargarNoticiasDesdeGitHub() {
   }
 }
 
-/* RENDERIZADO FILTRADO Y HERO NOTICIA */
+/* RENDERIZADO CON PRIORIDAD DE POLÍTICA EN LA NOTICIA PRINCIPAL */
 function renderizarNoticiasProcesadas() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
@@ -227,7 +226,13 @@ function renderizarNoticiasProcesadas() {
   };
 
   if (seccionActual === 'inicio') {
-    const destacada = noticiasFiltradas[0];
+    // Busca la última noticia de POLÍTICA para ponerla como noticia principal
+    let indiceHero = noticiasFiltradas.findIndex(n => n.categoria === 'politica');
+    if (indiceHero === -1) indiceHero = 0; // Si no hay de política, usa la primera disponible
+
+    const destacada = noticiasFiltradas[indiceHero];
+    const restantes = noticiasFiltradas.filter((_, idx) => idx !== indiceHero);
+
     contenedorDestacada.innerHTML = `
       <article class="tarjeta-destacada-hero">
         <a href="noticia.html?id=${destacada.id}" class="enlace-destacada">
@@ -240,15 +245,13 @@ function renderizarNoticiasProcesadas() {
             <h2 class="titulo-destacada">${destacada.title}</h2>
             <p class="bajada-destacada">${destacada.bajada}</p>
             <div class="meta-destacada">
-              <span>Por <strong>${destacada.autor}</strong></span>
-              <span>• ${destacada.date}</span>
+              <span>${destacada.date}</span>
             </div>
           </div>
         </a>
       </article>
     `;
 
-    const restantes = noticiasFiltradas.slice(1);
     grid.innerHTML = restantes.map(n => generarTarjetaHTML(n, mapaCatTexto)).join('');
   } else {
     grid.innerHTML = noticiasFiltradas.map(n => generarTarjetaHTML(n, mapaCatTexto)).join('');
@@ -269,8 +272,7 @@ function generarTarjetaHTML(n, mapaCatTexto) {
           <h3 class="titulo-tarjeta">${n.title}</h3>
           <p class="bajada-tarjeta">${bajadaCorta}</p>
           <div class="meta-tarjeta">
-            <span>Por <strong>${n.autor}</strong></span>
-            <span>• ${n.date}</span>
+            <span>${n.date}</span>
           </div>
         </div>
       </a>
