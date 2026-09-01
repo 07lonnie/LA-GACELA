@@ -20,7 +20,7 @@ A pesar de que los organizadores del evento le entregaron una placa como reconoc
 
 [https://www.tiktok.com/@elbuho.pe/video/7677653410983709973 ](https://www.tiktok.com/@elbuho.pe/video/7677653410983709973)
 
-**Cuestionamientos políticos y rechazo estudiantil**
+#### **Cuestionamientos políticos y rechazo estudiantil**
 
 El descontento de los universitarios se muestra con consignascomo "La Villa es del pueblo y no de los corruptos". Este descontento se basa en controversias políticas y legales que involucran al exalcalde de Lima. Por un lado, el ministro de Transportes, Rafael Rey, aclaró que los trenes gestionados por la Municipalidad Metropolitana de Lima fueron comprados y no donados, como se había señalado inicialmente.
 
@@ -28,7 +28,7 @@ El descontento de los universitarios se muestra con consignascomo "La Villa es d
 
 Por otro lado, la postulación como primer regidor ha sido objetode críticas por parte de diversos especialistas. Los especialistas advierten que la condición de senador electo y la prohibición de la reelección municipal inmediata invalidarían una eventual asunción al cargo de alcalde si la agrupación resulta ganadora.
 
-**Incidencias en la transmisión y repercusión digital**
+#### **Incidencias en la transmisión y repercusión digital**
 
 La controversia también llegó al mundo digital, donde la transmisión en vivo del evento por YouTube, organizada por el equipo de prensa de López Aliaga, sufrió cambios importantes.
 
