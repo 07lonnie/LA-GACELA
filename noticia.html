@@ -159,7 +159,7 @@
           document.getElementById('contenedor-tags').style.display = 'block';
         }
 
-        // Renderizado de imágenes intermedias
+        // Renderizado seguro de imágenes
         const renderer = new marked.Renderer();
         renderer.image = function(tokenOrHref, title, text) {
           let href = '';
@@ -179,13 +179,16 @@
 
         marked.setOptions({ renderer: renderer });
 
+        // 1. Renderizar Markdown a HTML
         let htmlRenderizado = marked.parse(cuerpo || '');
+
+        // 2. Transformar enlaces párrafo por párrafo (sin borrar texto)
         htmlRenderizado = procesarMediosSinDuplicados(htmlRenderizado);
 
         const contenedorCuerpo = document.getElementById('art-cuerpo');
         contenedorCuerpo.innerHTML = htmlRenderizado;
 
-        // Carga de widgets de Twitter (X)
+        // 3. Activar widget de Twitter
         if (contenedorCuerpo.querySelector('.twitter-tweet')) {
           if (!window.twttr) {
             const scriptTwitter = document.createElement('script');
@@ -198,7 +201,7 @@
           }
         }
 
-        // Carga de widgets de TikTok
+        // 4. Activar widget de TikTok
         if (contenedorCuerpo.querySelector('.tiktok-embed')) {
           const scriptTikTok = document.createElement('script');
           scriptTikTok.src = "https://www.tiktok.com/embed.js";
@@ -211,28 +214,41 @@
       }
     });
 
-    // PROCESADOR FLEXIBLE PARA YOUTUBE, TWITTER/X Y TIKTOK
+    // PROCESADOR SEGURO: TRANSFORMA SÓLO PÁRRAFOS INDIVIDUALES
     function procesarMediosSinDuplicados(html) {
       if (!html) return '';
 
       html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
 
-      // 1. YouTube
-      html = html.replace(/<p>[\s\S]*?(?:youtube\.com\/(?:watch\?(?:[^\s<]*&)?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})[\s\S]*?<\/p>/gi, function(match, id) {
-        return `<div class="iframe-responsive-inline"><iframe src="https://www.youtube-nocookie.com/embed/${id}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+      let partes = html.split('</p>');
+      let resultado = partes.map(bloque => {
+        if (!bloque.includes('<p>')) return bloque;
+
+        let contenidoP = bloque.substring(bloque.indexOf('<p>') + 3);
+        let textoPlano = contenidoP.replace(/<[^>]*>/g, '').trim();
+
+        // 1. YouTube
+        let ytMatch = textoPlano.match(/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?(?:[^\s]*&)?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})(?:[^\s]*)$/i);
+        if (ytMatch && ytMatch[1]) {
+          return `<div class="iframe-responsive-inline"><iframe src="https://www.youtube-nocookie.com/embed/${ytMatch[1]}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`;
+        }
+
+        // 2. Twitter / X
+        let twMatch = textoPlano.match(/^(?:https?:\/\/)?(?:www\.)?(?:twitter\.com|x\.com)\/([^\s<>\/]+)\/status\/([\d]+)(?:[^\s]*)$/i);
+        if (twMatch && twMatch[2]) {
+          return `<div class="contenedor-red-social"><blockquote class="twitter-tweet" data-dnt="true" align="center"><a href="https://twitter.com/${twMatch[1]}/status/${twMatch[2]}"></a></blockquote></div>`;
+        }
+
+        // 3. TikTok
+        let ttMatch = textoPlano.match(/^(?:https?:\/\/)?(?:www\.)?(?:tiktok\.com)\/@([^\s<>\/]+)\/video\/([\d]+)(?:[^\s]*)$/i);
+        if (ttMatch && ttMatch[2]) {
+          return `<div class="contenedor-red-social"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${ttMatch[1]}/video/${ttMatch[2]}" data-video-id="${ttMatch[2]}" style="max-width: 605px;min-width: 325px;"><section></section></blockquote></div>`;
+        }
+
+        return bloque + '</p>';
       });
 
-      // 2. Twitter / X
-      html = html.replace(/<p>[\s\S]*?(?:twitter\.com|x\.com)\/([^\s<>\/]+)\/status\/([\d]+)[\s\S]*?<\/p>/gi, function(match, user, id) {
-        return `<div class="contenedor-red-social"><blockquote class="twitter-tweet" data-dnt="true" align="center"><a href="https://twitter.com/${user}/status/${id}"></a></blockquote></div>`;
-      });
-
-      // 3. TikTok
-      html = html.replace(/<p>[\s\S]*?tiktok\.com\/@([^\s<>\/]+)\/video\/([\d]+)[\s\S]*?<\/p>/gi, function(match, user, id) {
-        return `<div class="contenedor-red-social"><blockquote class="tiktok-embed" cite="https://www.tiktok.com/@${user}/video/${id}" data-video-id="${id}" style="max-width: 605px;min-width: 325px;"><section></section></blockquote></div>`;
-      });
-
-      return html;
+      return resultado.join('');
     }
 
     function parseFrontmatter(texto) {
