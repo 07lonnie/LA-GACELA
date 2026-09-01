@@ -1,4 +1,5 @@
 ---
+autor: "La Gacela "
 volada: Música urbana
 title: Paulo Londra prepara su regreso al Perú con su primer concierto en el
   Estadio Nacional
@@ -6,7 +7,6 @@ categoria: espectaculos
 bajada: El artista argentino se presentará este 29 de agosto en Lima como parte
   de su *Next Rounds Tour*. El concierto marcará su debut en el Estadio Nacional
   y contará con la participación del cantante peruano Gonzalo Genek.
-autor: "La Gacela "
 date: 2026-08-24
 lead: Paulo Londra regresará al Perú este sábado 29 de agosto para ofrecer un
   concierto en el Estadio Nacional de Lima, como parte de su gira internacional
@@ -18,12 +18,11 @@ lead: Paulo Londra regresará al Perú este sábado 29 de agosto para ofrecer un
 thumbnail: fotos/subidas/6995c9488fb4f_700_410-.webp
 pie_foto: "Paulo Londra llegará a Lima el 29 de agosto para presentarse por
   primera vez en el Estadio Nacional. /Fuente: Crónica"
-tags: Paulo Londra, Perú, Lima, Estadio Nacional, Next Rounds Tour, Gonzalo
-  Genek, Música urbana, Conciertos, Espectáculos
+tags: Paulo Londra, Estadio Nacional,  Gonzalo Genek, Música urbana
 ---
 El espectáculo está programado para este sábado y tendrá como escenario el **[Estadio Nacional](https://share.google/1DhEpCNE2Ge2wIukH),** ubicado en la avenida José Díaz, en Lima. La presentación forma parte del recorrido internacional de Londra, quien ha llevado su propuesta de música urbana a diferentes escenarios de Latinoamérica.
 
-<https://www.tiktok.com/@conciertoslima.pe/video/7607892078940392712?is_from_webapp=1&sender_device=pc&web_id=7636999679101044240>
+<https://vt.tiktok.com/ZSVK6243D/>
 
 Uno de los atractivos de la jornada será la participación del artista peruano **[Gonzalo Genek](https://www.instagram.com/gonzalogenek?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==)**, quien fue confirmado como encargado de abrir el concierto. Su presencia sumará una representación local al espectáculo y permitirá que el público disfrute de una propuesta vinculada a la escena urbana peruana antes de la presentación principal.
 
