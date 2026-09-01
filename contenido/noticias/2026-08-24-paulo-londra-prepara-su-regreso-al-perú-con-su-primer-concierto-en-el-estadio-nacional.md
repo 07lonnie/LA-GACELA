@@ -22,7 +22,7 @@ tags: Paulo Londra, Estadio Nacional,  Gonzalo Genek, Música urbana
 ---
 El espectáculo está programado para este sábado y tendrá como escenario el **[Estadio Nacional](https://share.google/1DhEpCNE2Ge2wIukH),** ubicado en la avenida José Díaz, en Lima. La presentación forma parte del recorrido internacional de Londra, quien ha llevado su propuesta de música urbana a diferentes escenarios de Latinoamérica.
 
-<https://vt.tiktok.com/ZSVK6243D/>
+[https://www.tiktok.com/@conciertoslima.pe/video/7607892078940392712?_r=1&_t=ZS-99N2Nlr2gHl](https://www.tiktok.com/@conciertoslima.pe/video/7607892078940392712?_r=1&_t=ZS-99N2Nlr2gHl)
 
 Uno de los atractivos de la jornada será la participación del artista peruano **[Gonzalo Genek](https://www.instagram.com/gonzalogenek?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==)**, quien fue confirmado como encargado de abrir el concierto. Su presencia sumará una representación local al espectáculo y permitirá que el público disfrute de una propuesta vinculada a la escena urbana peruana antes de la presentación principal.
 
