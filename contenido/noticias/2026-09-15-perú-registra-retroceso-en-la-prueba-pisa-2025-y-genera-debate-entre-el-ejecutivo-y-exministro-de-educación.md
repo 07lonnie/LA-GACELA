@@ -17,4 +17,4 @@ Ante la difusión de los datos, la presidenta Keiko Fujimori calificó los resul
 
 Por su parte, el exministro de Educación, Ricardo Cuenca, señaló que los resultados reflejan un severo problema en la educación secundaria, explicado porque las políticas públicas del Estado se han enfocado casi exclusivamente en el nivel primaria. Asimismo, el especialista consideró que afirmar un "retroceso de diez años" es una frase orientada "para la tribuna", al tiempo que expresó preocupación por responder al problema volviendo a esquemas de los años noventa centrados primordialmente en la infraestructura.
 
-![]()
+![Infografía sobre el retroceso de Perú en los resultados de la prueba PISA . /Fuente: elaboración propia.](fotos/subidas/1000395520.png "Infografía prueba PISA ")
