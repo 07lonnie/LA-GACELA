@@ -18,7 +18,7 @@ tags: COPA SUDAMERICANA | CIENCIANO | MOTEVIDEO CITY TORQUE
 ---
 Cienciano afronta los últimos días de preparación con la mirada puesta en el Estadio Centenario, donde tendrá que defender la ventaja conseguida en el partido de ida. El cuadro cusqueño trabaja con la tranquilidad que le otorga el 2-0 obtenido en Cusco, pero sin caer en el exceso de confianza, debido a que todavía quedan 90 minutos para definir al equipo que continuará en carrera.
 
-<https://www.instagram.com/p/DdR5e2aGWV7/?img_index=1>
+https://x.com/Club_Cienciano/status/2099721190621208831
 
 El comando técnico concentra sus esfuerzos en mantener el orden y la concentración durante todo el encuentro. La defensa será uno de los principales puntos de atención, especialmente ante la necesidad de evitar un gol temprano que pueda darle confianza al conjunto uruguayo y cambiar el desarrollo de la serie.
 
