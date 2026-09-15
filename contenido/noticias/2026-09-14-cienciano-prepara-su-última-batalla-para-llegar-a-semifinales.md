@@ -14,7 +14,7 @@ lead: Cienciano ya piensa en los 90 minutos que pueden marcar el rumbo de su
   asegurar su clasificación a las semifinales.
 thumbnail: fotos/subidas/images-7-.jpg
 pie_foto: cienciano / facebook
-tags: COPA SUDAMERICANA | CIENCIANO | MOTEVIDEO CITY TORQUE
+tags: COPA SUDAMERICANA, CIENCIANO, MOTEVIDEO CITY TORQUE
 ---
 Cienciano afronta los últimos días de preparación con la mirada puesta en el Estadio Centenario, donde tendrá que defender la ventaja conseguida en el partido de ida. El cuadro cusqueño trabaja con la tranquilidad que le otorga el 2-0 obtenido en Cusco, pero sin caer en el exceso de confianza, debido a que todavía quedan 90 minutos para definir al equipo que continuará en carrera.
 
