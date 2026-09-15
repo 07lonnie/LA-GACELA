@@ -3,9 +3,8 @@ volada: Nacional
 title: Perú registra retroceso en la prueba PISA 2025 y genera debate entre el
   Ejecutivo y exministro de Educación
 categoria: politica
-bajada: El reporte de la prueba PISA 2025 evidenció un bajo rendimiento escolar
-  en lectura, matemáticas y ciencias, situando al país por debajo del promedio
-  de la OCDE.
+bajada: El reporte evidenció un bajo rendimiento escolar en lectura, matemáticas
+  y ciencias, situando al país por debajo del promedio de la OCDE.
 date: 2026-09-15
 thumbnail: fotos/subidas/uoemepjtandplhjcemy7uupzwu.jpg
 pie_foto: Estudiantes de una secundaria del país./Fotografía:Maria Elena Mamani
