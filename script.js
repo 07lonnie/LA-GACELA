@@ -45,7 +45,7 @@ const equipoEditorial = [
 
 let indiceEquipo = 0;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   inicializarModoOscuro();
   inicializarNavegacion();
   precargarImagenesEquipo();
@@ -56,28 +56,61 @@ document.addEventListener('DOMContentLoaded', () => {
   const tagBuscado = params.get('tag');
 
   if (tagBuscado) {
-    cargarNoticiasPorEtiqueta(tagBuscado);
+    await obtenerNoticiasDeGitHub();
+    renderizarPorEtiqueta(tagBuscado);
   } else {
-    cargarNoticiasDesdeGitHub();
+    await cargarNoticiasDesdeGitHub();
   }
 });
 
-async function cargarNoticiasPorEtiqueta(tag) {
+/* FUNCIÓN PURA PARA DESCARGAR NOTICIAS SIN PINTAR LA PORTADA AUTOMÁTICAMENTE */
+async function obtenerNoticiasDeGitHub() {
+  if (noticiasGlobales.length > 0) return;
+
+  try {
+    const repo = "07lonnie/LA-GACELA";
+    const res = await fetch(`https://api.github.com/repos/${repo}/contents/contenido/noticias`);
+    if (!res.ok) throw new Error('Sin noticias');
+
+    const archivos = await res.json();
+    const archivosMarkdown = archivos.filter(f => f.name.endsWith('.md'));
+
+    noticiasGlobales = [];
+
+    for (const file of archivosMarkdown) {
+      const resContenido = await fetch(file.download_url);
+      const texto = await resContenido.text();
+      const { metadatos, cuerpo } = parseFrontmatter(texto);
+
+      noticiasGlobales.push({
+        id: file.name,
+        title: metadatos.title || 'Sin título',
+        categoria: (metadatos.categoria || 'politica').toLowerCase(),
+        date: metadatos.date || '2026',
+        bajada: metadatos.bajada || '',
+        tags: metadatos.tags || '',
+        thumbnail: metadatos.thumbnail || 'fotos/LAGACELAICONODORADO.jpg'
+      });
+    }
+  } catch (e) {
+    console.error("Error al obtener noticias:", e);
+  }
+}
+
+/* RENDERIZADO EXCLUSIVO PARA FILTRADO POR ETIQUETA */
+function renderizarPorEtiqueta(tag) {
   const grid = document.getElementById('grid-noticias');
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const tituloSeccion = document.getElementById('titulo-seccion-actual');
   const bajadaSeccion = document.getElementById('bajada-seccion-actual');
 
+  // 1. Quitar de raíz la noticia principal destacada
   if (contenedorDestacada) contenedorDestacada.innerHTML = '';
   if (tituloSeccion) tituloSeccion.textContent = `Etiqueta: #${tag}`;
   if (bajadaSeccion) bajadaSeccion.textContent = `Artículos y coberturas relacionadas con "${tag}".`;
 
-  // Desmarcar pestañas activas
+  // Desmarcar pestañas activas del menú
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('activo'));
-
-  if (noticiasGlobales.length === 0) {
-    await cargarNoticiasDesdeGitHub();
-  }
 
   const mapaCatTexto = {
     'politica': 'POLÍTICA',
@@ -112,8 +145,7 @@ async function cargarNoticiasPorEtiqueta(tag) {
             <span class="badge-categoria-editorial">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
           </div>
           <div class="info-wrap">
-            <h3>${n.title}</h3>
-            ${n.bajada ? `<p>${limpiarBajadaCompleta(n.bajada)}</p>` : ''}
+            <h3>${n.title}</h3>${n.bajada ? `<p>${limpiarBajadaCompleta(n.bajada)}</p>` : ''}
             <span class="meta-fecha-mini">${n.date}</span>
           </div>
         </a>
@@ -191,6 +223,11 @@ function inicializarNavegacion() {
 
       botonesNav.forEach(b => b.classList.remove('activo'));
       btn.classList.add('activo');
+
+      // Limpiar el parámetro de la URL si venía de un clic en tag
+      if (window.location.search) {
+        window.history.pushState({}, document.title, window.location.pathname);
+      }
 
       cambiarVistaSeccion(seccion);
     });
@@ -277,50 +314,19 @@ async function cargarNoticiasDesdeGitHub() {
     </div>
   `;
 
-  try {
-    const repo = "07lonnie/LA-GACELA";
-    const res = await fetch(`https://api.github.com/repos/${repo}/contents/contenido/noticias`);
+  await obtenerNoticiasDeGitHub();
 
-    if (!res.ok) throw new Error('Sin noticias');
-
-    const archivos = await res.json();
-    const archivosMarkdown = archivos.filter(f => f.name.endsWith('.md'));
-
-    if (archivosMarkdown.length === 0) {
-      contenedorDestacada.innerHTML = '';
-      grid.innerHTML = '<p class="mensaje-vacio">No hay publicaciones disponibles en este momento.</p>';
-      return;
-    }
-
-    noticiasGlobales = [];
-
-    for (const file of archivosMarkdown) {
-      const resContenido = await fetch(file.download_url);
-      const texto = await resContenido.text();
-
-      const { metadatos, cuerpo } = parseFrontmatter(texto);
-
-      noticiasGlobales.push({
-  id: file.name,
-  title: metadatos.title || 'Sin título',
-  categoria: (metadatos.categoria || 'politica').toLowerCase(),
-  date: metadatos.date || '2026',
-  bajada: metadatos.bajada || '',
-  tags: metadatos.tags || '',
-  thumbnail: metadatos.thumbnail || 'fotos/LAGACELAICONODORADO.jpg'
-});
-    }
-
-    // 2. Reemplazar las siluetas por el contenido real
-    renderizarNoticiasProcesadas();
-
-  } catch (err) {
+  if (noticiasGlobales.length === 0) {
     contenedorDestacada.innerHTML = '';
-    grid.innerHTML = '<div class="bloque-vacio-seccion"><p>No se pudieron cargar las noticias.</p></div>';
+    grid.innerHTML = '<p class="mensaje-vacio">No hay publicaciones disponibles en este momento.</p>';
+    return;
   }
+
+  // 2. Reemplazar las siluetas por el contenido real
+  renderizarNoticiasProcesadas();
 }
 
-/* RENDERIZADO EDITORIAL */
+/* RENDERIZADO EDITORIAL GENERAL */
 function renderizarNoticiasProcesadas() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
@@ -505,7 +511,6 @@ function actualizarTarjetaEquipo() {
 
   if (!elNombre) return;
 
-  // Actualización inmediata sin animaciones pesadas
   elNombre.textContent = miembro.nombre;
   elCargo.textContent = miembro.cargo;
   
