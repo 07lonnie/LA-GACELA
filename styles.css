@@ -1,5 +1,5 @@
 /* ==========================================================
-   LA GACELA - MAQUETACIÓN EDITORIAL DINÁMICA
+   LA GACELA - ESTILOS PERIODÍSTICOS DEFINITIVOS
    ========================================================== */
 
 :root {
@@ -35,12 +35,12 @@ a {
   text-decoration: none;
 }
 
-/* 1. ENCABEZADO COMPACTO Y SIN ESPACIOS EXCESIVOS */
+/* 1. ENCABEZADO COMPACTO */
 .encabezado {
   background-color: var(--verde-esmeralda);
   color: var(--blanco);
   border-bottom: 3px solid var(--dorado);
-  padding: 8px 20px 14px 20px !important; /* Grosor reducido */
+  padding: 8px 20px 14px 20px !important;
   text-align: center;
   width: 100%;
 }
@@ -85,7 +85,7 @@ a {
   font-weight: 900;
   color: var(--blanco);
   letter-spacing: 2px;
-  margin: 2px 0 0 0 !important; /* Espaciado mínimo */
+  margin: 2px 0 0 0 !important;
   line-height: 1.1;
 }
 
@@ -94,7 +94,7 @@ a {
   font-style: italic;
   font-size: 14px !important;
   color: var(--dorado);
-  margin: 3px 0 0 0 !important; /* Interlineado pegado al logo */
+  margin: 3px 0 0 0 !important;
 }
 
 /* 2. BARRA DE NAVEGACIÓN */
@@ -196,7 +196,26 @@ a {
   color: var(--texto-secundario);
 }
 
-/* 4. NOTICIA DESTACADA HERO (POLÍTICA) */
+/* 4. INSIGNIA / BADGE EDITORIAL FLOTANTE UNIFICADA */
+.badge-categoria-editorial {
+  position: absolute !important;
+  top: 12px !important;
+  left: 12px !important;
+  background-color: var(--verde-esmeralda) !important;
+  color: var(--blanco) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 3px !important;
+  letter-spacing: 1px !important;
+  border: 1px solid var(--dorado) !important;
+  z-index: 5 !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2) !important;
+}
+
+/* NOTICIA DESTACADA HERO (POLÍTICA) */
 .tarjeta-destacada-hero {
   background-color: var(--tarjeta-bg);
   border-radius: 8px;
@@ -239,20 +258,6 @@ a {
   display: block;
 }
 
-.badge-categoria-destacada {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background-color: var(--verde-esmeralda);
-  color: var(--blanco);
-  font-size: 10px;
-  font-weight: 700;
-  padding: 4px 9px;
-  border-radius: 3px;
-  letter-spacing: 1px;
-  border: 1px solid var(--dorado);
-}
-
 .contenido-destacada {
   padding: 22px 26px;
   display: flex;
@@ -293,14 +298,14 @@ a {
   border-top: 1px solid var(--borde-suave);
 }
 
-/* 5. ESTRUCTURA EDITORIAL DINÁMICA (ESTILO NEW YORK TIMES / EL COMERCIO) */
+/* 5. ESTRUCTURA EDITORIAL ASIMÉTRICA */
 .layout-noticias-dinamico {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-/* Fila de 2 Columnas Grandes */
+/* Fila de 2 Columnas Medianas */
 .fila-secundaria-editorial {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -321,19 +326,27 @@ a {
   display: flex;
   flex-direction: column;
   box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta-mediana:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .tarjeta-mediana .img-wrap {
   position: relative;
   width: 100%;
-  height: 200px;
+  aspect-ratio: 16 / 10;
   background-color: #e5e7eb;
+  overflow: hidden;
 }
 
 .tarjeta-mediana .img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .tarjeta-mediana .info-wrap {
@@ -347,21 +360,29 @@ a {
   font-family: 'Merriweather', Georgia, serif;
   font-size: 18px;
   line-height: 1.35;
+  color: var(--texto-principal);
   margin-bottom: 8px;
   font-weight: 700;
 }
 
 .tarjeta-mediana p {
+  font-family: 'Inter', sans-serif;
   font-size: 13.5px;
   color: var(--texto-secundario);
   margin-bottom: 12px;
   line-height: 1.45;
 }
 
-/* Fila Mixta: 1 Noticia Horizontal + 2 Compactas */
+.tarjeta-mediana .meta-fecha-mini {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid var(--borde-suave);
+}
+
+/* Fila Mixta: 1 Horizontal + Columna Compacta */
 .fila-mosaico-editorial {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.25fr 1fr;
   gap: 22px;
 }
 
@@ -376,46 +397,65 @@ a {
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--borde-suave);
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  align-items: center;
   box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-@media (max-width: 550px) {
-  .tarjeta-horizontal {
+.tarjeta-horizontal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.enlace-horizontal {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  align-items: stretch;
+  height: 100%;
+}
+
+@media (max-width: 580px) {
+  .enlace-horizontal {
     grid-template-columns: 1fr;
   }
 }
 
 .tarjeta-horizontal .img-wrap {
+  position: relative;
   height: 100%;
-  min-height: 150px;
+  min-height: 180px;
   background-color: #e5e7eb;
+  overflow: hidden;
 }
 
 .tarjeta-horizontal .img-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .tarjeta-horizontal .info-wrap {
-  padding: 16px 18px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .tarjeta-horizontal h3 {
   font-family: 'Merriweather', Georgia, serif;
-  font-size: 16.5px;
+  font-size: 17px;
   line-height: 1.35;
-  margin-bottom: 6px;
+  color: var(--texto-principal);
+  margin-bottom: 8px;
   font-weight: 700;
 }
 
 .tarjeta-horizontal p {
-  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
   color: var(--texto-secundario);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  line-height: 1.45;
 }
 
 /* Columna de tarjetas compactas */
@@ -432,6 +472,11 @@ a {
   border: 1px solid var(--borde-suave);
   border-left: 3px solid var(--dorado);
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  transition: transform 0.15s ease;
+}
+
+.tarjeta-compacta-editorial:hover {
+  transform: translateX(3px);
 }
 
 .tarjeta-compacta-editorial h4 {
@@ -440,6 +485,7 @@ a {
   line-height: 1.35;
   margin-bottom: 4px;
   font-weight: 700;
+  color: var(--texto-principal);
 }
 
 .badge-cat-tag {
@@ -449,6 +495,7 @@ a {
   text-transform: uppercase;
   margin-bottom: 4px;
   display: inline-block;
+  letter-spacing: 0.5px;
 }
 
 .meta-fecha-mini {
@@ -519,7 +566,7 @@ a {
   margin: 25px auto;
 }
 
-/* 7. CARRUSEL EDITORIAL SIN DEMORA */
+/* 7. CARRUSEL EDITORIAL INMEDIATO */
 .bloque-equipo-editorial {
   margin-top: 25px;
   width: 100%;
@@ -560,7 +607,6 @@ a {
   max-width: 580px;
   width: 100%;
   text-align: center;
-  /* Transición instantánea: sin delay ni retardo */
   transition: none !important;
 }
 
@@ -876,7 +922,7 @@ a {
   background-color: var(--verde-oscuro);
   color: var(--blanco);
   text-align: center;
-  padding: 18px 20px !important; /* Grosor reducido */
+  padding: 18px 20px !important;
   border-top: 2px solid var(--dorado);
   font-size: 12.5px;
   width: 100%;

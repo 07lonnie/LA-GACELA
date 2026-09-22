@@ -94,6 +94,27 @@ function limpiarValorYaml(val) {
   return str.trim();
 }
 
+/* OBTENER ORACIÓN COMPLETA QUE CIERRE EN PUNTO (.) O NADA */
+function obtenerOracionCerrada(texto, maxLongitud = 160) {
+  if (!texto) return '';
+  let limpio = texto.replace(/[*_#`]/g, '').trim();
+
+  // Buscar primer punto seguido de espacio o final
+  let matchPunto = limpio.match(/^([^.!?]+[.!?])/);
+  if (matchPunto && matchPunto[1].length <= maxLongitud) {
+    return matchPunto[1].trim();
+  }
+
+  // Si la primera frase completa es razonable
+  let frases = limpio.split(/[.!?]\s+/);
+  if (frases.length > 0 && frases[0].length <= maxLongitud && frases[0].length > 25) {
+    return frases[0].trim() + '.';
+  }
+
+  // Si no se puede cerrar con elegancia, no mostrar nada para no entrecortar
+  return '';
+}
+
 /* NAVEGACIÓN Y TÍTULOS EN FORMATO ORACIÓN */
 function inicializarNavegacion() {
   const botonesNav = document.querySelectorAll('.nav-btn');
@@ -127,7 +148,6 @@ function cambiarVistaSeccion(seccion) {
   secQuienesSomos.classList.remove('activo');
   secNoticias.classList.add('activo');
 
-  // Títulos corregidos: solo primera letra con mayúscula
   const nombresTitulos = {
     'inicio': 'Últimas publicaciones',
     'politica': 'Noticias de política',
@@ -185,7 +205,7 @@ async function cargarNoticiasDesdeGitHub() {
         title: metadatos.title || 'Sin título',
         categoria: (metadatos.categoria || 'politica').toLowerCase(),
         date: metadatos.date || '2026',
-        bajada: (metadatos.bajada || '').replace(/[*_#]/g, ''),
+        bajada: metadatos.bajada || '',
         thumbnail: metadatos.thumbnail || 'fotos/LAGACELAICONODORADO.jpg'
       });
     }
@@ -197,7 +217,7 @@ async function cargarNoticiasDesdeGitHub() {
   }
 }
 
-/* RENDERIZADO CON MAQUETACIÓN ASIMÉTRICA TIPO NEW YORK TIMES / EL COMERCIO */
+/* RENDERIZADO EDITORIAL ASIMÉTRICO Y VISUALMENTE ARMONIOSO */
 function renderizarNoticiasProcesadas() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
@@ -233,18 +253,19 @@ function renderizarNoticiasProcesadas() {
 
     const destacada = noticiasFiltradas[indiceHero];
     const restantes = noticiasFiltradas.filter((_, idx) => idx !== indiceHero);
+    const bajadaHero = obtenerOracionCerrada(destacada.bajada, 220);
 
     contenedorDestacada.innerHTML = `
       <article class="tarjeta-destacada-hero">
         <a href="noticia.html?id=${destacada.id}" class="enlace-destacada">
           <div class="imagen-destacada-wrapper">
             <img src="${destacada.thumbnail}" alt="${destacada.title}" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
-            <span class="badge-categoria-destacada">${mapaCatTexto[destacada.categoria] || destacada.categoria.toUpperCase()}</span>
+            <span class="badge-categoria-editorial">${mapaCatTexto[destacada.categoria] || destacada.categoria.toUpperCase()}</span>
           </div>
           <div class="contenido-destacada">
             <span class="etiqueta-destacada-alerta">★ NOTICIA PRINCIPAL</span>
             <h2 class="titulo-destacada">${destacada.title}</h2>
-            <p class="bajada-destacada">${destacada.bajada}</p>
+            ${bajadaHero ? `<p class="bajada-destacada">${bajadaHero}</p>` : ''}
             <div class="meta-destacada">
               <span>${destacada.date}</span>
             </div>
@@ -253,25 +274,25 @@ function renderizarNoticiasProcesadas() {
       </article>
     `;
 
-    // 2. Construcción del layout dinámico asimétrico
+    // 2. Mosaico dinámico asimétrico
     let htmlDinamico = '<div class="layout-noticias-dinamico">';
 
-    // Fila 1: Dos noticias medianas destacadas
+    // Fila 1: Dos noticias destacadas con insignia flotante
     if (restantes.length > 0) {
       const fila2 = restantes.slice(0, 2);
       htmlDinamico += '<div class="fila-secundaria-editorial">';
       fila2.forEach(n => {
-        const bajadaCorta = n.bajada.length > 120 ? n.bajada.substring(0, 120) + '...' : n.bajada;
+        const oracionLimpia = obtenerOracionCerrada(n.bajada, 140);
         htmlDinamico += `
           <article class="tarjeta-mediana">
             <a href="noticia.html?id=${n.id}">
               <div class="img-wrap">
                 <img src="${n.thumbnail}" alt="${n.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
-                <span class="badge-categoria-portada">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
+                <span class="badge-categoria-editorial">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
               </div>
               <div class="info-wrap">
                 <h3>${n.title}</h3>
-                <p>${bajadaCorta}</p>
+                ${oracionLimpia ? `<p>${oracionLimpia}</p>` : ''}
                 <span class="meta-fecha-mini">${n.date}</span>
               </div>
             </a>
@@ -281,30 +302,32 @@ function renderizarNoticiasProcesadas() {
       htmlDinamico += '</div>';
     }
 
-    // Fila 2: Mosaico mixto (1 Horizontal + Columna de compactas)
+    // Fila 2: Mosaico mixto (1 Horizontal con insignia + columna compacta)
     if (restantes.length > 2) {
       const horizontal = restantes[2];
       const compactas = restantes.slice(3);
+      const bajadaH = obtenerOracionCerrada(horizontal.bajada, 150);
 
       htmlDinamico += '<div class="fila-mosaico-editorial">';
       
-      // Lado A: Horizontal grande
-      const bajadaH = horizontal.bajada.length > 140 ? horizontal.bajada.substring(0, 140) + '...' : horizontal.bajada;
+      // Horizontal
       htmlDinamico += `
         <article class="tarjeta-horizontal">
-          <div class="img-wrap">
-            <img src="${horizontal.thumbnail}" alt="${horizontal.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
-          </div>
-          <div class="info-wrap">
-            <span class="badge-cat-tag">${mapaCatTexto[horizontal.categoria] || horizontal.categoria.toUpperCase()}</span>
-            <a href="noticia.html?id=${horizontal.id}"><h3>${horizontal.title}</h3></a>
-            <p>${bajadaH}</p>
-            <span class="meta-fecha-mini">${horizontal.date}</span>
-          </div>
+          <a href="noticia.html?id=${horizontal.id}" class="enlace-horizontal">
+            <div class="img-wrap">
+              <img src="${horizontal.thumbnail}" alt="${horizontal.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
+              <span class="badge-categoria-editorial">${mapaCatTexto[horizontal.categoria] || horizontal.categoria.toUpperCase()}</span>
+            </div>
+            <div class="info-wrap">
+              <h3>${horizontal.title}</h3>
+              ${bajadaH ? `<p>${bajadaH}</p>` : ''}
+              <span class="meta-fecha-mini">${horizontal.date}</span>
+            </div>
+          </a>
         </article>
       `;
 
-      // Lado B: Columna de compactas
+      // Columna de compactas
       if (compactas.length > 0) {
         htmlDinamico += '<div class="columna-compactas">';
         compactas.slice(0, 3).forEach(c => {
@@ -326,20 +349,20 @@ function renderizarNoticiasProcesadas() {
     grid.innerHTML = htmlDinamico;
 
   } else {
-    // Vista de sección individual: 2 columnas limpias
+    // Vista de sección temática (2 columnas limpias con insignia flotante)
     let htmlSeccion = '<div class="fila-secundaria-editorial">';
     noticiasFiltradas.forEach(n => {
-      const bajadaCorta = n.bajada.length > 130 ? n.bajada.substring(0, 130) + '...' : n.bajada;
+      const oracionLimpia = obtenerOracionCerrada(n.bajada, 140);
       htmlSeccion += `
         <article class="tarjeta-mediana">
           <a href="noticia.html?id=${n.id}">
             <div class="img-wrap">
               <img src="${n.thumbnail}" alt="${n.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
-              <span class="badge-categoria-portada">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
+              <span class="badge-categoria-editorial">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
             </div>
             <div class="info-wrap">
               <h3>${n.title}</h3>
-              <p>${bajadaCorta}</p>
+              ${oracionLimpia ? `<p>${oracionLimpia}</p>` : ''}
               <span class="meta-fecha-mini">${n.date}</span>
             </div>
           </a>
@@ -351,7 +374,7 @@ function renderizarNoticiasProcesadas() {
   }
 }
 
-/* CARRUSEL EDITORIAL INMEDIATO Y FLUIDO */
+/* CARRUSEL EDITORIAL INMEDIATO */
 function inicializarCarruselEquipo() {
   const btnPrev = document.getElementById('btn-carrusel-prev');
   const btnNext = document.getElementById('btn-carrusel-next');
@@ -382,7 +405,6 @@ function actualizarTarjetaEquipo() {
 
   if (!elNombre) return;
 
-  // Actualización inmediata del DOM
   elNombre.textContent = miembro.nombre;
   elCargo.textContent = miembro.cargo;
   
