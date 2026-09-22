@@ -10,7 +10,7 @@ bajada: El Poder Judicial dictó 15 días de detención preliminar contra los
 date: 2026-09-22
 thumbnail: fotos/subidas/banner-generico3.png
 pie_foto: Susy Aponte era canditada para el Gobierno Regional de Áncash. /Fuente:LP
-tags: periodismo, crimen, Áncash
+tags: periodismo, sicariato, Áncash
 ---
 El asesinato de la periodista de investigación y candidata al Gobierno Regional de Áncash, Susy Ysabel Aponte Polo "La China Polo", desencadenó una rápida intervención de los altos mandos del sistema de justicia y de las fuerzas del orden, al tiempo que abrió un nuevo frente de fiscalización política en el Congreso de la República. Mientras el Poder Judicial ordenó 15 días de detención preliminar contra dos sospechosos, las bancadas parlamentarias impulsan acciones de control político contra el sector Interior ante las denuncias previas de amenazas que no recibieron protección oficial.
 
