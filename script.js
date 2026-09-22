@@ -9,14 +9,14 @@ const equipoEditorial = [
   {
     nombre: "Lidia Yamilet Chapilliquen Charca",
     cargo: "Directora & Editora de Espectáculos",
-    correo: "espectaculos@lagacela.pe",
+    correo: "espectáculos@lagacela.pe",
     bio: "Dirección general del medio e investigaciones de la agenda cultural, artística y de entretenimiento.",
     foto: "fotos/Yamilet.jpg"
   },
   {
     nombre: "Belen Lucero Yaranga Rojas",
     cargo: "Editora de Política",
-    correo: "politica@lagacela.pe",
+    correo: "política@lagacela.pe",
     bio: "Cobertura de asuntos institucionales, política nacional, comisiones parlamentarias e investigaciones coyunturales.",
     foto: "fotos/Belen.jpg"
   },
