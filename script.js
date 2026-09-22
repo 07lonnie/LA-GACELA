@@ -48,9 +48,20 @@ let indiceEquipo = 0;
 document.addEventListener('DOMContentLoaded', () => {
   inicializarModoOscuro();
   inicializarNavegacion();
+  precargarImagenesEquipo(); // Elimina el delay al cambiar de miembro
   inicializarCarruselEquipo();
   cargarNoticiasDesdeGitHub();
 });
+
+/* PRECARGA DE IMÁGENES EN CACHÉ PARA EVITAR RETARDOS */
+function precargarImagenesEquipo() {
+  equipoEditorial.forEach(miembro => {
+    if (miembro.foto) {
+      const img = new Image();
+      img.src = miembro.foto;
+    }
+  });
+}
 
 /* PARSER FRONTMATTER */
 function parseFrontmatter(texto) {
@@ -94,7 +105,6 @@ function limpiarValorYaml(val) {
   return str.trim();
 }
 
-/* LIMPIEZA DE FORMATO PARA MOSTRAR TODA LA BAJADA COMPLETA */
 function limpiarBajadaCompleta(texto) {
   if (!texto) return '';
   return texto.replace(/[*_#`\[\]]/g, '').trim();
@@ -156,12 +166,10 @@ function cambiarVistaSeccion(seccion) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* CARGAR NOTICIAS DESDE GITHUB */
+/* CARGAR NOTICIAS DESDE GITHUB (SIN MENSAJE DE CARGA VISIBLE) */
 async function cargarNoticiasDesdeGitHub() {
   const grid = document.getElementById('grid-noticias');
   if (!grid) return;
-
-  grid.innerHTML = '<p class="mensaje-cargando">Cargando la edición digital...</p>';
 
   try {
     const repo = "07lonnie/LA-GACELA";
@@ -198,11 +206,11 @@ async function cargarNoticiasDesdeGitHub() {
     renderizarNoticiasProcesadas();
 
   } catch (err) {
-    grid.innerHTML = '<p class="mensaje-vacio">Aún no se han cargado publicaciones en esta sección.</p>';
+    grid.innerHTML = '<div class="bloque-vacio-seccion"><p>No se pudieron cargar las noticias.</p></div>';
   }
 }
 
-/* RENDERIZADO EDITORIAL CON TODA LA BAJADA COMPLETA */
+/* RENDERIZADO EDITORIAL */
 function renderizarNoticiasProcesadas() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
@@ -232,7 +240,6 @@ function renderizarNoticiasProcesadas() {
   };
 
   if (seccionActual === 'inicio') {
-    // Hero: Política prioritariamente
     let indiceHero = noticiasFiltradas.findIndex(n => n.categoria === 'politica');
     if (indiceHero === -1) indiceHero = 0;
 
@@ -261,7 +268,7 @@ function renderizarNoticiasProcesadas() {
 
     let htmlDinamico = '<div class="layout-noticias-dinamico">';
 
-    // Fila 1: Dos noticias medianas destacadas con toda su bajada
+    // Fila 1: Dos medianas con toda la bajada
     if (restantes.length > 0) {
       const fila2 = restantes.slice(0, 2);
       htmlDinamico += '<div class="fila-secundaria-editorial">';
@@ -286,7 +293,7 @@ function renderizarNoticiasProcesadas() {
       htmlDinamico += '</div>';
     }
 
-    // Fila 2: Mosaico mixto (1 Horizontal + Columna compacta)
+    // Fila 2: Mosaico mixto con toda la bajada
     if (restantes.length > 2) {
       const horizontal = restantes[2];
       const compactas = restantes.slice(3);
@@ -294,7 +301,6 @@ function renderizarNoticiasProcesadas() {
 
       htmlDinamico += '<div class="fila-mosaico-editorial">';
       
-      // Horizontal con toda su bajada
       htmlDinamico += `
         <article class="tarjeta-horizontal">
           <a href="noticia.html?id=${horizontal.id}" class="enlace-horizontal">
@@ -311,7 +317,6 @@ function renderizarNoticiasProcesadas() {
         </article>
       `;
 
-      // Columna de compactas
       if (compactas.length > 0) {
         htmlDinamico += '<div class="columna-compactas">';
         compactas.slice(0, 3).forEach(c => {
@@ -333,7 +338,6 @@ function renderizarNoticiasProcesadas() {
     grid.innerHTML = htmlDinamico;
 
   } else {
-    // Vista de sección temática (con toda la bajada completa)
     let htmlSeccion = '<div class="fila-secundaria-editorial">';
     noticiasFiltradas.forEach(n => {
       const bajadaSec = limpiarBajadaCompleta(n.bajada);
@@ -358,18 +362,20 @@ function renderizarNoticiasProcesadas() {
   }
 }
 
-/* CARRUSEL EDITORIAL INMEDIATO */
+/* CARRUSEL INSTANTÁNEO Y SIN DEMORAS */
 function inicializarCarruselEquipo() {
   const btnPrev = document.getElementById('btn-carrusel-prev');
   const btnNext = document.getElementById('btn-carrusel-next');
 
   if (btnPrev && btnNext) {
-    btnPrev.onclick = () => {
+    btnPrev.onclick = (e) => {
+      e.preventDefault();
       indiceEquipo = (indiceEquipo - 1 + equipoEditorial.length) % equipoEditorial.length;
       actualizarTarjetaEquipo();
     };
 
-    btnNext.onclick = () => {
+    btnNext.onclick = (e) => {
+      e.preventDefault();
       indiceEquipo = (indiceEquipo + 1) % equipoEditorial.length;
       actualizarTarjetaEquipo();
     };
@@ -389,6 +395,7 @@ function actualizarTarjetaEquipo() {
 
   if (!elNombre) return;
 
+  // Actualización inmediata sin animaciones pesadas
   elNombre.textContent = miembro.nombre;
   elCargo.textContent = miembro.cargo;
   
