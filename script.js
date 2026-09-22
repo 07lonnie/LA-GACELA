@@ -94,28 +94,25 @@ function limpiarValorYaml(val) {
   return str.trim();
 }
 
-/* OBTENER ORACIÓN COMPLETA QUE CIERRE EN PUNTO (.) O NADA */
-function obtenerOracionCerrada(texto, maxLongitud = 160) {
+/* RECORTAR BAJADA A MÁXIMO 140 CARACTERES DE FORMA LIMPIA */
+function formatearBajada(texto, maxLongitud = 140) {
   if (!texto) return '';
-  let limpio = texto.replace(/[*_#`]/g, '').trim();
+  let limpio = texto.replace(/[*_#`\[\]]/g, '').trim();
+  if (limpio.length <= maxLongitud) return limpio;
 
-  // Buscar primer punto seguido de espacio o final
-  let matchPunto = limpio.match(/^([^.!?]+[.!?])/);
-  if (matchPunto && matchPunto[1].length <= maxLongitud) {
-    return matchPunto[1].trim();
+  // Corta sin partir palabras
+  let recortado = limpio.substring(0, maxLongitud);
+  let ultimoEspacio = recortado.lastIndexOf(' ');
+  if (ultimoEspacio > 0) {
+    recortado = recortado.substring(0, ultimoEspacio);
   }
 
-  // Si la primera frase completa es razonable
-  let frases = limpio.split(/[.!?]\s+/);
-  if (frases.length > 0 && frases[0].length <= maxLongitud && frases[0].length > 25) {
-    return frases[0].trim() + '.';
-  }
-
-  // Si no se puede cerrar con elegancia, no mostrar nada para no entrecortar
-  return '';
+  // Elimina signos sobrantes al final
+  recortado = recortado.replace(/[,;:\-\s]+$/, '');
+  return recortado.endsWith('.') ? recortado : recortado + '.';
 }
 
-/* NAVEGACIÓN Y TÍTULOS EN FORMATO ORACIÓN */
+/* NAVEGACIÓN */
 function inicializarNavegacion() {
   const botonesNav = document.querySelectorAll('.nav-btn');
 
@@ -217,7 +214,7 @@ async function cargarNoticiasDesdeGitHub() {
   }
 }
 
-/* RENDERIZADO EDITORIAL ASIMÉTRICO Y VISUALMENTE ARMONIOSO */
+/* RENDERIZADO EDITORIAL CON BAJADAS (MÁXIMO 140 CARACTERES) */
 function renderizarNoticiasProcesadas() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
@@ -247,13 +244,13 @@ function renderizarNoticiasProcesadas() {
   };
 
   if (seccionActual === 'inicio') {
-    // 1. Noticia Hero: Política prioritariamente
+    // Hero: Política prioritariamente
     let indiceHero = noticiasFiltradas.findIndex(n => n.categoria === 'politica');
     if (indiceHero === -1) indiceHero = 0;
 
     const destacada = noticiasFiltradas[indiceHero];
     const restantes = noticiasFiltradas.filter((_, idx) => idx !== indiceHero);
-    const bajadaHero = obtenerOracionCerrada(destacada.bajada, 220);
+    const bajadaHero = formatearBajada(destacada.bajada, 140);
 
     contenedorDestacada.innerHTML = `
       <article class="tarjeta-destacada-hero">
@@ -274,15 +271,14 @@ function renderizarNoticiasProcesadas() {
       </article>
     `;
 
-    // 2. Mosaico dinámico asimétrico
     let htmlDinamico = '<div class="layout-noticias-dinamico">';
 
-    // Fila 1: Dos noticias destacadas con insignia flotante
+    // Fila 1: Dos noticias medianas destacadas
     if (restantes.length > 0) {
       const fila2 = restantes.slice(0, 2);
       htmlDinamico += '<div class="fila-secundaria-editorial">';
       fila2.forEach(n => {
-        const oracionLimpia = obtenerOracionCerrada(n.bajada, 140);
+        const bajadaMedia = formatearBajada(n.bajada, 140);
         htmlDinamico += `
           <article class="tarjeta-mediana">
             <a href="noticia.html?id=${n.id}">
@@ -292,7 +288,7 @@ function renderizarNoticiasProcesadas() {
               </div>
               <div class="info-wrap">
                 <h3>${n.title}</h3>
-                ${oracionLimpia ? `<p>${oracionLimpia}</p>` : ''}
+                ${bajadaMedia ? `<p>${bajadaMedia}</p>` : ''}
                 <span class="meta-fecha-mini">${n.date}</span>
               </div>
             </a>
@@ -302,11 +298,11 @@ function renderizarNoticiasProcesadas() {
       htmlDinamico += '</div>';
     }
 
-    // Fila 2: Mosaico mixto (1 Horizontal con insignia + columna compacta)
+    // Fila 2: Mosaico mixto (1 Horizontal + Columna compacta)
     if (restantes.length > 2) {
       const horizontal = restantes[2];
       const compactas = restantes.slice(3);
-      const bajadaH = obtenerOracionCerrada(horizontal.bajada, 150);
+      const bajadaH = formatearBajada(horizontal.bajada, 140);
 
       htmlDinamico += '<div class="fila-mosaico-editorial">';
       
@@ -349,10 +345,10 @@ function renderizarNoticiasProcesadas() {
     grid.innerHTML = htmlDinamico;
 
   } else {
-    // Vista de sección temática (2 columnas limpias con insignia flotante)
+    // Vista de sección individual
     let htmlSeccion = '<div class="fila-secundaria-editorial">';
     noticiasFiltradas.forEach(n => {
-      const oracionLimpia = obtenerOracionCerrada(n.bajada, 140);
+      const bajadaSec = formatearBajada(n.bajada, 140);
       htmlSeccion += `
         <article class="tarjeta-mediana">
           <a href="noticia.html?id=${n.id}">
@@ -362,7 +358,7 @@ function renderizarNoticiasProcesadas() {
             </div>
             <div class="info-wrap">
               <h3>${n.title}</h3>
-              ${oracionLimpia ? `<p>${oracionLimpia}</p>` : ''}
+              ${bajadaSec ? `<p>${bajadaSec}</p>` : ''}
               <span class="meta-fecha-mini">${n.date}</span>
             </div>
           </a>
@@ -374,7 +370,7 @@ function renderizarNoticiasProcesadas() {
   }
 }
 
-/* CARRUSEL EDITORIAL INMEDIATO */
+/* CARRUSEL EDITORIAL */
 function inicializarCarruselEquipo() {
   const btnPrev = document.getElementById('btn-carrusel-prev');
   const btnNext = document.getElementById('btn-carrusel-next');
