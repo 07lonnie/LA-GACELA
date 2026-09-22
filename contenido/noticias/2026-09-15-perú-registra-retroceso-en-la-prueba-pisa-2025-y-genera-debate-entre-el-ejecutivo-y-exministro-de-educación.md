@@ -1,4 +1,5 @@
 ---
+destacada: true
 volada: Nacional
 title: Perú registra retroceso en la prueba PISA 2025 y genera debate entre el
   Ejecutivo y exministro de educación
