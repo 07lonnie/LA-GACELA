@@ -39,7 +39,7 @@ const equipoEditorial = [
     cargo: "Editora de Diseño Web",
     correo: "diseñoweb@lagacela.pe",
     bio: "Responsable de la maquetación digital, arquitectura web, experiencia de usuario e innovación gráfica del diario.",
-    foto: "fotos/yo.png"
+    foto: "fotos/yo.jpg"
   }
 ];
 
