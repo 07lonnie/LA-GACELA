@@ -1,11 +1,12 @@
 ---
+autor: Redacción La Gacela
+destacada: true
 volada: Nacional
 title: Keiko Fujimori jura como presidenta del Perú en medio de polarización y
   anuncios de emergencia nacional
 categoria: politica
 bajada: Ella se convierte en la primera mujer presidenta elegida mediante un
   proceso electoral en el Perú.
-autor: Redacción La Gacela
 date: 2026-08-25
 lead: ""
 thumbnail: fotos/subidas/keiko-fujimori-juramenta-como-presidenta_page-0001-e1785377224101.jpg
