@@ -7,39 +7,39 @@ let seccionActual = 'inicio';
 
 const equipoEditorial = [
   {
-    nombre: "Belen Lucero Yaranga Rojas",
-    cargo: "Director(a) & Editor(a) de Espectáculos",
-    correo: "espectaculos@lagacela.unfv.edu.pe",
+    nombre: "Lidia Yamilet Chapilliquen Charca",
+    cargo: "Directora & Editora de Espectáculos",
+    correo: "espectaculos@lagacela.pe",
     bio: "Dirección general del medio e investigaciones de la agenda cultural, artística y de entretenimiento.",
-    foto: "fotos/LAGACELAICONODORADO.jpg"
+    foto: "fotos/Yamilet.jpg"
+  },
+  {
+    nombre: "Belen Lucero Yaranga Rojas",
+    cargo: "Editora de Política",
+    correo: "politica@lagacela.pe",
+    bio: "Cobertura de asuntos institucionales, política nacional, comisiones parlamentarias e investigaciones coyunturales.",
+    foto: "fotos/Belen.jpg"
   },
   {
     nombre: "Adriana Judith Peña Cotos",
-    cargo: "Editor(a) de Política",
-    correo: "politica@lagacela.unfv.edu.pe",
-    bio: "Cobertura de asuntos institucionales, política nacional, comisiones parlamentarias e investigaciones coyunturales.",
-    foto: "fotos/LAGACELAICONODORADO.jpg"
-  },
-  {
-    nombre: "Lidia Yamilet Chapilliquen Charca",
-    cargo: "Editor(a) de Internacionales",
-    correo: "internacionales@lagacela.unfv.edu.pe",
+    cargo: "Editora de Internacionales",
+    correo: "internacionales@lagacela.pe",
     bio: "Análisis geopolítico global, seguimiento de conflictos internacionales y acuerdos diplomáticos multilaterales.",
-    foto: "fotos/LAGACELAICONODORADO.jpg"
+    foto: "fotos/Adriana.jpg"
   },
   {
     nombre: "Jhordan David Valverde Soto",
-    cargo: "Editor(a) de Deportes",
-    correo: "deportes@lagacela.unfv.edu.pe",
+    cargo: "Editor de Deportes",
+    correo: "deportes@lagacela.pe",
     bio: "Seguimiento y cobertura del deporte universitario, disciplinas locales, competencias nacionales e internacionales.",
-    foto: "fotos/LAGACELAICONODORADO.jpg"
+    foto: "fotos/Jhordan.jpg"
   },
   {
     nombre: "Gianella Alondra Orellana Perez",
-    cargo: "Editor(a) de Diseño Web",
-    correo: "webmaster@lagacela.unfv.edu.pe",
+    cargo: "Editora de Diseño Web",
+    correo: "diseñoweb@lagacela.pe",
     bio: "Responsable de la maquetación digital, arquitectura web, experiencia de usuario e innovación gráfica del diario.",
-    foto: "fotos/LAGACELAICONODORADO.jpg"
+    foto: "fotos/yo.png"
   }
 ];
 
