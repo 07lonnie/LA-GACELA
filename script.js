@@ -94,22 +94,10 @@ function limpiarValorYaml(val) {
   return str.trim();
 }
 
-/* RECORTAR BAJADA A MÁXIMO 140 CARACTERES DE FORMA LIMPIA */
-function formatearBajada(texto, maxLongitud = 140) {
+/* LIMPIEZA DE FORMATO PARA MOSTRAR TODA LA BAJADA COMPLETA */
+function limpiarBajadaCompleta(texto) {
   if (!texto) return '';
-  let limpio = texto.replace(/[*_#`\[\]]/g, '').trim();
-  if (limpio.length <= maxLongitud) return limpio;
-
-  // Corta sin partir palabras
-  let recortado = limpio.substring(0, maxLongitud);
-  let ultimoEspacio = recortado.lastIndexOf(' ');
-  if (ultimoEspacio > 0) {
-    recortado = recortado.substring(0, ultimoEspacio);
-  }
-
-  // Elimina signos sobrantes al final
-  recortado = recortado.replace(/[,;:\-\s]+$/, '');
-  return recortado.endsWith('.') ? recortado : recortado + '.';
+  return texto.replace(/[*_#`\[\]]/g, '').trim();
 }
 
 /* NAVEGACIÓN */
@@ -214,7 +202,7 @@ async function cargarNoticiasDesdeGitHub() {
   }
 }
 
-/* RENDERIZADO EDITORIAL CON BAJADAS (MÁXIMO 140 CARACTERES) */
+/* RENDERIZADO EDITORIAL CON TODA LA BAJADA COMPLETA */
 function renderizarNoticiasProcesadas() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
@@ -250,7 +238,7 @@ function renderizarNoticiasProcesadas() {
 
     const destacada = noticiasFiltradas[indiceHero];
     const restantes = noticiasFiltradas.filter((_, idx) => idx !== indiceHero);
-    const bajadaHero = formatearBajada(destacada.bajada, 140);
+    const bajadaHero = limpiarBajadaCompleta(destacada.bajada);
 
     contenedorDestacada.innerHTML = `
       <article class="tarjeta-destacada-hero">
@@ -273,12 +261,12 @@ function renderizarNoticiasProcesadas() {
 
     let htmlDinamico = '<div class="layout-noticias-dinamico">';
 
-    // Fila 1: Dos noticias medianas destacadas
+    // Fila 1: Dos noticias medianas destacadas con toda su bajada
     if (restantes.length > 0) {
       const fila2 = restantes.slice(0, 2);
       htmlDinamico += '<div class="fila-secundaria-editorial">';
       fila2.forEach(n => {
-        const bajadaMedia = formatearBajada(n.bajada, 140);
+        const bajadaMedia = limpiarBajadaCompleta(n.bajada);
         htmlDinamico += `
           <article class="tarjeta-mediana">
             <a href="noticia.html?id=${n.id}">
@@ -302,11 +290,11 @@ function renderizarNoticiasProcesadas() {
     if (restantes.length > 2) {
       const horizontal = restantes[2];
       const compactas = restantes.slice(3);
-      const bajadaH = formatearBajada(horizontal.bajada, 140);
+      const bajadaH = limpiarBajadaCompleta(horizontal.bajada);
 
       htmlDinamico += '<div class="fila-mosaico-editorial">';
       
-      // Horizontal
+      // Horizontal con toda su bajada
       htmlDinamico += `
         <article class="tarjeta-horizontal">
           <a href="noticia.html?id=${horizontal.id}" class="enlace-horizontal">
@@ -345,10 +333,10 @@ function renderizarNoticiasProcesadas() {
     grid.innerHTML = htmlDinamico;
 
   } else {
-    // Vista de sección individual
+    // Vista de sección temática (con toda la bajada completa)
     let htmlSeccion = '<div class="fila-secundaria-editorial">';
     noticiasFiltradas.forEach(n => {
-      const bajadaSec = formatearBajada(n.bajada, 140);
+      const bajadaSec = limpiarBajadaCompleta(n.bajada);
       htmlSeccion += `
         <article class="tarjeta-mediana">
           <a href="noticia.html?id=${n.id}">
@@ -370,7 +358,7 @@ function renderizarNoticiasProcesadas() {
   }
 }
 
-/* CARRUSEL EDITORIAL */
+/* CARRUSEL EDITORIAL INMEDIATO */
 function inicializarCarruselEquipo() {
   const btnPrev = document.getElementById('btn-carrusel-prev');
   const btnNext = document.getElementById('btn-carrusel-next');
