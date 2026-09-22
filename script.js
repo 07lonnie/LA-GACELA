@@ -7,39 +7,39 @@ let seccionActual = 'inicio';
 
 const equipoEditorial = [
   {
-    nombre: "Lidia Chapilliquen",
+    nombre: "Belen Lucero Yaranga Rojas",
     cargo: "Director(a) & Editor(a) de Espectáculos",
     correo: "espectaculos@lagacela.unfv.edu.pe",
     bio: "Dirección general del medio e investigaciones de la agenda cultural, artística y de entretenimiento.",
-    foto: "fotos/Yamilet.jpg"
+    foto: "fotos/LAGACELAICONODORADO.jpg"
   },
   {
-    nombre: "Belen Yaranga",
+    nombre: "Adriana Judith Peña Cotos",
     cargo: "Editor(a) de Política",
-    correo: "política@lagacela.unfv.edu.pe",
+    correo: "politica@lagacela.unfv.edu.pe",
     bio: "Cobertura de asuntos institucionales, política nacional, comisiones parlamentarias e investigaciones coyunturales.",
-    foto: "fotos/Belen.jpg"
+    foto: "fotos/LAGACELAICONODORADO.jpg"
   },
   {
-    nombre: "Adriana Peña",
+    nombre: "Lidia Yamilet Chapilliquen Charca",
     cargo: "Editor(a) de Internacionales",
     correo: "internacionales@lagacela.unfv.edu.pe",
     bio: "Análisis geopolítico global, seguimiento de conflictos internacionales y acuerdos diplomáticos multilaterales.",
-    foto: "fotos/Adriana.jpg"
+    foto: "fotos/LAGACELAICONODORADO.jpg"
   },
   {
-    nombre: "Jhordan Valverde",
+    nombre: "Jhordan David Valverde Soto",
     cargo: "Editor(a) de Deportes",
     correo: "deportes@lagacela.unfv.edu.pe",
     bio: "Seguimiento y cobertura del deporte universitario, disciplinas locales, competencias nacionales e internacionales.",
-    foto: "fotos/Jhordan.jpg"
+    foto: "fotos/LAGACELAICONODORADO.jpg"
   },
   {
-    nombre: "Gianella Orellana",
+    nombre: "Gianella Alondra Orellana Perez",
     cargo: "Editor(a) de Diseño Web",
-    correo: "diseñoweb@lagacela.unfv.edu.pe",
+    correo: "webmaster@lagacela.unfv.edu.pe",
     bio: "Responsable de la maquetación digital, arquitectura web, experiencia de usuario e innovación gráfica del diario.",
-    foto: "fotos/yo.jpg"
+    foto: "fotos/LAGACELAICONODORADO.jpg"
   }
 ];
 
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cargarNoticiasDesdeGitHub();
 });
 
-/* PARSER MULTILÍNEA DE FRONTMATTER */
+/* PARSER FRONTMATTER */
 function parseFrontmatter(texto) {
   const partes = texto.split(/^---$/m);
   if (partes.length < 3) return { metadatos: {}, cuerpo: texto };
@@ -94,7 +94,7 @@ function limpiarValorYaml(val) {
   return str.trim();
 }
 
-/* NAVEGACIÓN ENTRE PESTAÑAS */
+/* NAVEGACIÓN Y TÍTULOS EN FORMATO ORACIÓN */
 function inicializarNavegacion() {
   const botonesNav = document.querySelectorAll('.nav-btn');
 
@@ -127,11 +127,12 @@ function cambiarVistaSeccion(seccion) {
   secQuienesSomos.classList.remove('activo');
   secNoticias.classList.add('activo');
 
+  // Títulos corregidos: solo primera letra con mayúscula
   const nombresTitulos = {
-    'inicio': 'Últimas Publicaciones',
-    'politica': 'Noticias de Política',
-    'internacionales': 'Noticias Internacionales',
-    'espectaculos': 'Espectáculos y Cultura',
+    'inicio': 'Últimas publicaciones',
+    'politica': 'Noticias de política',
+    'internacionales': 'Noticias internacionales',
+    'espectaculos': 'Espectáculos y cultura',
     'deportes': 'Deportes'
   };
 
@@ -196,7 +197,7 @@ async function cargarNoticiasDesdeGitHub() {
   }
 }
 
-/* RENDERIZADO CON PRIORIDAD DE POLÍTICA EN LA NOTICIA PRINCIPAL */
+/* RENDERIZADO CON MAQUETACIÓN ASIMÉTRICA TIPO NEW YORK TIMES / EL COMERCIO */
 function renderizarNoticiasProcesadas() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
@@ -213,7 +214,7 @@ function renderizarNoticiasProcesadas() {
 
   if (noticiasFiltradas.length === 0) {
     grid.innerHTML = `<div class="bloque-vacio-seccion">
-      <p>No hay noticias publicadas en la sección <strong>${seccionActual.toUpperCase()}</strong> todavía.</p>
+      <p>No hay noticias publicadas en esta sección todavía.</p>
     </div>`;
     return;
   }
@@ -226,9 +227,9 @@ function renderizarNoticiasProcesadas() {
   };
 
   if (seccionActual === 'inicio') {
-    // Busca la última noticia de POLÍTICA para ponerla como noticia principal
+    // 1. Noticia Hero: Política prioritariamente
     let indiceHero = noticiasFiltradas.findIndex(n => n.categoria === 'politica');
-    if (indiceHero === -1) indiceHero = 0; // Si no hay de política, usa la primera disponible
+    if (indiceHero === -1) indiceHero = 0;
 
     const destacada = noticiasFiltradas[indiceHero];
     const restantes = noticiasFiltradas.filter((_, idx) => idx !== indiceHero);
@@ -252,49 +253,119 @@ function renderizarNoticiasProcesadas() {
       </article>
     `;
 
-    grid.innerHTML = restantes.map(n => generarTarjetaHTML(n, mapaCatTexto)).join('');
+    // 2. Construcción del layout dinámico asimétrico
+    let htmlDinamico = '<div class="layout-noticias-dinamico">';
+
+    // Fila 1: Dos noticias medianas destacadas
+    if (restantes.length > 0) {
+      const fila2 = restantes.slice(0, 2);
+      htmlDinamico += '<div class="fila-secundaria-editorial">';
+      fila2.forEach(n => {
+        const bajadaCorta = n.bajada.length > 120 ? n.bajada.substring(0, 120) + '...' : n.bajada;
+        htmlDinamico += `
+          <article class="tarjeta-mediana">
+            <a href="noticia.html?id=${n.id}">
+              <div class="img-wrap">
+                <img src="${n.thumbnail}" alt="${n.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
+                <span class="badge-categoria-portada">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
+              </div>
+              <div class="info-wrap">
+                <h3>${n.title}</h3>
+                <p>${bajadaCorta}</p>
+                <span class="meta-fecha-mini">${n.date}</span>
+              </div>
+            </a>
+          </article>
+        `;
+      });
+      htmlDinamico += '</div>';
+    }
+
+    // Fila 2: Mosaico mixto (1 Horizontal + Columna de compactas)
+    if (restantes.length > 2) {
+      const horizontal = restantes[2];
+      const compactas = restantes.slice(3);
+
+      htmlDinamico += '<div class="fila-mosaico-editorial">';
+      
+      // Lado A: Horizontal grande
+      const bajadaH = horizontal.bajada.length > 140 ? horizontal.bajada.substring(0, 140) + '...' : horizontal.bajada;
+      htmlDinamico += `
+        <article class="tarjeta-horizontal">
+          <div class="img-wrap">
+            <img src="${horizontal.thumbnail}" alt="${horizontal.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
+          </div>
+          <div class="info-wrap">
+            <span class="badge-cat-tag">${mapaCatTexto[horizontal.categoria] || horizontal.categoria.toUpperCase()}</span>
+            <a href="noticia.html?id=${horizontal.id}"><h3>${horizontal.title}</h3></a>
+            <p>${bajadaH}</p>
+            <span class="meta-fecha-mini">${horizontal.date}</span>
+          </div>
+        </article>
+      `;
+
+      // Lado B: Columna de compactas
+      if (compactas.length > 0) {
+        htmlDinamico += '<div class="columna-compactas">';
+        compactas.slice(0, 3).forEach(c => {
+          htmlDinamico += `
+            <article class="tarjeta-compacta-editorial">
+              <span class="badge-cat-tag">${mapaCatTexto[c.categoria] || c.categoria.toUpperCase()}</span>
+              <a href="noticia.html?id=${c.id}"><h4>${c.title}</h4></a>
+              <span class="meta-fecha-mini">${c.date}</span>
+            </article>
+          `;
+        });
+        htmlDinamico += '</div>';
+      }
+
+      htmlDinamico += '</div>';
+    }
+
+    htmlDinamico += '</div>';
+    grid.innerHTML = htmlDinamico;
+
   } else {
-    grid.innerHTML = noticiasFiltradas.map(n => generarTarjetaHTML(n, mapaCatTexto)).join('');
+    // Vista de sección individual: 2 columnas limpias
+    let htmlSeccion = '<div class="fila-secundaria-editorial">';
+    noticiasFiltradas.forEach(n => {
+      const bajadaCorta = n.bajada.length > 130 ? n.bajada.substring(0, 130) + '...' : n.bajada;
+      htmlSeccion += `
+        <article class="tarjeta-mediana">
+          <a href="noticia.html?id=${n.id}">
+            <div class="img-wrap">
+              <img src="${n.thumbnail}" alt="${n.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
+              <span class="badge-categoria-portada">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
+            </div>
+            <div class="info-wrap">
+              <h3>${n.title}</h3>
+              <p>${bajadaCorta}</p>
+              <span class="meta-fecha-mini">${n.date}</span>
+            </div>
+          </a>
+        </article>
+      `;
+    });
+    htmlSeccion += '</div>';
+    grid.innerHTML = htmlSeccion;
   }
 }
 
-function generarTarjetaHTML(n, mapaCatTexto) {
-  const bajadaCorta = n.bajada.length > 150 ? n.bajada.substring(0, 150) + '...' : n.bajada;
-
-  return `
-    <article class="tarjeta-noticia-portada">
-      <a href="noticia.html?id=${n.id}" class="enlace-noticia">
-        <div class="imagen-portada-wrapper">
-          <img src="${n.thumbnail}" alt="${n.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
-          <span class="badge-categoria-portada">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
-        </div>
-        <div class="contenido-tarjeta-portada">
-          <h3 class="titulo-tarjeta">${n.title}</h3>
-          <p class="bajada-tarjeta">${bajadaCorta}</p>
-          <div class="meta-tarjeta">
-            <span>${n.date}</span>
-          </div>
-        </div>
-      </a>
-    </article>
-  `;
-}
-
-/* CARRUSEL EDITORIAL */
+/* CARRUSEL EDITORIAL INMEDIATO Y FLUIDO */
 function inicializarCarruselEquipo() {
   const btnPrev = document.getElementById('btn-carrusel-prev');
   const btnNext = document.getElementById('btn-carrusel-next');
 
   if (btnPrev && btnNext) {
-    btnPrev.addEventListener('click', () => {
+    btnPrev.onclick = () => {
       indiceEquipo = (indiceEquipo - 1 + equipoEditorial.length) % equipoEditorial.length;
       actualizarTarjetaEquipo();
-    });
+    };
 
-    btnNext.addEventListener('click', () => {
+    btnNext.onclick = () => {
       indiceEquipo = (indiceEquipo + 1) % equipoEditorial.length;
       actualizarTarjetaEquipo();
-    });
+    };
 
     actualizarTarjetaEquipo();
   }
@@ -311,6 +382,7 @@ function actualizarTarjetaEquipo() {
 
   if (!elNombre) return;
 
+  // Actualización inmediata del DOM
   elNombre.textContent = miembro.nombre;
   elCargo.textContent = miembro.cargo;
   
