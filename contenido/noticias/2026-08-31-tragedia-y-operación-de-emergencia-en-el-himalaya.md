@@ -1,10 +1,10 @@
 ---
+autor: La Gacela
 volada: nepal
-title: TRAGEDIA Y OPERACIÓN DE EMERGENCIA EN EL HIMALAYA
+title: Tragedia y operación, emergencia en el Himalaya
 categoria: internacionales
 bajada: "### Milagro bajo el fango: Equipos de rescate logran bombear oxígeno a
   cientos de obreros atrapados en los túneles hidroeléctricos de Nepal"
-autor: La Gacela
 date: 2026-08-31
 lead: "Rescatistas trabajaban el lunes a contrarreloj para localizar a cientos
   de obreros atrapados en los túneles de proyectos hidroeléctricos en Nepal,

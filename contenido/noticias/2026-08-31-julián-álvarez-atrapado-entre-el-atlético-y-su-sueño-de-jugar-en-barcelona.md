@@ -1,11 +1,11 @@
 ---
+autor: La Gacela
 volada: mercado de fichajes
 title: Julián Álvarez, atrapado entre el Atlético y su sueño de jugar en Barcelona
 categoria: deportes
 bajada: El delantero argentino quería vestir la camiseta azulgrana, pero el
   Atlético de Madrid cerró la puerta a cualquier negociación y el conflicto
   entre ambos clubes amenaza con cambiar el futuro de “La Araña”.
-autor: La Gacela
 date: 2026-08-31
 lead: "**Lo que comenzó como un sueño terminó convertido en una guerra entre
   clubes. Julián Álvarez quiere salir del Atlético de Madrid para cumplir su
@@ -14,7 +14,7 @@ lead: "**Lo que comenzó como un sueño terminó convertido en una guerra entre
   catalán.**"
 thumbnail: fotos/subidas/images-6-.jpg
 pie_foto: "Fuente: El Comercio -  Foto: EFE/ Kiko Huesca"
-tags: "Julián Alvarez, Fc Barcelona, Atletico de Madrid, FIFA, "
+tags: Julián Alvarez, Fc Barcelona, Atletico de Madrid, FIFA
 ---
 Julián Álvarez vive uno de los momentos más tensos desde su llegada al Atlético de Madrid. El delantero argentino se convirtió en protagonista del mercado de fichajes luego de que trascendiera su deseo de abandonar el conjunto rojiblanco para cumplir uno de sus grandes objetivos: vestir la camiseta del FC Barcelona.
 
@@ -22,7 +22,7 @@ El interés del conjunto azulgrana fue creciendo durante las últimas semanas. J
 
 El Atlético cerró la puerta a una negociación con Barcelona y dejó claro que no quería desprenderse de su principal delantero para reforzar a un rival directo de LaLiga. El club considera a Álvarez una pieza fundamental de su proyecto y recuerda que el jugador tiene contrato hasta 2030.
 
-<https://www.google.com/search?q=comunicado+atletico+madrid+julian+alvarez&sca_esv=a8395c8440b66210&rlz=1C1ONGR_esPE949PE949&udm=2&biw=1366&bih=641&sxsrf=APpeQnsbnVGJsWphSTreiKxXQyQ7c_SZDQ%3A1788245674746&ei=qnaWatGYLdPZ1sQPycfi8QE&oq=julian+alvarez+comunicado+atlet&gs_lp=Egtnd3Mtd2l6LWltZyIfanVsaWFuIGFsdmFyZXogY29tdW5pY2FkbyBhdGxldCoCCAAyBhAAGAgYHjIGEAAYCBgeMgYQABgIGB5I_DlQ7QRYhC1wAXgAkAEAmAFVoAHICaoBAjE2uAEDyAEA-AEBmAIPoAK_CcICBRAAGIAEwgIEEAAYHsICBxAAGIAEGBPCAgkQABiABBgTGArCAggQABgeGBMYCsICBhAAGB4YE8ICCBAAGAgYHhgKwgIGEAAYHhgKmAMAiAYBkgcCMTWgB-JHsgcCMTW4B78JwgcGMC40LjExyAcwgAgB&sclient=gws-wiz-img#sv=CAMSURoyKhBlLV9ZWEJXdjVMcFA1bmFNMg5fWVhCV3Y1THBQNW5hTToOcnR1QnFsMDRMSjFmMU0gBCoXCgFzEhBlLV9ZWEJXdjVMcFA1bmFNGAEwARgHIIKwt74CSggQARgBIAEoAQ>
+<https://x.com/mundodeportivo/status/2092943598442434900?s=20>
 
 La tensión aumentó durante los últimos días del mercado. Julián no participó con normalidad en varias sesiones de entrenamiento. El club explicó inicialmente que el delantero había pasado una mala noche y se encontraba indispuesto. Posteriormente, realizó trabajo individual y volvió a entrenarse con el grupo.
 
@@ -41,6 +41,8 @@ El regreso no significa que el deseo de jugar en Barcelona haya desaparecido. La
 Simeone y la directiva rojiblanca tienen ahora una misión complicada: recuperar a un jugador que llegó con grandes expectativas y que sigue siendo considerado fundamental para el equipo. El Atlético necesita que Julián vuelva a concentrarse en el terreno de juego y demuestre el nivel que lo convirtió en uno de los delanteros más importantes del fútbol mundial.
 
 Para Barcelona, la historia también terminó con sabor amargo. El club buscaba en Álvarez una figura capaz de liderar su ataque, pero no logró convencer al Atlético de dejarlo salir. Finalmente, el conjunto azulgrana tuvo que buscar otras alternativas para reforzar su ofensiva.
+
+![Duro comunicado de Atlético de Madrid po el caso Julián Alvarez /Fuente: Infobae](fotos/subidas/ans56v54pjajvojn6bp367g434.avif)
 
 Así, lo que parecía encaminado a convertirse en uno de los grandes fichajes del mercado terminó transformándose en una novela sin final feliz para ninguna de las partes. Julián no llegó al Barcelona, el Atlético tuvo que afrontar el malestar generado alrededor de su estrella y el conjunto catalán terminó cerrando el mercado sin conseguir a su principal objetivo ofensivo.
 
