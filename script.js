@@ -166,10 +166,45 @@ function cambiarVistaSeccion(seccion) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* CARGAR NOTICIAS DESDE GITHUB (SIN MENSAJE DE CARGA VISIBLE) */
+/* CARGAR NOTICIAS CON SKELETON LOADERS */
 async function cargarNoticiasDesdeGitHub() {
+  const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
-  if (!grid) return;
+  if (!grid || !contenedorDestacada) return;
+
+  // 1. Mostrar siluetas desde el milisegundo cero (elimina pantalla vacía)
+  contenedorDestacada.innerHTML = `
+    <div class="skeleton-hero">
+      <div class="skeleton-box skeleton-hero-img"></div>
+      <div class="skeleton-hero-body">
+        <div class="skeleton-box skeleton-line corta"></div>
+        <div class="skeleton-box skeleton-line titular"></div>
+        <div class="skeleton-box skeleton-line media"></div>
+        <div class="skeleton-box skeleton-line corta"></div>
+      </div>
+    </div>
+  `;
+
+  grid.innerHTML = `
+    <div class="skeleton-grid-fila">
+      <div class="skeleton-card">
+        <div class="skeleton-box skeleton-card-img"></div>
+        <div class="skeleton-card-body">
+          <div class="skeleton-box skeleton-line titular"></div>
+          <div class="skeleton-box skeleton-line"></div>
+          <div class="skeleton-box skeleton-line corta"></div>
+        </div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-box skeleton-card-img"></div>
+        <div class="skeleton-card-body">
+          <div class="skeleton-box skeleton-line titular"></div>
+          <div class="skeleton-box skeleton-line"></div>
+          <div class="skeleton-box skeleton-line corta"></div>
+        </div>
+      </div>
+    </div>
+  `;
 
   try {
     const repo = "07lonnie/LA-GACELA";
@@ -181,6 +216,7 @@ async function cargarNoticiasDesdeGitHub() {
     const archivosMarkdown = archivos.filter(f => f.name.endsWith('.md'));
 
     if (archivosMarkdown.length === 0) {
+      contenedorDestacada.innerHTML = '';
       grid.innerHTML = '<p class="mensaje-vacio">No hay publicaciones disponibles en este momento.</p>';
       return;
     }
@@ -203,9 +239,11 @@ async function cargarNoticiasDesdeGitHub() {
       });
     }
 
+    // 2. Reemplazar las siluetas por el contenido real
     renderizarNoticiasProcesadas();
 
   } catch (err) {
+    contenedorDestacada.innerHTML = '';
     grid.innerHTML = '<div class="bloque-vacio-seccion"><p>No se pudieron cargar las noticias.</p></div>';
   }
 }
