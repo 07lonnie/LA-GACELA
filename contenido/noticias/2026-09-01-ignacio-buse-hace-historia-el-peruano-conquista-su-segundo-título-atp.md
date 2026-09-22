@@ -16,9 +16,13 @@ pie_foto: "Ignacio Buse logra histórica clasificación en el ranking ATP tras s
 ---
 Ignacio Buse volvió a hacer historia para el tenis peruano al conseguir su segundo título ATP. El joven tenista nacional se consagró campeón del ATP 250 de Winston-Salem, demostrando que su crecimiento en el circuito internacional no es casualidad. Buse llegó a la gran final con la ilusión de volver a levantar un trofeo y encontró en el británico Arthur Fery a su último obstáculo. Desde los primeros puntos, el peruano mostró seguridad, intensidad y una gran concentración.
 
+<https://x.com/noticias_tvperu/status/2093823668023685157>
+
 Su juego fue agresivo cuando tuvo que atacar y sólido cuando necesitó defenderse. Buse consiguió imponer su ritmo y comenzó a generar dificultades para su rival. El primer set fue disputado, pero el peruano supo aprovechar las oportunidades que tuvo. Con golpes profundos y mucha precisión, logró marcar diferencias y terminó llevándose el parcial por 6-3.
 
 La ventaja le permitió afrontar el segundo set con mayor confianza, aunque sabía que todavía quedaba mucho por jugar. Fery intentó reaccionar y buscó cambiar su estrategia para recuperar el control del partido. Sin embargo, Buse mantuvo la concentración y no permitió que su rival pudiera imponer su juego. El peruano continuó presionando desde el fondo de la cancha y aprovechó cada oportunidad para ampliar la diferencia.
+
+![Buse defendiendo el trofeo del ATP 250 de Winston-Salem/El Comercio](fotos/subidas/ds3htflzjncqrk3jsnj4hnqilm.avif)
 
 Con el paso de los juegos, la confianza de Buse fue aumentando. Su nivel de tenis comenzó a marcar una diferencia cada vez mayor. Finalmente, el segundo set terminó 6-2 y el partido quedó definido. Ignacio Buse era nuevamente campeón. La celebración reflejó la importancia del momento y todo el trabajo que hubo detrás de aquella victoria.
 
@@ -44,6 +48,10 @@ El trofeo conseguido representa meses de sacrificio, disciplina y trabajo consta
 
 Ahora el nombre de Ignacio Buse comienza a sonar con mayor fuerza en el tenis internacional. Sus rivales ya conocen su potencial y los aficionados peruanos siguen con atención cada uno de sus pasos. El objetivo será continuar creciendo, buscar nuevos títulos y acercarse cada vez más a la élite mundial.
 
+<https://x.com/ATPTour_ES/status/2058880765480615994>
+
 El camino todavía es largo, pero Buse ya demostró que tiene las condiciones para recorrerlo. Su segundo título ATP no es solamente un trofeo más: es una muestra de evolución, confianza y carácter. Es también una señal de que el tenis peruano cuenta con una nueva figura capaz de competir en los grandes escenarios.
 
 Ignacio Buse ya sabe lo que significa ser campeón. Ahora el gran desafío será descubrir hasta dónde puede llegar. Después de lo ocurrido en Winston-Salem, una cosa queda clara: la historia del tenista peruano apenas está comenzando.
+
+![Ignacio Buse: entrevista sobre su ingreso al top 100/Depor](fotos/subidas/s.avif)

@@ -8,12 +8,12 @@ bajada: "**Cientos de jóvenes llegaron desde la madrugada a la sede de ATV para
   de postulantes provocó largas filas, aglomeraciones y escenas que rápidamente
   fueron difundidas en TikTok.**"
 date: 2026-09-15
-lead: "**El casting de “Combate”, realizado el sábado 12 de septiembre en la
-  sede de ATV, reunió a cientos de jóvenes que llegaron desde la madrugada para
+lead: El casting de “Combate”, realizado el sábado 12 de septiembre en la sede
+  de ATV, reunió a cientos de jóvenes que llegaron desde la madrugada para
   buscar un lugar en el regreso del reality. La convocatoria generó largas filas
   y momentos de tensión durante el ingreso, escenas que fueron registradas y
-  difundidas mediante videos en TikTok.**"
-thumbnail: fotos/subidas/6xllettrnjg7boxzvfm2f26oea.avif
+  difundidas mediante videos en TikTok.
+thumbnail: fotos/subidas/be8657db-92e4-468d-8271-e4813c676ad5.jpg
 pie_foto: "El proceso de selección para la nueva temporada del programa de
   televisión Combate en Lima convoca a cientos de postulantes en la sede del
   canal ATV. / Fuente: Infobae"
@@ -21,13 +21,13 @@ tags: Combate, ATV, Zumba, Tiktok
 ---
 El regreso de **“Combate”** generó gran expectativa entre los jóvenes que buscan convertirse en los nuevos participantes del conocido reality peruano. La convocatoria realizada por ATV superó las previsiones iniciales de la producción y provocó una masiva llegada de postulantes.
 
-<https://www.tiktok.com/@programacionatv/video/7684751932048657682?is_from_webapp=1&sender_device=pc&web_id=7636999679101044240>
+<https://x.com/infobaeperu/status/2100513535621050527?s=20>
 
 De acuerdo con los videos difundidos en **TikTok**, algunos aspirantes llegaron desde aproximadamente la **1:00 de la madrugada** e incluso permanecieron en los exteriores del canal durante varias horas para intentar asegurar uno de los primeros lugares en el proceso de selección. 
 
 La gran cantidad de personas también ocasionó momentos de desorden en el ingreso a las instalaciones de ATV. Uno de los videos que obtuvo atención en redes muestra a una joven empujando con fuerza el portón del canal mientras varias personas intentaban ingresar.
 
-<https://www.tiktok.com/@alexandersairii/video/7684821647861255445?is_from_webapp=1&sender_device=pc&web_id=7636999679101044240>
+
 
 El episodio fue registrado y difundido en redes sociales, donde el video llegó a alcanzar **cerca de 100 mil reproducciones**. La situación evidenció la gran expectativa que generó la convocatoria. 
 

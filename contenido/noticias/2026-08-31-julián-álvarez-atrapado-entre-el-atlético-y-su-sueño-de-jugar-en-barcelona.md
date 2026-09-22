@@ -28,11 +28,17 @@ La tensión aumentó durante los últimos días del mercado. Julián no particip
 
 La situación generó todo tipo de especulaciones. Mientras algunos sectores interpretaron sus ausencias como una señal de malestar por el frustrado traspaso, desde el entorno del Atlético se mantuvo la versión de que se trataba de un problema físico. La incertidumbre terminó colocando al argentino en el centro de una tormenta mediática.
 
+[https://x.com/juegosimple__/status/2093289926775222420](https://x.com/juegosimple__/status/2093289926775222420)
+
 A la tensión con el club se sumó la reacción de algunos aficionados. Julián recibió abucheos durante un partido, una situación que evidenció que su relación con parte de la hinchada se había deteriorado. El delantero, que había llegado a Madrid como uno de los grandes fichajes del proyecto rojiblanco, ahora debía afrontar un escenario completamente diferente.
 
 Barcelona, mientras tanto, no consiguió concretar la operación. El conjunto catalán mantuvo su interés, pero la negativa del Atlético terminó convirtiéndose en el principal obstáculo para cerrar el fichaje. Con el mercado llegando a su final, la posibilidad de ver a Álvarez vestido de azulgrana comenzó a desvanecerse.
 
+![Nuevo plan de Laporta para asechar a Julian/Fuente: Infobae](fotos/subidas/whatsapp-image-2026-09-21-at-11.57.24-pm.jpeg)
+
 El fracaso de la operación también abrió la puerta a otros pretendientes. El Arsenal apareció como una alternativa para el argentino y llegó a mostrar interés en contratarlo. Incluso se habló de una operación cercana a los 150 millones de euros. Sin embargo, el delantero no habría mostrado el mismo entusiasmo por esa posibilidad y su preferencia continuaba siendo Barcelona.
+
+<https://x.com/LiderEsDeporte/status/2092331826622660767>
 
 Mientras todos hablaban de su futuro, Julián regresó a los entrenamientos del Atlético de Madrid. El domingo 30 de agosto volvió a trabajar con el grupo bajo las órdenes de Diego Simeone y se mostró cercano a su compañero y amigo Cristian Romero. Su reincorporación fue interpretada como una señal de que su continuidad en el equipo rojiblanco estaba cada vez más cerca.
 
@@ -49,3 +55,5 @@ Así, lo que parecía encaminado a convertirse en uno de los grandes fichajes de
 Ahora, Julián Álvarez deberá volver a demostrar su compromiso dentro de la cancha. El argentino tiene contrato con el Atlético hasta 2030 y, por el momento, todo apunta a que continuará en Madrid. Su desafío será convertir la frustración de un fichaje que nunca se concretó en motivación para volver a ganarse a la afición.
 
 La historia todavía podría tener nuevos capítulos. Barcelona mantiene la mirada puesta en el delantero y su deseo de jugar en el Camp Nou no parece haber desaparecido. Pero por ahora, la realidad es otra: Julián Álvarez sigue siendo jugador del Atlético de Madrid y tendrá que demostrar que, pese a todo lo ocurrido, todavía puede ser la figura que el club esperaba cuando apostó por él.
+
+![Julián Álvarez se queda en el Atlético de Madrid tras un caótico mercado de fichajes/ ADN BARCA](fotos/subidas/images-8-.jpg)
