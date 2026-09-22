@@ -179,13 +179,14 @@ function cambiarVistaSeccion(seccion) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* OBTENER DATOS DE GITHUB */
+/* OBTENER DATOS DE GITHUB (SIN CACHÉ VIEJA) */
 async function obtenerNoticiasDeGitHub() {
   if (noticiasGlobales.length > 0) return;
 
   try {
     const repo = "07lonnie/LA-GACELA";
-    const res = await fetch(`https://api.github.com/repos/${repo}/contents/contenido/noticias`);
+    // Parámetro anti-caché con fecha actual
+    const res = await fetch(`https://api.github.com/repos/${repo}/contents/contenido/noticias?t=${Date.now()}`);
     if (!res.ok) throw new Error('Sin noticias');
 
     const archivos = await res.json();
@@ -194,12 +195,14 @@ async function obtenerNoticiasDeGitHub() {
     noticiasGlobales = [];
 
     for (const file of archivosMarkdown) {
-      const resContenido = await fetch(file.download_url);
+      // Descarga directa sin caché
+      const resContenido = await fetch(`${file.download_url}?t=${Date.now()}`);
       const texto = await resContenido.text();
       const { metadatos, cuerpo } = parseFrontmatter(texto);
 
-      // Interpretar si está marcada como destacada (true / "true")
-      const esDestacada = metadatos.destacada === true || metadatos.destacada === 'true';
+      // Detección robusta de valor booleano o texto
+      const valorDestacada = String(metadatos.destacada || '').trim().toLowerCase();
+      const esDestacada = metadatos.destacada === true || valorDestacada === 'true' || valorDestacada === 'yes' || valorDestacada === '1';
 
       noticiasGlobales.push({
         id: file.name,
@@ -345,7 +348,7 @@ function renderizarNoticiasProcesadas() {
 
   if (seccionActual === 'inicio') {
     // 1. ELECCIÓN DE NOTICIA PRINCIPAL:
-    // Prioridad A: La noticia que tenga activada la opción "destacada: true" en el panel.
+    // Prioridad A: La noticia que tenga activada la opción destacada en el panel.
     let indiceHero = noticiasFiltradas.findIndex(n => n.destacada === true);
 
     // Prioridad B: Si ninguna está marcada, toma la primera de Política.
@@ -353,7 +356,7 @@ function renderizarNoticiasProcesadas() {
       indiceHero = noticiasFiltradas.findIndex(n => n.categoria === 'politica');
     }
 
-    // Prioridad C: Si tampoco hay de Política, toma la más reciente (primera).
+    // Prioridad C: Si tampoco hay de Política, toma la más reciente.
     if (indiceHero === -1) {
       indiceHero = 0;
     }
