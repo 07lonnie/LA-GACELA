@@ -48,10 +48,81 @@ let indiceEquipo = 0;
 document.addEventListener('DOMContentLoaded', () => {
   inicializarModoOscuro();
   inicializarNavegacion();
-  precargarImagenesEquipo(); // Elimina el delay al cambiar de miembro
+  precargarImagenesEquipo();
   inicializarCarruselEquipo();
-  cargarNoticiasDesdeGitHub();
+
+  // Detectar si el usuario viene de hacer clic en una etiqueta
+  const params = new URLSearchParams(window.location.search);
+  const tagBuscado = params.get('tag');
+
+  if (tagBuscado) {
+    cargarNoticiasPorEtiqueta(tagBuscado);
+  } else {
+    cargarNoticiasDesdeGitHub();
+  }
 });
+
+async function cargarNoticiasPorEtiqueta(tag) {
+  const grid = document.getElementById('grid-noticias');
+  const contenedorDestacada = document.getElementById('contenedor-destacada');
+  const tituloSeccion = document.getElementById('titulo-seccion-actual');
+  const bajadaSeccion = document.getElementById('bajada-seccion-actual');
+
+  if (contenedorDestacada) contenedorDestacada.innerHTML = '';
+  if (tituloSeccion) tituloSeccion.textContent = `Etiqueta: #${tag}`;
+  if (bajadaSeccion) bajadaSeccion.textContent = `Artículos y coberturas relacionadas con "${tag}".`;
+
+  // Desmarcar pestañas activas
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('activo'));
+
+  if (noticiasGlobales.length === 0) {
+    await cargarNoticiasDesdeGitHub();
+  }
+
+  const mapaCatTexto = {
+    'politica': 'POLÍTICA',
+    'internacionales': 'INTERNACIONALES',
+    'espectaculos': 'ESPECTÁCULOS',
+    'deportes': 'DEPORTES'
+  };
+
+  const tagNorm = tag.toLowerCase().trim();
+  const coincidentes = noticiasGlobales.filter(n => {
+    return n.tags && n.tags.toLowerCase().split(',').map(t => t.trim()).includes(tagNorm);
+  });
+
+  if (!grid) return;
+
+  if (coincidentes.length === 0) {
+    grid.innerHTML = `
+      <div class="bloque-vacio-seccion">
+        <p>No se encontraron más noticias con la etiqueta "<strong>#${tag}</strong>".</p>
+        <a href="index.html" class="btn-volver-portada" style="margin-top: 15px;">Ver todas las noticias</a>
+      </div>`;
+    return;
+  }
+
+  let htmlResultados = '<div class="fila-secundaria-editorial">';
+  coincidentes.forEach(n => {
+    htmlResultados += `
+      <article class="tarjeta-mediana">
+        <a href="noticia.html?id=${n.id}">
+          <div class="img-wrap">
+            <img src="${n.thumbnail}" alt="${n.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
+            <span class="badge-categoria-editorial">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
+          </div>
+          <div class="info-wrap">
+            <h3>${n.title}</h3>
+            ${n.bajada ? `<p>${limpiarBajadaCompleta(n.bajada)}</p>` : ''}
+            <span class="meta-fecha-mini">${n.date}</span>
+          </div>
+        </a>
+      </article>
+    `;
+  });
+  htmlResultados += '</div>';
+  grid.innerHTML = htmlResultados;
+}
 
 /* PRECARGA DE IMÁGENES EN CACHÉ PARA EVITAR RETARDOS */
 function precargarImagenesEquipo() {
@@ -230,13 +301,14 @@ async function cargarNoticiasDesdeGitHub() {
       const { metadatos, cuerpo } = parseFrontmatter(texto);
 
       noticiasGlobales.push({
-        id: file.name,
-        title: metadatos.title || 'Sin título',
-        categoria: (metadatos.categoria || 'politica').toLowerCase(),
-        date: metadatos.date || '2026',
-        bajada: metadatos.bajada || '',
-        thumbnail: metadatos.thumbnail || 'fotos/LAGACELAICONODORADO.jpg'
-      });
+  id: file.name,
+  title: metadatos.title || 'Sin título',
+  categoria: (metadatos.categoria || 'politica').toLowerCase(),
+  date: metadatos.date || '2026',
+  bajada: metadatos.bajada || '',
+  tags: metadatos.tags || '',
+  thumbnail: metadatos.thumbnail || 'fotos/LAGACELAICONODORADO.jpg'
+});
     }
 
     // 2. Reemplazar las siluetas por el contenido real

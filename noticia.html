@@ -155,9 +155,12 @@
         }
 
         if (tags) {
-          document.getElementById('tags-lista').innerHTML = tags.split(',').map(t => `<span class="tag-item">${t.trim()}</span>`).join('');
-          document.getElementById('contenedor-tags').style.display = 'block';
-        }
+  const etiquetasArray = tags.split(',').map(t => t.trim()).filter(t => t.length > 0);
+  document.getElementById('tags-lista').innerHTML = etiquetasArray
+    .map(t => `<a href="index.html?tag=${encodeURIComponent(t)}" class="tag-item">#${t}</a>`)
+    .join('');
+  document.getElementById('contenedor-tags').style.display = 'block';
+}
 
         const renderer = new marked.Renderer();
         renderer.image = function(tokenOrHref, title, text) {
