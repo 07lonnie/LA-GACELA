@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   precargarImagenesEquipo();
   inicializarCarruselEquipo();
 
-  // Detectar si el usuario viene de hacer clic en una etiqueta
   const params = new URLSearchParams(window.location.search);
   const tagBuscado = params.get('tag');
 
@@ -63,100 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-/* FUNCIÓN PURA PARA DESCARGAR NOTICIAS SIN PINTAR LA PORTADA AUTOMÁTICAMENTE */
-async function obtenerNoticiasDeGitHub() {
-  if (noticiasGlobales.length > 0) return;
-
-  try {
-    const repo = "07lonnie/LA-GACELA";
-    const res = await fetch(`https://api.github.com/repos/${repo}/contents/contenido/noticias`);
-    if (!res.ok) throw new Error('Sin noticias');
-
-    const archivos = await res.json();
-    const archivosMarkdown = archivos.filter(f => f.name.endsWith('.md'));
-
-    noticiasGlobales = [];
-
-    for (const file of archivosMarkdown) {
-      const resContenido = await fetch(file.download_url);
-      const texto = await resContenido.text();
-      const { metadatos, cuerpo } = parseFrontmatter(texto);
-
-      noticiasGlobales.push({
-        id: file.name,
-        title: metadatos.title || 'Sin título',
-        categoria: (metadatos.categoria || 'politica').toLowerCase(),
-        date: metadatos.date || '2026',
-        bajada: metadatos.bajada || '',
-        tags: metadatos.tags || '',
-        thumbnail: metadatos.thumbnail || 'fotos/LAGACELAICONODORADO.jpg'
-      });
-    }
-  } catch (e) {
-    console.error("Error al obtener noticias:", e);
-  }
-}
-
-/* RENDERIZADO EXCLUSIVO PARA FILTRADO POR ETIQUETA */
-function renderizarPorEtiqueta(tag) {
-  const grid = document.getElementById('grid-noticias');
-  const contenedorDestacada = document.getElementById('contenedor-destacada');
-  const tituloSeccion = document.getElementById('titulo-seccion-actual');
-  const bajadaSeccion = document.getElementById('bajada-seccion-actual');
-
-  // 1. Quitar de raíz la noticia principal destacada
-  if (contenedorDestacada) contenedorDestacada.innerHTML = '';
-  if (tituloSeccion) tituloSeccion.textContent = `Etiqueta: #${tag}`;
-  if (bajadaSeccion) bajadaSeccion.textContent = `Artículos y coberturas relacionadas con "${tag}".`;
-
-  // Desmarcar pestañas activas del menú
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('activo'));
-
-  const mapaCatTexto = {
-    'politica': 'POLÍTICA',
-    'internacionales': 'INTERNACIONALES',
-    'espectaculos': 'ESPECTÁCULOS',
-    'deportes': 'DEPORTES'
-  };
-
-  const tagNorm = tag.toLowerCase().trim();
-  const coincidentes = noticiasGlobales.filter(n => {
-    return n.tags && n.tags.toLowerCase().split(',').map(t => t.trim()).includes(tagNorm);
-  });
-
-  if (!grid) return;
-
-  if (coincidentes.length === 0) {
-    grid.innerHTML = `
-      <div class="bloque-vacio-seccion">
-        <p>No se encontraron más noticias con la etiqueta "<strong>#${tag}</strong>".</p>
-        <a href="index.html" class="btn-volver-portada" style="margin-top: 15px;">Ver todas las noticias</a>
-      </div>`;
-    return;
-  }
-
-  let htmlResultados = '<div class="fila-secundaria-editorial">';
-  coincidentes.forEach(n => {
-    htmlResultados += `
-      <article class="tarjeta-mediana">
-        <a href="noticia.html?id=${n.id}">
-          <div class="img-wrap">
-            <img src="${n.thumbnail}" alt="${n.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
-            <span class="badge-categoria-editorial">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
-          </div>
-          <div class="info-wrap">
-            <h3>${n.title}</h3>${n.bajada ? `<p>${limpiarBajadaCompleta(n.bajada)}</p>` : ''}
-            <span class="meta-fecha-mini">${n.date}</span>
-          </div>
-        </a>
-      </article>
-    `;
-  });
-  htmlResultados += '</div>';
-  grid.innerHTML = htmlResultados;
-}
-
-/* PRECARGA DE IMÁGENES EN CACHÉ PARA EVITAR RETARDOS */
+/* PRECARGA DE IMÁGENES EN CACHÉ */
 function precargarImagenesEquipo() {
   equipoEditorial.forEach(miembro => {
     if (miembro.foto) {
@@ -224,7 +130,6 @@ function inicializarNavegacion() {
       botonesNav.forEach(b => b.classList.remove('activo'));
       btn.classList.add('activo');
 
-      // Limpiar el parámetro de la URL si venía de un clic en tag
       if (window.location.search) {
         window.history.pushState({}, document.title, window.location.pathname);
       }
@@ -274,59 +179,142 @@ function cambiarVistaSeccion(seccion) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* CARGAR NOTICIAS CON SKELETON LOADERS */
+/* OBTENER DATOS DE GITHUB */
+async function obtenerNoticiasDeGitHub() {
+  if (noticiasGlobales.length > 0) return;
+
+  try {
+    const repo = "07lonnie/LA-GACELA";
+    const res = await fetch(`https://api.github.com/repos/${repo}/contents/contenido/noticias`);
+    if (!res.ok) throw new Error('Sin noticias');
+
+    const archivos = await res.json();
+    const archivosMarkdown = archivos.filter(f => f.name.endsWith('.md'));
+
+    noticiasGlobales = [];
+
+    for (const file of archivosMarkdown) {
+      const resContenido = await fetch(file.download_url);
+      const texto = await resContenido.text();
+      const { metadatos, cuerpo } = parseFrontmatter(texto);
+
+      // Interpretar si está marcada como destacada (true / "true")
+      const esDestacada = metadatos.destacada === true || metadatos.destacada === 'true';
+
+      noticiasGlobales.push({
+        id: file.name,
+        title: metadatos.title || 'Sin título',
+        categoria: (metadatos.categoria || 'politica').toLowerCase(),
+        date: metadatos.date || '2026',
+        bajada: metadatos.bajada || '',
+        tags: metadatos.tags || '',
+        destacada: esDestacada,
+        thumbnail: metadatos.thumbnail || 'fotos/LAGACELAICONODORADO.jpg'
+      });
+    }
+  } catch (e) {
+    console.error("Error al obtener noticias:", e);
+  }
+}
+
+/* CARGA REGULAR CON SKELETONS */
 async function cargarNoticiasDesdeGitHub() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
-  if (!grid || !contenedorDestacada) return;
 
-  // 1. Mostrar siluetas desde el milisegundo cero (elimina pantalla vacía)
-  contenedorDestacada.innerHTML = `
-    <div class="skeleton-hero">
-      <div class="skeleton-box skeleton-hero-img"></div>
-      <div class="skeleton-hero-body">
-        <div class="skeleton-box skeleton-line corta"></div>
-        <div class="skeleton-box skeleton-line titular"></div>
-        <div class="skeleton-box skeleton-line media"></div>
-        <div class="skeleton-box skeleton-line corta"></div>
-      </div>
-    </div>
-  `;
-
-  grid.innerHTML = `
-    <div class="skeleton-grid-fila">
-      <div class="skeleton-card">
-        <div class="skeleton-box skeleton-card-img"></div>
-        <div class="skeleton-card-body">
-          <div class="skeleton-box skeleton-line titular"></div>
-          <div class="skeleton-box skeleton-line"></div>
+  if (contenedorDestacada) {
+    contenedorDestacada.innerHTML = `
+      <div class="skeleton-hero">
+        <div class="skeleton-box skeleton-hero-img"></div>
+        <div class="skeleton-hero-body">
           <div class="skeleton-box skeleton-line corta"></div>
+          <div class="skeleton-box skeleton-line titular"></div>
+          <div class="skeleton-box skeleton-line media"></div>
         </div>
       </div>
-      <div class="skeleton-card">
-        <div class="skeleton-box skeleton-card-img"></div>
-        <div class="skeleton-card-body">
-          <div class="skeleton-box skeleton-line titular"></div>
-          <div class="skeleton-box skeleton-line"></div>
-          <div class="skeleton-box skeleton-line corta"></div>
-        </div>
+    `;
+  }
+
+  if (grid) {
+    grid.innerHTML = `
+      <div class="skeleton-grid-fila">
+        <div class="skeleton-card"><div class="skeleton-box skeleton-card-img"></div><div class="skeleton-card-body"><div class="skeleton-box skeleton-line titular"></div><div class="skeleton-box skeleton-line corta"></div></div></div>
+        <div class="skeleton-card"><div class="skeleton-box skeleton-card-img"></div><div class="skeleton-card-body"><div class="skeleton-box skeleton-line titular"></div><div class="skeleton-box skeleton-line corta"></div></div></div>
       </div>
-    </div>
-  `;
+    `;
+  }
 
   await obtenerNoticiasDeGitHub();
 
   if (noticiasGlobales.length === 0) {
-    contenedorDestacada.innerHTML = '';
-    grid.innerHTML = '<p class="mensaje-vacio">No hay publicaciones disponibles en este momento.</p>';
+    if (contenedorDestacada) contenedorDestacada.innerHTML = '';
+    if (grid) grid.innerHTML = '<p class="mensaje-vacio">No hay publicaciones disponibles en este momento.</p>';
     return;
   }
 
-  // 2. Reemplazar las siluetas por el contenido real
   renderizarNoticiasProcesadas();
 }
 
-/* RENDERIZADO EDITORIAL GENERAL */
+/* RENDERIZADO EXCLUSIVO PARA FILTRO POR ETIQUETA */
+function renderizarPorEtiqueta(tag) {
+  const contenedorDestacada = document.getElementById('contenedor-destacada');
+  const grid = document.getElementById('grid-noticias');
+  const tituloSeccion = document.getElementById('titulo-seccion-actual');
+  const bajadaSeccion = document.getElementById('bajada-seccion-actual');
+
+  if (contenedorDestacada) contenedorDestacada.innerHTML = '';
+  if (tituloSeccion) tituloSeccion.textContent = `Etiqueta: #${tag}`;
+  if (bajadaSeccion) bajadaSeccion.textContent = `Artículos y coberturas relacionadas con "${tag}".`;
+
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('activo'));
+
+  const mapaCatTexto = {
+    'politica': 'POLÍTICA',
+    'internacionales': 'INTERNACIONALES',
+    'espectaculos': 'ESPECTÁCULOS',
+    'deportes': 'DEPORTES'
+  };
+
+  const tagNorm = tag.toLowerCase().trim();
+  const coincidentes = noticiasGlobales.filter(n => {
+    return n.tags && n.tags.toLowerCase().split(',').map(t => t.trim()).includes(tagNorm);
+  });
+
+  if (!grid) return;
+
+  if (coincidentes.length === 0) {
+    grid.innerHTML = `
+      <div class="bloque-vacio-seccion">
+        <p>No se encontraron más noticias con la etiqueta "<strong>#${tag}</strong>".</p>
+        <a href="index.html" class="btn-volver-portada" style="margin-top: 15px;">Ver todas las noticias</a>
+      </div>`;
+    return;
+  }
+
+  let htmlResultados = '<div class="fila-secundaria-editorial">';
+  coincidentes.forEach(n => {
+    const bajadaLimpia = limpiarBajadaCompleta(n.bajada);
+    htmlResultados += `
+      <article class="tarjeta-mediana">
+        <a href="noticia.html?id=${n.id}">
+          <div class="img-wrap">
+            <img src="${n.thumbnail}" alt="${n.title}" loading="lazy" onerror="this.src='fotos/LAGACELAICONODORADO.jpg'">
+            <span class="badge-categoria-editorial">${mapaCatTexto[n.categoria] || n.categoria.toUpperCase()}</span>
+          </div>
+          <div class="info-wrap">
+            <h3>${n.title}</h3>
+            ${bajadaLimpia ? `<p>${bajadaLimpia}</p>` : ''}
+            <span class="meta-fecha-mini">${n.date}</span>
+          </div>
+        </a>
+      </article>
+    `;
+  });
+  htmlResultados += '</div>';
+  grid.innerHTML = htmlResultados;
+}
+
+/* RENDERIZADO GENERAL: SELECCIÓN DE NOTICIA PRINCIPAL */
 function renderizarNoticiasProcesadas() {
   const contenedorDestacada = document.getElementById('contenedor-destacada');
   const grid = document.getElementById('grid-noticias');
@@ -356,8 +344,19 @@ function renderizarNoticiasProcesadas() {
   };
 
   if (seccionActual === 'inicio') {
-    let indiceHero = noticiasFiltradas.findIndex(n => n.categoria === 'politica');
-    if (indiceHero === -1) indiceHero = 0;
+    // 1. ELECCIÓN DE NOTICIA PRINCIPAL:
+    // Prioridad A: La noticia que tenga activada la opción "destacada: true" en el panel.
+    let indiceHero = noticiasFiltradas.findIndex(n => n.destacada === true);
+
+    // Prioridad B: Si ninguna está marcada, toma la primera de Política.
+    if (indiceHero === -1) {
+      indiceHero = noticiasFiltradas.findIndex(n => n.categoria === 'politica');
+    }
+
+    // Prioridad C: Si tampoco hay de Política, toma la más reciente (primera).
+    if (indiceHero === -1) {
+      indiceHero = 0;
+    }
 
     const destacada = noticiasFiltradas[indiceHero];
     const restantes = noticiasFiltradas.filter((_, idx) => idx !== indiceHero);
@@ -384,7 +383,7 @@ function renderizarNoticiasProcesadas() {
 
     let htmlDinamico = '<div class="layout-noticias-dinamico">';
 
-    // Fila 1: Dos medianas con toda la bajada
+    // Fila 1: Dos noticias medianas
     if (restantes.length > 0) {
       const fila2 = restantes.slice(0, 2);
       htmlDinamico += '<div class="fila-secundaria-editorial">';
@@ -409,7 +408,7 @@ function renderizarNoticiasProcesadas() {
       htmlDinamico += '</div>';
     }
 
-    // Fila 2: Mosaico mixto con toda la bajada
+    // Fila 2: Mosaico mixto
     if (restantes.length > 2) {
       const horizontal = restantes[2];
       const compactas = restantes.slice(3);
@@ -478,7 +477,7 @@ function renderizarNoticiasProcesadas() {
   }
 }
 
-/* CARRUSEL INSTANTÁNEO Y SIN DEMORAS */
+/* CARRUSEL INSTANTÁNEO */
 function inicializarCarruselEquipo() {
   const btnPrev = document.getElementById('btn-carrusel-prev');
   const btnNext = document.getElementById('btn-carrusel-next');
